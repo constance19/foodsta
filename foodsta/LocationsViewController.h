@@ -5,12 +5,9 @@
 //  Created by constanceh on 7/12/21.
 //
 
-#import "ViewController.h"
+#import <UIKit/UIKit.h>
 
-NS_ASSUME_NONNULL_BEGIN
-
-@interface LocationsViewController : ViewController
+@interface LocationsViewController : UIViewController
 
 @end
 
-NS_ASSUME_NONNULL_END

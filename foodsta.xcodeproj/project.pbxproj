@@ -3,13 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		173B620AB9D00480437DFAC8 /* Pods_foodsta.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94DBCF63251A45821B4D96D8 /* Pods_foodsta.framework */; };
 		780424A5269D2E6300E771CE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 780424A4269D2E6300E771CE /* AppDelegate.m */; };
 		780424A8269D2E6300E771CE /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 780424A7269D2E6300E771CE /* SceneDelegate.m */; };
-		780424AB269D2E6300E771CE /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 780424AA269D2E6300E771CE /* ViewController.m */; };
 		780424AE269D2E6300E771CE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 780424AC269D2E6300E771CE /* Main.storyboard */; };
 		780424B0269D2E6300E771CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 780424AF269D2E6300E771CE /* Assets.xcassets */; };
 		780424B3269D2E6300E771CE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 780424B1269D2E6300E771CE /* LaunchScreen.storyboard */; };
@@ -17,8 +17,11 @@
 		780424C0269D2E6400E771CE /* foodstaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 780424BF269D2E6400E771CE /* foodstaTests.m */; };
 		780424CB269D2E6400E771CE /* foodstaUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 780424CA269D2E6400E771CE /* foodstaUITests.m */; };
 		780424DA269D2E7500E771CE /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 780424D9269D2E7500E771CE /* Location.m */; };
-		780424DD269D2EB500E771CE /* LocationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 780424DC269D2EB500E771CE /* LocationsViewController.m */; };
 		780424E0269D315A00E771CE /* LocationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 780424DF269D315A00E771CE /* LocationCell.m */; };
+		780424E3269D3DB000E771CE /* LocationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 780424E2269D3DB000E771CE /* LocationsViewController.m */; };
+		780424E9269D4F0600E771CE /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 780424E8269D4F0600E771CE /* LoginViewController.m */; };
+		E4B6B47959F79E483DDBEA65 /* Pods_foodstaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50185661E04E68223708872F /* Pods_foodstaTests.framework */; };
+		F2EAC73CF64B1ABC7BFCF585 /* Pods_foodsta_foodstaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E40072F959FD3C6A5E6EAAC1 /* Pods_foodsta_foodstaUITests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,13 +42,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0EE42AAB70FA68D19B238C6A /* Pods-foodstaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-foodstaTests.debug.xcconfig"; path = "Target Support Files/Pods-foodstaTests/Pods-foodstaTests.debug.xcconfig"; sourceTree = "<group>"; };
+		1CAEF50362EDE1FCC2A228BC /* Pods-foodsta-foodstaUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-foodsta-foodstaUITests.debug.xcconfig"; path = "Target Support Files/Pods-foodsta-foodstaUITests/Pods-foodsta-foodstaUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		2CE06FB9F1BF0B39A537CD3B /* Pods-foodsta-foodstaUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-foodsta-foodstaUITests.release.xcconfig"; path = "Target Support Files/Pods-foodsta-foodstaUITests/Pods-foodsta-foodstaUITests.release.xcconfig"; sourceTree = "<group>"; };
+		50185661E04E68223708872F /* Pods_foodstaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_foodstaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		780424A0269D2E6300E771CE /* foodsta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = foodsta.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		780424A3269D2E6300E771CE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		780424A4269D2E6300E771CE /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		780424A6269D2E6300E771CE /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
 		780424A7269D2E6300E771CE /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
-		780424A9269D2E6300E771CE /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		780424AA269D2E6300E771CE /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		780424AD269D2E6300E771CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		780424AF269D2E6300E771CE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		780424B2269D2E6300E771CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -59,10 +64,17 @@
 		780424CC269D2E6400E771CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		780424D8269D2E7500E771CE /* Location.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
 		780424D9269D2E7500E771CE /* Location.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
-		780424DB269D2EB500E771CE /* LocationsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocationsViewController.h; sourceTree = "<group>"; };
-		780424DC269D2EB500E771CE /* LocationsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocationsViewController.m; sourceTree = "<group>"; };
 		780424DE269D315A00E771CE /* LocationCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocationCell.h; sourceTree = "<group>"; };
 		780424DF269D315A00E771CE /* LocationCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocationCell.m; sourceTree = "<group>"; };
+		780424E1269D3DB000E771CE /* LocationsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocationsViewController.h; sourceTree = "<group>"; };
+		780424E2269D3DB000E771CE /* LocationsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocationsViewController.m; sourceTree = "<group>"; };
+		780424E7269D4F0600E771CE /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		780424E8269D4F0600E771CE /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		94DBCF63251A45821B4D96D8 /* Pods_foodsta.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_foodsta.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BDED1C488468ADD58D63CDDE /* Pods-foodstaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-foodstaTests.release.xcconfig"; path = "Target Support Files/Pods-foodstaTests/Pods-foodstaTests.release.xcconfig"; sourceTree = "<group>"; };
+		DDA34CDF962E3DCE4D4CD92D /* Pods-foodsta.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-foodsta.release.xcconfig"; path = "Target Support Files/Pods-foodsta/Pods-foodsta.release.xcconfig"; sourceTree = "<group>"; };
+		E0CE98474C40E5CED7CD0207 /* Pods-foodsta.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-foodsta.debug.xcconfig"; path = "Target Support Files/Pods-foodsta/Pods-foodsta.debug.xcconfig"; sourceTree = "<group>"; };
+		E40072F959FD3C6A5E6EAAC1 /* Pods_foodsta_foodstaUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_foodsta_foodstaUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				173B620AB9D00480437DFAC8 /* Pods_foodsta.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -77,6 +90,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4B6B47959F79E483DDBEA65 /* Pods_foodstaTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,12 +98,36 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F2EAC73CF64B1ABC7BFCF585 /* Pods_foodsta_foodstaUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1CD76F05BA6354666F42D1DE /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E0CE98474C40E5CED7CD0207 /* Pods-foodsta.debug.xcconfig */,
+				DDA34CDF962E3DCE4D4CD92D /* Pods-foodsta.release.xcconfig */,
+				1CAEF50362EDE1FCC2A228BC /* Pods-foodsta-foodstaUITests.debug.xcconfig */,
+				2CE06FB9F1BF0B39A537CD3B /* Pods-foodsta-foodstaUITests.release.xcconfig */,
+				0EE42AAB70FA68D19B238C6A /* Pods-foodstaTests.debug.xcconfig */,
+				BDED1C488468ADD58D63CDDE /* Pods-foodstaTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		1D5B5A76F5E87DF50E11467E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				94DBCF63251A45821B4D96D8 /* Pods_foodsta.framework */,
+				E40072F959FD3C6A5E6EAAC1 /* Pods_foodsta_foodstaUITests.framework */,
+				50185661E04E68223708872F /* Pods_foodstaTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		78042497269D2E6300E771CE = {
 			isa = PBXGroup;
 			children = (
@@ -97,6 +135,8 @@
 				780424BE269D2E6400E771CE /* foodstaTests */,
 				780424C9269D2E6400E771CE /* foodstaUITests */,
 				780424A1269D2E6300E771CE /* Products */,
+				1CD76F05BA6354666F42D1DE /* Pods */,
+				1D5B5A76F5E87DF50E11467E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -119,13 +159,13 @@
 				780424A4269D2E6300E771CE /* AppDelegate.m */,
 				780424A6269D2E6300E771CE /* SceneDelegate.h */,
 				780424A7269D2E6300E771CE /* SceneDelegate.m */,
-				780424A9269D2E6300E771CE /* ViewController.h */,
-				780424AA269D2E6300E771CE /* ViewController.m */,
+				780424E1269D3DB000E771CE /* LocationsViewController.h */,
+				780424E2269D3DB000E771CE /* LocationsViewController.m */,
 				780424DE269D315A00E771CE /* LocationCell.h */,
 				780424DF269D315A00E771CE /* LocationCell.m */,
 				780424AC269D2E6300E771CE /* Main.storyboard */,
-				780424DB269D2EB500E771CE /* LocationsViewController.h */,
-				780424DC269D2EB500E771CE /* LocationsViewController.m */,
+				780424E7269D4F0600E771CE /* LoginViewController.h */,
+				780424E8269D4F0600E771CE /* LoginViewController.m */,
 				780424AF269D2E6300E771CE /* Assets.xcassets */,
 				780424B1269D2E6300E771CE /* LaunchScreen.storyboard */,
 				780424B4269D2E6300E771CE /* Info.plist */,
@@ -159,9 +199,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 780424CF269D2E6400E771CE /* Build configuration list for PBXNativeTarget "foodsta" */;
 			buildPhases = (
+				1002BEB2327CD60F446A1CC6 /* [CP] Check Pods Manifest.lock */,
 				7804249C269D2E6300E771CE /* Sources */,
 				7804249D269D2E6300E771CE /* Frameworks */,
 				7804249E269D2E6300E771CE /* Resources */,
+				1223FE287555B157DAC656F6 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -176,6 +218,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 780424D2269D2E6400E771CE /* Build configuration list for PBXNativeTarget "foodstaTests" */;
 			buildPhases = (
+				1274C3E50D0A52AB511D249F /* [CP] Check Pods Manifest.lock */,
 				780424B7269D2E6400E771CE /* Sources */,
 				780424B8269D2E6400E771CE /* Frameworks */,
 				780424B9269D2E6400E771CE /* Resources */,
@@ -194,9 +237,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 780424D5269D2E6400E771CE /* Build configuration list for PBXNativeTarget "foodstaUITests" */;
 			buildPhases = (
+				ADB11CFA07CCCC908528FC83 /* [CP] Check Pods Manifest.lock */,
 				780424C2269D2E6400E771CE /* Sources */,
 				780424C3269D2E6400E771CE /* Frameworks */,
 				780424C4269D2E6400E771CE /* Resources */,
+				F19A0EB6BCF0FA6AA30F5270 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -276,18 +321,121 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		1002BEB2327CD60F446A1CC6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-foodsta-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		1223FE287555B157DAC656F6 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-foodsta/Pods-foodsta-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-foodsta/Pods-foodsta-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-foodsta/Pods-foodsta-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		1274C3E50D0A52AB511D249F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-foodstaTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		ADB11CFA07CCCC908528FC83 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-foodsta-foodstaUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F19A0EB6BCF0FA6AA30F5270 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-foodsta-foodstaUITests/Pods-foodsta-foodstaUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-foodsta-foodstaUITests/Pods-foodsta-foodstaUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-foodsta-foodstaUITests/Pods-foodsta-foodstaUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		7804249C269D2E6300E771CE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				780424AB269D2E6300E771CE /* ViewController.m in Sources */,
 				780424DA269D2E7500E771CE /* Location.m in Sources */,
 				780424E0269D315A00E771CE /* LocationCell.m in Sources */,
 				780424A5269D2E6300E771CE /* AppDelegate.m in Sources */,
 				780424B6269D2E6300E771CE /* main.m in Sources */,
+				780424E9269D4F0600E771CE /* LoginViewController.m in Sources */,
 				780424A8269D2E6300E771CE /* SceneDelegate.m in Sources */,
-				780424DD269D2EB500E771CE /* LocationsViewController.m in Sources */,
+				780424E3269D3DB000E771CE /* LocationsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -456,6 +604,7 @@
 		};
 		780424D0269D2E6400E771CE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E0CE98474C40E5CED7CD0207 /* Pods-foodsta.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -474,6 +623,7 @@
 		};
 		780424D1269D2E6400E771CE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DDA34CDF962E3DCE4D4CD92D /* Pods-foodsta.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -492,6 +642,7 @@
 		};
 		780424D3269D2E6400E771CE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0EE42AAB70FA68D19B238C6A /* Pods-foodstaTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -512,6 +663,7 @@
 		};
 		780424D4269D2E6400E771CE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BDED1C488468ADD58D63CDDE /* Pods-foodstaTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -532,6 +684,7 @@
 		};
 		780424D6269D2E6400E771CE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1CAEF50362EDE1FCC2A228BC /* Pods-foodsta-foodstaUITests.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 54U4XNMMRU;
@@ -550,6 +703,7 @@
 		};
 		780424D7269D2E6400E771CE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2CE06FB9F1BF0B39A537CD3B /* Pods-foodsta-foodstaUITests.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 54U4XNMMRU;
