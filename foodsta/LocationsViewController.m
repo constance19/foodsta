@@ -8,6 +8,7 @@
 #import "LocationsViewController.h"
 #import "Location.h"
 #import "LocationCell.h"
+#import "ComposeViewController.h"
 
 @interface LocationsViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -103,14 +104,25 @@
     return UITableViewAutomaticDimension;
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    
+    if ([[segue identifier] isEqualToString:@"locationSegue"]) {
+        UITableViewCell *tappedCell = sender;
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
+        Location *location = self.arrayOfLocations[indexPath.row];
+        
+        ComposeViewController *composeController = [segue destinationViewController];
+        composeController.location = location;
+        composeController.locationSelected = TRUE;
+    }
+ 
 }
-*/
+
 
 @end

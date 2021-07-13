@@ -44,6 +44,11 @@
     
     // Set button display
     [self.photoButton setFrame:CGRectMake(173, 269, 130, 44)];
+    
+    // Set location if user already selected one
+    if (self.locationSelected) {
+        self.searchBar.text = self.location.name;
+    }
 }
 
 - (IBAction)onTapPhoto:(id)sender {

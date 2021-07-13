@@ -72,7 +72,7 @@
             <objects>
                 <viewController id="fdf-fH-paj" customClass="ComposeViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="KRs-nC-OPU">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gdr-rZ-8Ai">
@@ -240,11 +240,11 @@
             <objects>
                 <viewController storyboardIdentifier="locationsController" id="BYZ-38-t0r" customClass="LocationsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="yhA-Wc-dFh">
-                                <rect key="frame" x="0.0" y="158" width="414" height="684"/>
+                                <rect key="frame" x="0.0" y="146" width="414" height="750"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="LocationCell" rowHeight="106" id="BYh-A6-UEu" customClass="LocationCell">
@@ -268,7 +268,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PEJ-FV-vTa">
-                                                    <rect key="frame" x="99" y="45.5" width="281" height="20.5"/>
+                                                    <rect key="frame" x="99" y="42.5" width="281" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -282,7 +282,7 @@
                                                 <constraint firstItem="YTp-ne-i7J" firstAttribute="leading" secondItem="hlV-rc-tll" secondAttribute="trailing" constant="21" id="UGH-g5-Ybs"/>
                                                 <constraint firstItem="PEJ-FV-vTa" firstAttribute="leading" secondItem="YTp-ne-i7J" secondAttribute="leading" id="Zpn-1d-Man"/>
                                                 <constraint firstItem="hlV-rc-tll" firstAttribute="leading" secondItem="Bgd-rA-Enu" secondAttribute="leading" constant="14" id="mjO-0f-lmo"/>
-                                                <constraint firstItem="PEJ-FV-vTa" firstAttribute="top" secondItem="YTp-ne-i7J" secondAttribute="bottom" constant="11" id="uHG-zM-pM3"/>
+                                                <constraint firstItem="PEJ-FV-vTa" firstAttribute="top" secondItem="YTp-ne-i7J" secondAttribute="bottom" constant="8" id="uHG-zM-pM3"/>
                                                 <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="PEJ-FV-vTa" secondAttribute="bottom" constant="3" id="w7O-8p-BaX"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -290,16 +290,17 @@
                                             <outlet property="addressLabel" destination="PEJ-FV-vTa" id="oP6-KS-s2S"/>
                                             <outlet property="nameLabel" destination="YTp-ne-i7J" id="854-AO-g52"/>
                                             <outlet property="restaurantImage" destination="hlV-rc-tll" id="HR1-rW-xAy"/>
+                                            <segue destination="fdf-fH-paj" kind="show" identifier="locationSegue" id="wId-7A-82a"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="c7E-fd-ktv">
-                                <rect key="frame" x="0.0" y="107" width="414" height="51"/>
+                                <rect key="frame" x="0.0" y="95" width="414" height="51"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
                             <searchBar contentMode="redraw" text="" translatesAutoresizingMaskIntoConstraints="NO" id="6o5-Ea-gfW">
-                                <rect key="frame" x="0.0" y="56" width="414" height="51"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="51"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
                         </subviews>
@@ -418,6 +419,9 @@
             <point key="canvasLocation" x="763.768115942029" y="272.54464285714283"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="wId-7A-82a"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
