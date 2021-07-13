@@ -12,6 +12,7 @@
 @interface LocationsViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (weak, nonatomic) IBOutlet UISearchBar *locationBar;
 @property (strong, nonatomic) NSMutableArray *arrayOfLocations;
 
 @end
@@ -25,14 +26,18 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.searchBar.delegate = self;
+    
+    // Set placeholder text of search bars
+    self.searchBar.placeholder = @"Cafes, pasta, delivery, etc.";
+    self.locationBar.placeholder = @"Location..";
 }
 
 - (IBAction)onTapSearch:(id)sender {
     NSString *term = self.searchBar.text;
-//    NSString *location = @"sf";
+    NSString *location = self.locationBar.text;
 
     NSMutableURLRequest *requestData = [[NSMutableURLRequest alloc] init];
-    NSString *str = [NSString stringWithFormat: @"https://api.yelp.com/v3/businesses/search?term=%@&location=sf&radius=10000", term];
+    NSString *str = [NSString stringWithFormat: @"https://api.yelp.com/v3/businesses/search?term=%@&location=%@&radius=10000", term, location];
     [requestData setURL:[NSURL URLWithString:str]];
 
     [requestData setHTTPMethod:@"GET"];
@@ -61,6 +66,7 @@
             NSLog(@"%@", loc.imageURL);
         }
         
+        // Reload table view on main thread
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
         });

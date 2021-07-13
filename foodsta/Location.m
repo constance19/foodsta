@@ -19,9 +19,10 @@
     // Concatenate address components and set it to the location's property
     NSArray *address = dictionary[@"location"][@"display_address"];
     NSInteger count = [address count];
-    NSString *concat = @"";
-    for (int i = 0; i < count; i++) {
+    NSString *concat = [address objectAtIndex:0];
+    for (int i = 1; i < count; i++) {
         NSString* add = [address objectAtIndex:i];
+        concat = [concat stringByAppendingString:@" "];
         concat = [concat stringByAppendingString:add];
     }
     self.address = concat;
