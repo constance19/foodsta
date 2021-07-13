@@ -17,6 +17,7 @@
 
 @property (nonatomic, strong) NSArray *arrayOfPosts;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) UIRefreshControl *refreshControl;
 
 @end
 
@@ -28,6 +29,12 @@
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    
+    // Pull to refresh
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl setTintColor:[UIColor blackColor]];
+    [refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
+    [self.tableView insertSubview:refreshControl atIndex:0];
     
     // Get timeline
     [self loadPosts:20];
@@ -121,6 +128,21 @@
 -(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return UITableViewAutomaticDimension;
+}
+
+// Makes a network request to get updated data
+// Updates the tableView with the new data
+// Hides the RefreshControl
+- (void)beginRefresh:(UIRefreshControl *)refreshControl {
+    [self loadPosts:20];
+    [refreshControl endRefreshing];
+}
+
+// For infinite scrolling
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+    if(indexPath.row + 1 == [self.arrayOfPosts count]){
+        [self loadPosts: (int)[self.arrayOfPosts count]+20];
+    }
 }
 
 /*
