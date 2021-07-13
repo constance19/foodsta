@@ -31,7 +31,7 @@
     newPost.caption = caption;
     newPost.likeCount = @(0);
     newPost.commentCount = @(0);
-    newPost.liked = 0;
+    newPost.liked = @(0);
     
     // add location somehow
     newPost.locationTitle = location;

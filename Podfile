@@ -7,6 +7,10 @@ target 'foodsta' do
 
   # Pods for foodsta
   pod 'Parse'
+  pod 'MBProgressHUD'
+  pod 'HCSStarRatingView', '~> 1.5'
+  pod 'DateTools'
+  pod 'Parse/UI'
 
   target 'foodstaTests' do
     inherit! :search_paths

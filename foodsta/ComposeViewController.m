@@ -7,7 +7,7 @@
 
 #import "ComposeViewController.h"
 #import "Post.h"
-//#import "MBProgressHUD.h"
+#import "MBProgressHUD.h"
 #import <UIKit/UIKit.h>
 #import "LocationsViewController.h"
 
@@ -75,7 +75,7 @@
 
 - (IBAction)onTapShare:(id)sender {
      //Display HUD right before the request is made
-//    [MBProgressHUD showHUDAddedTo:self.view animated:TRUE];
+    [MBProgressHUD showHUDAddedTo:self.view animated:TRUE];
     
     // Post the image and caption and show the progress HUD
     [Post postCheckIn:self.locationImage.image withCaption:self.captionView.text withLocation:self.searchBar.text withCompletion:^(BOOL succeeded, NSError *error) {
@@ -83,7 +83,7 @@
             NSLog(@"Error posting check-in", error.localizedDescription);
 
             // Show the progress HUD while user is waiting for the post request to complete
-//            [MBProgressHUD hideHUDForView:self.view animated:TRUE];
+            [MBProgressHUD hideHUDForView:self.view animated:TRUE];
             [self dismissViewControllerAnimated:YES completion:nil];
         } else {
             NSLog(@"Successfully posted check-in!");

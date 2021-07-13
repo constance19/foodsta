@@ -1,3 +1,6 @@
 ${PODS_ROOT}/Target Support Files/Pods-foodsta-foodstaUITests/Pods-foodsta-foodstaUITests-frameworks.sh
 ${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework
+${BUILT_PRODUCTS_DIR}/DateTools/DateTools.framework
+${BUILT_PRODUCTS_DIR}/HCSStarRatingView/HCSStarRatingView.framework
+${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework
 ${BUILT_PRODUCTS_DIR}/Parse/Parse.framework

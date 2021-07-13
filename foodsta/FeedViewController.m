@@ -6,11 +6,17 @@
 //
 
 #import "FeedViewController.h"
-#import "Parse/Parse.h"
+//#import "Parse/Parse.h"
 #import "SceneDelegate.h"
 #import "LoginViewController.h"
+#import "PostCell.h"
+//@import Parse;
+#import "DateTools.h"
 
-@interface FeedViewController ()
+@interface FeedViewController () <UITableViewDelegate, UITableViewDataSource>
+
+@property (nonatomic, strong) NSArray *arrayOfPosts;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end
 
@@ -19,6 +25,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    
+    // Get timeline
+    [self loadPosts:20];
 }
 
 - (IBAction)onTapLogout:(id)sender {
@@ -38,6 +50,77 @@
             myDelegate.window.rootViewController = loginViewController;
         }
     }];
+}
+
+- (void) loadPosts: (int) numPosts {
+    // construct PFQuery
+    PFQuery *postQuery = [Post query];
+    [postQuery orderByDescending:@"createdAt"];
+    [postQuery includeKey:@"author"];
+    [postQuery includeKey:@"liked"];
+    [postQuery includeKey:@"locationTitle"];
+    [postQuery includeKey:@"image"];
+    postQuery.limit = numPosts;
+
+    // fetch data asynchronously
+    [postQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> * _Nullable posts, NSError * _Nullable error) {
+        if (posts) {
+            // do something with the data fetched
+            self.arrayOfPosts = posts;
+            [self.tableView reloadData];
+        }
+        else {
+            NSLog(@"😫😫😫 Error getting home timeline: %@", error.localizedDescription);
+        }
+    }];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.arrayOfPosts.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    PostCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PostCell"];
+
+    // Get and set the post
+    Post *post = self.arrayOfPosts[indexPath.row];
+    cell.post = post;
+    
+    // Set the location
+    cell.locationLabel.text = post.locationTitle;
+    
+    // Set the caption
+    cell.captionLabel.text = post.caption;
+    
+    // Format and set createdAtString, convert Date to String using DateTool relative time
+    NSDate *createdAt = post.createdAt;
+    cell.timestampLabel.text = createdAt.shortTimeAgoSinceNow;
+//    cell.imageView.file = post.image;
+    
+    // Set like count
+    NSString *likeCount = [NSString stringWithFormat:@"%@", post.likeCount];
+    [cell.likeButton setTitle:likeCount forState:UIControlStateNormal];
+
+    PFUser *user = post[@"author"];
+    if (user != nil) {
+        // User found! update username label with username
+        cell.usernameLabel.text = [NSString stringWithFormat:@"@%@", user.username];
+        
+    } else {
+        // No user found, set default username
+        cell.usernameLabel.text = @"@Default_Name";
+    }
+    return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return UITableViewAutomaticDimension;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return UITableViewAutomaticDimension;
 }
 
 /*
