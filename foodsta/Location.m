@@ -13,9 +13,18 @@
 - (id)initWithDictionary:(NSDictionary *)dictionary {
     self = [super init];
     
-    // Set the restaurant name and address
+    // Set the restaurant name of the location
     self.name = dictionary[@"name"];
-    self.address = dictionary[@"location"][@"display_address"];
+    
+    // Concatenate address components and set it to the location's property
+    NSArray *address = dictionary[@"location"][@"display_address"];
+    NSInteger count = [address count];
+    NSString *concat = @"";
+    for (int i = 0; i < count; i++) {
+        NSString* add = [address objectAtIndex:i];
+        concat = [concat stringByAppendingString:add];
+    }
+    self.address = concat;
     
     // Get the poster URL to set the poster view
     NSString *imageString = dictionary[@"image_url"];
