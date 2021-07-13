@@ -18,13 +18,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) NSString *caption;
 @property (nonatomic, strong) PFFileObject *image;
-@property (nonatomic, strong) NSString *locationTitle;
 @property (nonatomic, strong) NSNumber *likeCount;
 @property (nonatomic, strong) NSNumber *commentCount;
 
 @property (nonatomic, strong) NSNumber *liked;
+@property (nonatomic, strong) NSString *locationTitle;
+
 
 + (PFFileObject *)getPFFileFromImage: (UIImage * _Nullable)image;
++ (void) postCheckIn: ( UIImage * _Nullable )image withCaption: ( NSString * _Nullable )caption withLocation: (NSString * _Nullable)location withCompletion: (PFBooleanResultBlock  _Nullable)completion;
 
 @end
 

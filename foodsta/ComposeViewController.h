@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface ComposeViewController : UIViewController
 
 @property (strong, nonatomic) Location *location;
-@property (nonatomic) BOOL *locationSelected;
+@property (nonatomic) int *locationSelected;
 
 @end
 

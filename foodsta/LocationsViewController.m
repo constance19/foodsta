@@ -119,7 +119,7 @@
         
         ComposeViewController *composeController = [segue destinationViewController];
         composeController.location = location;
-        composeController.locationSelected = TRUE;
+        composeController.locationSelected = 1;
     }
  
 }

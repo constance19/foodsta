@@ -45,7 +45,10 @@
     // Set button display
     [self.photoButton setFrame:CGRectMake(173, 269, 130, 44)];
     
-    // Set location if user already selected one
+    // Set placeholder text for check-in location if user hasn't selected one
+    self.searchBar.placeholder = @"Search Yelp..";
+    
+    // Set check-in location if user already selected one
     if (self.locationSelected) {
         self.searchBar.text = self.location.name;
     }
@@ -71,26 +74,24 @@
 }
 
 - (IBAction)onTapShare:(id)sender {
-    // Display HUD right before the request is made
+     //Display HUD right before the request is made
 //    [MBProgressHUD showHUDAddedTo:self.view animated:TRUE];
     
-//    // Post the image and caption and show the progress HUD
-//    [Post postCheckIn:self.postImage.image withCaption:self.textView.text withCompletion:^(BOOL succeeded, NSError *error) {
-//        if (error) {
-//            NSLog(@"Error posting image", error.localizedDescription);
-//
-//            // Show the progress HUD while user is waiting for the post request to complete
+    // Post the image and caption and show the progress HUD
+    [Post postCheckIn:self.locationImage.image withCaption:self.captionView.text withLocation:self.searchBar.text withCompletion:^(BOOL succeeded, NSError *error) {
+        if (error) {
+            NSLog(@"Error posting check-in", error.localizedDescription);
+
+            // Show the progress HUD while user is waiting for the post request to complete
 //            [MBProgressHUD hideHUDForView:self.view animated:TRUE];
-//            [self dismissViewControllerAnimated:YES completion:nil];
-//        } else {
-//            NSLog(@"Successfully posted image!");
-////            [self.delegate didPost:post];
-//
-//            // Hide HUD once the network request comes back (must be done on main UI thread)
+            [self dismissViewControllerAnimated:YES completion:nil];
+        } else {
+            NSLog(@"Successfully posted check-in!");
+            // Hide HUD once the network request comes back (must be done on main UI thread)
 //            [MBProgressHUD hideHUDForView:self.view animated:TRUE];
-//            [self dismissViewControllerAnimated:YES completion:nil];
-//        }
-//    }];
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }
+    }];
 }
 
 - (IBAction)onTapCancel:(id)sender {
@@ -151,8 +152,7 @@
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
 //    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main"
 //                                                         bundle:nil];
-    LocationsViewController *locationsController =
-               [self.storyboard instantiateViewControllerWithIdentifier:@"locationsController"];
+    LocationsViewController *locationsController = [self.storyboard instantiateViewControllerWithIdentifier:@"locationsController"];
 
     [self presentViewController:locationsController
                        animated:YES
