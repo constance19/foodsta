@@ -696,6 +696,8 @@
 		773F185B5C3D405967CEDA1022003174 /* PFObjectState.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PFObjectState.h; path = Parse/Parse/Internal/Object/State/PFObjectState.h; sourceTree = "<group>"; };
 		780424EA269D518F00E771CE /* FeedViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FeedViewController.h; path = ../foodsta/FeedViewController.h; sourceTree = "<group>"; };
 		780424EB269D518F00E771CE /* FeedViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = FeedViewController.m; path = ../foodsta/FeedViewController.m; sourceTree = "<group>"; };
+		780424EF269D655700E771CE /* Post.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Post.h; path = ../foodsta/Post.h; sourceTree = "<group>"; };
+		780424F0269D655700E771CE /* Post.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = Post.m; path = ../foodsta/Post.m; sourceTree = "<group>"; };
 		78817E5285BA8916CBA796A692F421FC /* PFRESTObjectCommand.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = PFRESTObjectCommand.m; path = Parse/Parse/Internal/Commands/PFRESTObjectCommand.m; sourceTree = "<group>"; };
 		7974EE58D288F21974479E653D96E757 /* PFSQLiteDatabaseController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PFSQLiteDatabaseController.h; path = Parse/Parse/Internal/LocalDataStore/SQLite/PFSQLiteDatabaseController.h; sourceTree = "<group>"; };
 		79A607AA1D29E5FD32D3F5419FA0BD0C /* PFPolygon.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PFPolygon.h; path = Parse/Parse/PFPolygon.h; sourceTree = "<group>"; };
@@ -1519,6 +1521,8 @@
 		CF1408CF629C7361332E53B88F7BD30C = {
 			isa = PBXGroup;
 			children = (
+				780424EF269D655700E771CE /* Post.h */,
+				780424F0269D655700E771CE /* Post.m */,
 				780424EA269D518F00E771CE /* FeedViewController.h */,
 				780424EB269D518F00E771CE /* FeedViewController.m */,
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
