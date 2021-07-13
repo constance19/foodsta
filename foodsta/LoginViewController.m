@@ -19,6 +19,15 @@
 
 @implementation LoginViewController
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
+    
+    // Set placeholder text of username and password text fields
+    self.usernameField.placeholder = @"Phone number, username, or email";
+    self.passwordField.placeholder = @"Password";
+}
+
 - (IBAction)onTapSignup:(id)sender {
     if([self.usernameField.text isEqual:@""] || [self.passwordField.text isEqual:@""]) {
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Incomplete information!"
