@@ -11,7 +11,7 @@
         <!--Login View Controller-->
         <scene sceneID="bT8-F9-df0">
             <objects>
-                <viewController id="LhA-Mq-Toy" customClass="LoginViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" id="LhA-Mq-Toy" customClass="LoginViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Lh8-V3-R5t">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -86,14 +86,20 @@
         <!--Home-->
         <scene sceneID="nRC-YI-cp8">
             <objects>
-                <viewController id="l9J-xN-EQp" sceneMemberID="viewController">
+                <viewController id="l9J-xN-EQp" customClass="FeedViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="pCL-bP-RTO">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="hFu-QZ-Ic4"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Home" id="iM1-af-qE2"/>
+                    <navigationItem key="navigationItem" title="Home" id="iM1-af-qE2">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="qEx-yI-bMU">
+                            <connections>
+                                <action selector="onTapLogout:" destination="l9J-xN-EQp" id="7R2-XJ-yGT"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cHi-zd-vfW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -102,7 +108,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="RWv-Mn-7P0">
             <objects>
-                <tabBarController id="0kM-CZ-YXU" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabBarController" id="0kM-CZ-YXU" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="3n7-4B-mXO">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>

@@ -20,6 +20,7 @@
 		780424E0269D315A00E771CE /* LocationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 780424DF269D315A00E771CE /* LocationCell.m */; };
 		780424E3269D3DB000E771CE /* LocationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 780424E2269D3DB000E771CE /* LocationsViewController.m */; };
 		780424E9269D4F0600E771CE /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 780424E8269D4F0600E771CE /* LoginViewController.m */; };
+		780424EE269D51B100E771CE /* FeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 780424ED269D51B100E771CE /* FeedViewController.m */; };
 		E4B6B47959F79E483DDBEA65 /* Pods_foodstaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50185661E04E68223708872F /* Pods_foodstaTests.framework */; };
 		F2EAC73CF64B1ABC7BFCF585 /* Pods_foodsta_foodstaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E40072F959FD3C6A5E6EAAC1 /* Pods_foodsta_foodstaUITests.framework */; };
 /* End PBXBuildFile section */
@@ -70,6 +71,8 @@
 		780424E2269D3DB000E771CE /* LocationsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocationsViewController.m; sourceTree = "<group>"; };
 		780424E7269D4F0600E771CE /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		780424E8269D4F0600E771CE /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		780424EC269D51B100E771CE /* FeedViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FeedViewController.h; sourceTree = "<group>"; };
+		780424ED269D51B100E771CE /* FeedViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FeedViewController.m; sourceTree = "<group>"; };
 		94DBCF63251A45821B4D96D8 /* Pods_foodsta.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_foodsta.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDED1C488468ADD58D63CDDE /* Pods-foodstaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-foodstaTests.release.xcconfig"; path = "Target Support Files/Pods-foodstaTests/Pods-foodstaTests.release.xcconfig"; sourceTree = "<group>"; };
 		DDA34CDF962E3DCE4D4CD92D /* Pods-foodsta.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-foodsta.release.xcconfig"; path = "Target Support Files/Pods-foodsta/Pods-foodsta.release.xcconfig"; sourceTree = "<group>"; };
@@ -166,6 +169,8 @@
 				780424AC269D2E6300E771CE /* Main.storyboard */,
 				780424E7269D4F0600E771CE /* LoginViewController.h */,
 				780424E8269D4F0600E771CE /* LoginViewController.m */,
+				780424EC269D51B100E771CE /* FeedViewController.h */,
+				780424ED269D51B100E771CE /* FeedViewController.m */,
 				780424AF269D2E6300E771CE /* Assets.xcassets */,
 				780424B1269D2E6300E771CE /* LaunchScreen.storyboard */,
 				780424B4269D2E6300E771CE /* Info.plist */,
@@ -431,6 +436,7 @@
 			files = (
 				780424DA269D2E7500E771CE /* Location.m in Sources */,
 				780424E0269D315A00E771CE /* LocationCell.m in Sources */,
+				780424EE269D51B100E771CE /* FeedViewController.m in Sources */,
 				780424A5269D2E6300E771CE /* AppDelegate.m in Sources */,
 				780424B6269D2E6300E771CE /* main.m in Sources */,
 				780424E9269D4F0600E771CE /* LoginViewController.m in Sources */,
