@@ -12,7 +12,7 @@ Original App Design Project - README Template
 
 ## Overview
 ### Description
-A social platform for foodie inspiration! Allows users to check in and share where/what they're eating (required location, optional picture, optional caption). Users can also interact with other foodies by liking their check-in posts, following them, and browsing their profile pages.
+A social platform for foodie inspiration! Allows users to check in and share where/what they're eating (location, picture, caption, rating). Leverages Yelp API for location searching and browsing. Users can also interact with other foodies by liking their check-in posts, following them, and browsing their profile pages.
 
 ### App Evaluation
 [Evaluation of your app across the following attributes]
