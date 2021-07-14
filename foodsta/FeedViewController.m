@@ -102,8 +102,8 @@
     cell.locationView.attributedText = str;
     cell.locationView.dataDetectorTypes = UIDataDetectorTypeLink;
     
-//    cell.locationLabel.tag = post.loc
-    
+    [cell.locationView setFont:[UIFont systemFontOfSize:19]];
+        
     // Set the caption
     cell.captionLabel.text = post.caption;
     
@@ -115,6 +115,9 @@
     // Set like count
     NSString *likeCount = [NSString stringWithFormat:@"%@", post.likeCount];
     [cell.likeButton setTitle:likeCount forState:UIControlStateNormal];
+    
+    // Set rating view
+    cell.ratingView.value = [post.rating doubleValue];
 
     PFUser *user = post[@"author"];
     if (user != nil) {

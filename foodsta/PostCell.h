@@ -8,6 +8,7 @@
 #import <UIKit/UIKit.h>
 #import "Post.h"
 @import Parse;
+#import "HCSStarRatingView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -20,6 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *captionLabel;
 @property (nonatomic, strong) Post *post;
 @property (weak, nonatomic) IBOutlet UIButton *likeButton;
+@property (weak, nonatomic) IBOutlet HCSStarRatingView *ratingView;
 
 @end
 
