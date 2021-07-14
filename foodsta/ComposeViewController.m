@@ -10,6 +10,7 @@
 #import "MBProgressHUD.h"
 #import <UIKit/UIKit.h>
 #import "LocationsViewController.h"
+#import "HCSStarRatingView.h"
 
 @interface ComposeViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate, UISearchBarDelegate>
 
@@ -17,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *locationImage;
 @property (weak, nonatomic) IBOutlet UITextView *captionView;
 @property (weak, nonatomic) IBOutlet UIButton *photoButton;
+@property (weak, nonatomic) IBOutlet HCSStarRatingView *ratingView;
 
 @end
 
@@ -78,7 +80,7 @@
     [MBProgressHUD showHUDAddedTo:self.view animated:TRUE];
     
     // Post the image and caption and show the progress HUD
-    [Post postCheckIn:self.locationImage.image withCaption:self.captionView.text withLocation:self.searchBar.text withUrl: self.location.yelpURL withCompletion:^(BOOL succeeded, NSError *error) {
+    [Post postCheckIn:self.locationImage.image withCaption:self.captionView.text withLocation:self.searchBar.text withUrl: self.location.yelpURL withRating:@(self.ratingView.value) withCompletion:^(BOOL succeeded, NSError *error) {
         if (error) {
             NSLog(@"Error posting check-in", error.localizedDescription);
 

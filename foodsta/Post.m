@@ -19,12 +19,13 @@
 @dynamic likeCount;
 @dynamic commentCount;
 @dynamic liked;
+@dynamic rating;
 
 + (nonnull NSString *)parseClassName {
     return @"Post";
 }
 
-+ (void) postCheckIn: ( UIImage * _Nullable )image withCaption: ( NSString * _Nullable )caption withLocation: (NSString * _Nullable)location withUrl: (NSString * _Nullable)url withCompletion: (PFBooleanResultBlock  _Nullable)completion {
++ (void) postCheckIn: ( UIImage * _Nullable )image withCaption: ( NSString * _Nullable )caption withLocation: (NSString * _Nullable)location withUrl: (NSString * _Nullable)url withRating: (NSNumber * _Nullable)rating withCompletion: (PFBooleanResultBlock  _Nullable)completion {
     
     Post *newPost = [Post new];
     newPost.image = [self getPFFileFromImage:image];
@@ -35,6 +36,7 @@
     newPost.liked = @(0);
     newPost.locationTitle = location;
     newPost.locationUrl = url;
+    newPost.rating = rating;
     
     [newPost saveInBackgroundWithBlock: completion];
 }
