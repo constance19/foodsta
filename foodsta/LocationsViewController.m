@@ -9,6 +9,7 @@
 #import "Location.h"
 #import "LocationCell.h"
 #import "ComposeViewController.h"
+#import "MBProgressHUD.h"
 
 @interface LocationsViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -34,7 +35,9 @@
 }
 
 - (IBAction)onTapSearch:(id)sender {
-    NSString *term = self.searchBar.text;
+    NSString *rawTerm = self.searchBar.text;
+    // Process the search term to be compatible with the Yelp API, i.e. converting spaces to +
+    NSString *term = [rawTerm stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]];
     NSString *location = self.locationBar.text;
 
     NSMutableURLRequest *requestData = [[NSMutableURLRequest alloc] init];
@@ -53,7 +56,9 @@
 
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
 
-
+    //Display HUD right before the request is made
+   [MBProgressHUD showHUDAddedTo:self.view animated:TRUE];
+    
     [[session dataTaskWithRequest:requestData completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         NSDictionary *jsonArray = [NSJSONSerialization JSONObjectWithData: data options: NSJSONReadingMutableContainers error: &error];
         NSArray *businesses = jsonArray[@"businesses"]; // array of dictionaries, each dictionary = business with 16 key/value pairs
@@ -70,6 +75,7 @@
         // Reload table view on main thread
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
+            [MBProgressHUD hideHUDForView:self.view animated:TRUE];
         });
 
     }] resume];

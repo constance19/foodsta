@@ -15,6 +15,7 @@
 @dynamic caption;
 @dynamic image;
 @dynamic locationTitle;
+@dynamic locationUrl;
 @dynamic likeCount;
 @dynamic commentCount;
 @dynamic liked;
@@ -23,7 +24,7 @@
     return @"Post";
 }
 
-+ (void) postCheckIn: ( UIImage * _Nullable )image withCaption: ( NSString * _Nullable )caption withLocation: (NSString * _Nullable)location withCompletion: (PFBooleanResultBlock  _Nullable)completion {
++ (void) postCheckIn: ( UIImage * _Nullable )image withCaption: ( NSString * _Nullable )caption withLocation: (NSString * _Nullable)location withUrl: (NSString * _Nullable)url withCompletion: (PFBooleanResultBlock  _Nullable)completion {
     
     Post *newPost = [Post new];
     newPost.image = [self getPFFileFromImage:image];
@@ -33,6 +34,7 @@
     newPost.commentCount = @(0);
     newPost.liked = @(0);
     newPost.locationTitle = location;
+    newPost.locationUrl = url;
     
     [newPost saveInBackgroundWithBlock: completion];
 }

@@ -12,6 +12,8 @@
 #import "PostCell.h"
 //@import Parse;
 #import "DateTools.h"
+#import "LocationDetailsViewController.h"
+#import "MBProgressHUD.h"
 
 @interface FeedViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -94,7 +96,13 @@
     cell.post = post;
     
     // Set the location
-    cell.locationLabel.text = post.locationTitle;
+//    cell.locationLabel.text = post.locationTitle;
+    NSMutableAttributedString * str = [[NSMutableAttributedString alloc] initWithString:post.locationTitle];
+    [str addAttribute: NSLinkAttributeName value: post.locationUrl range: NSMakeRange(0, str.length)];
+    cell.locationView.attributedText = str;
+    cell.locationView.dataDetectorTypes = UIDataDetectorTypeLink;
+    
+//    cell.locationLabel.tag = post.loc
     
     // Set the caption
     cell.captionLabel.text = post.caption;
@@ -145,14 +153,21 @@
     }
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    
+    if ([[segue identifier] isEqualToString:@"locationDetailSegue"]) {
+        UILabel *tappedLabel = sender;
+        LocationDetailsViewController *locationController = [segue destinationViewController];
+        // how to access the PostCell that the tapped label is in? need to get the PostCell.post.locationUrl property to pass through segue
+//        locationController.yelpUrl = tappedLabel.tag;
+    }
 }
-*/
+
 
 @end

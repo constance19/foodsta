@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSURL *imageURL;
 @property (nonatomic, strong) NSString *address;
+@property (nonatomic, strong) NSString *yelpURL;
 
 - (id)initWithDictionary:(NSDictionary *)dictionary;
 + (NSArray *)locationsWithDictionaries:(NSArray *)dictionaries;

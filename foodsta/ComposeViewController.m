@@ -78,7 +78,7 @@
     [MBProgressHUD showHUDAddedTo:self.view animated:TRUE];
     
     // Post the image and caption and show the progress HUD
-    [Post postCheckIn:self.locationImage.image withCaption:self.captionView.text withLocation:self.searchBar.text withCompletion:^(BOOL succeeded, NSError *error) {
+    [Post postCheckIn:self.locationImage.image withCaption:self.captionView.text withLocation:self.searchBar.text withUrl: self.location.yelpURL withCompletion:^(BOOL succeeded, NSError *error) {
         if (error) {
             NSLog(@"Error posting check-in", error.localizedDescription);
 

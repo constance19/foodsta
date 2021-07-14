@@ -16,6 +16,9 @@
     // Set the restaurant name of the location
     self.name = dictionary[@"name"];
     
+    // Set the Yelp url of the location
+    self.yelpURL = dictionary[@"url"];
+    
     // Concatenate address components and set it to the location's property
     NSArray *address = dictionary[@"location"][@"display_address"];
     NSInteger count = [address count];
