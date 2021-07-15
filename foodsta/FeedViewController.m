@@ -31,6 +31,8 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    
     // Pull to refresh
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl setTintColor:[UIColor blackColor]];
@@ -150,16 +152,6 @@
 
 
 // MARK: UITableViewDelegate
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return UITableViewAutomaticDimension;
-}
-
--(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return UITableViewAutomaticDimension;
-}
 
 // For infinite scrolling
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
