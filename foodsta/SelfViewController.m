@@ -43,6 +43,8 @@
     self.profileImage.image = [[UIImage alloc] initWithData:fileData];
 }
 
+// TODO: viewWillAppear
+
 - (IBAction)onTapLogout:(id)sender {
     [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
         // Logout failed
@@ -75,8 +77,9 @@
         EditProfileViewController *editController = navController.topViewController;
         
         // Pass back the updated profile picture to refresh the profile tab immediately
-        editController.onDismiss = ^(UIViewController *sender, UIImage *profileImage) {
+        editController.onDismiss = ^(UIViewController *sender, UIImage *profileImage, NSString *bio) {
             self.profileImage.image = profileImage;
+            self.bioLabel.text = bio;
         };
     }
 }

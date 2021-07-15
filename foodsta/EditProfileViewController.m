@@ -73,7 +73,7 @@
     // Dismiss to go back to profile page
     [self dismissViewControllerAnimated:YES completion: ^ {
         // Pass back the updated profile picture to the parent view controller (profile tab)
-        self.onDismiss(self, self.profileImage.image);
+        self.onDismiss(self, self.profileImage.image, self.bioField.text);
     }];
 }
 
