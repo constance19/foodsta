@@ -9,13 +9,13 @@
 
 @implementation PostCell
 
-
-- (void)setPost:(Post *)post {
-    _post = post;
-//    NSLog(@"%@", post[@"image"]);
-    self.locationImage.file = post[@"image"];
-    [self.locationImage loadInBackground];
-}
+//
+//- (void)setPost:(Post *)post {
+//    _post = post;
+////    NSLog(@"%@", post[@"image"]);
+//    self.locationImage.file = post[@"image"];
+//    [self.locationImage loadInBackground];
+//}
 
 - (void)awakeFromNib {
     [super awakeFromNib];

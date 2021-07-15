@@ -24,19 +24,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     
-    // make profile image view circular
+    // Make profile image view circular
     self.profileImage.layer.cornerRadius = self.profileImage.frame.size.height /2;
     self.profileImage.layer.masksToBounds = YES;
     self.profileImage.layer.borderWidth = 0;
     
     PFUser *user = [PFUser currentUser];
             
-    // Set username label
+    // Set username and bio label
     self.usernameLabel.text = [@"@" stringByAppendingString: user.username];
-    
-    // Set bio
     self.bioLabel.text = user[@"bio"];
             
     // Set profile image
@@ -48,13 +45,11 @@
 
 - (IBAction)onTapLogout:(id)sender {
     [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
-        // PFUser.current() will now be nil
-        
         // Logout failed
         if (error) {
             NSLog(@"User logout failed: %@", error.localizedDescription);
         
-        // Successful logout
+        // Successful logout, PFUser.current() will now be nil
         } else {
             NSLog(@"User logged out successfully!");
             SceneDelegate *myDelegate = (SceneDelegate *)self.view.window.windowScene.delegate;
@@ -66,14 +61,25 @@
 }
 
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    
+    // Segue to edit profile page
+    if ([[segue identifier] isEqualToString:@"editProfileSegue"]) {
+        UINavigationController *navController = [segue destinationViewController];
+        EditProfileViewController *editController = navController.topViewController;
+        
+        // Pass back the updated profile picture to refresh the profile tab immediately
+        editController.onDismiss = ^(UIViewController *sender, UIImage *profileImage) {
+            self.profileImage.image = profileImage;
+        };
+    }
 }
-*/
+
 
 @end

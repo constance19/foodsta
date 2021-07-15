@@ -11,6 +11,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface EditProfileViewController : UIViewController
 
+@property (nonatomic, strong) void (^onDismiss)(UIViewController *sender, UIImage *profileImage);
+
 @end
 
 NS_ASSUME_NONNULL_END

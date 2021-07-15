@@ -18,7 +18,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     
     NSURL *url=[NSURL URLWithString:self.yelpUrl];
     NSURLRequest *request =[NSURLRequest requestWithURL:url];

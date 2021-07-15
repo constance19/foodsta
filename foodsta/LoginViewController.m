@@ -21,7 +21,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     
     // Set placeholder text of username and password text fields
     self.usernameField.placeholder = @"Phone number, username, or email";

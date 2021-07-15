@@ -26,21 +26,22 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     
     // Set caption box display
     self.captionView.layer.borderWidth = 1.2f;
     self.captionView.clipsToBounds = YES;
     self.captionView.layer.cornerRadius = 3.0f;
     self.captionView.layer.borderColor = UIColor.blackColor.CGColor;
-    
+
     // Set image view placeholder display
     UIColor *myGray = [UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1.0];
     self.locationImage.layer.backgroundColor = myGray.CGColor;
+    self.locationImage.image = nil;
     
     // Set placeholder text for caption view
     self.captionView.delegate = self;
-    self.captionView.text = @"Write a caption...";
+//    self.captionView.text = @"Write a caption...";
+    self.captionView.text = NSLocalizedString(@"Write a caption...", @"Tells the user to enter a caption");
     UIColor *myBlack = [UIColor colorWithRed:0.7 green:0.7 blue:0.7 alpha:1.0];
     self.captionView.textColor = myBlack;
     
@@ -61,11 +62,13 @@
     UIImagePickerController *imagePickerVC = [UIImagePickerController new];
     imagePickerVC.delegate = self;
     imagePickerVC.allowsEditing = YES;
-
-    // The Xcode simulator does not support taking pictures, so let's first check that the camera is indeed supported on the device before trying to present it.
+    
+    // Present camera on iPhone
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         imagePickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
     }
+    
+    // For Xcode simulator, present photo library
     else {
         NSLog(@"Camera 🚫 available so we will use photo library instead");
         imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
@@ -76,44 +79,52 @@
 }
 
 - (IBAction)onTapShare:(id)sender {
-     //Display HUD right before the request is made
-    [MBProgressHUD showHUDAddedTo:self.view animated:TRUE];
     
-    // Post the image and caption and show the progress HUD
-    [Post postCheckIn:self.locationImage.image withCaption:self.captionView.text withLocation:self.searchBar.text withUrl: self.location.yelpURL withRating:@(self.ratingView.value) withCompletion:^(BOOL succeeded, NSError *error) {
-        if (error) {
-            NSLog(@"Error posting check-in", error.localizedDescription);
-
-            // Show the progress HUD while user is waiting for the post request to complete
-            [MBProgressHUD hideHUDForView:self.view animated:TRUE];
-            [self dismissViewControllerAnimated:YES completion:nil];
-        } else {
-            NSLog(@"Successfully posted check-in!");
-            // Hide HUD once the network request comes back (must be done on main UI thread)
-//            [MBProgressHUD hideHUDForView:self.view animated:TRUE];
-            [self dismissViewControllerAnimated:YES completion:nil];
+    // If user did not enter a location, present alert message
+    if ([self.searchBar.text length] == 0) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Missing location!"
+                                                                       message:@"Please enter a check-in location!"
+                                                                preferredStyle:(UIAlertControllerStyleAlert)];
+        // create an OK action
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK"
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction * _Nonnull action) {
+        }];
+        
+        // add the OK action to the alert controller
+        [alert addAction:okAction];
+        [self presentViewController:alert animated:YES completion:^{
+        }];
+        
+    } else {
+        // If user did not enter a caption, don't post placeholder caption
+        NSString *caption = self.captionView.text;
+        if ([caption isEqualToString:@"Write a caption..."]) {
+            caption = @"";
         }
-    }];
+        
+        //Display HUD right before the request is made
+       [MBProgressHUD showHUDAddedTo:self.view animated:TRUE];
+        
+        // Post the image and caption and show the progress HUD
+        [Post postCheckIn:self.locationImage.image withCaption:caption withLocation:self.searchBar.text withUrl: self.location.yelpURL withRating:@(self.ratingView.value) withCompletion:^(BOOL succeeded, NSError *error) {
+            if (error) {
+                NSLog(@"Error posting check-in", error.localizedDescription);
+                // Show the progress HUD while user is waiting for the post request to complete
+                [MBProgressHUD hideHUDForView:self.view animated:TRUE];
+                [self dismissViewControllerAnimated:YES completion:nil];
+            } else {
+                NSLog(@"Successfully posted check-in!");
+                // Hide HUD once the network request comes back (must be done on main UI thread)
+                [MBProgressHUD hideHUDForView:self.view animated:TRUE];
+                [self dismissViewControllerAnimated:YES completion:nil];
+            }
+        }];
+    }
 }
 
 - (IBAction)onTapCancel:(id)sender {
     [self dismissViewControllerAnimated:true completion:nil];
-}
-
-// Delegate method
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
-    
-    // Get the image captured by the UIImagePickerController
-    UIImage *originalImage = info[UIImagePickerControllerOriginalImage];
-    UIImage *editedImage = info[UIImagePickerControllerEditedImage];
-
-    // Set the image view to the selected image (resized?)
-    CGSize size = CGSizeMake(300, 300);
-    self.locationImage.image = [self resizeImage:editedImage withSize:size];
-    self.locationImage.image = editedImage;
-    
-    // Dismiss UIImagePickerController to go back to your original view controller
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 // Resize each photo before uploading to Parse (Parse has a limit of 10MB per file)
@@ -130,6 +141,24 @@
     
     return newImage;
 }
+
+// MARK: UIImagePickerControllerDelegate
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
+    
+    // Get the image captured by the UIImagePickerController
+    UIImage *originalImage = info[UIImagePickerControllerOriginalImage];
+    UIImage *editedImage = info[UIImagePickerControllerEditedImage];
+
+    // Set the image view to the selected image (resized?)
+    CGSize size = CGSizeMake(300, 300);
+    self.locationImage.image = [self resizeImage:editedImage withSize:size];
+    self.locationImage.image = editedImage;
+    
+    // Dismiss UIImagePickerController to go back to your original view controller
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+// MARK: UITextViewDelegate
 
 // Clear placeholder text when user begins editing the caption box
 - (void)textViewDidBeginEditing:(UITextView *)textView
@@ -151,14 +180,11 @@
     [textView resignFirstResponder];
 }
 
-- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
-//    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main"
-//                                                         bundle:nil];
-    LocationsViewController *locationsController = [self.storyboard instantiateViewControllerWithIdentifier:@"locationsController"];
+// MARK: UISearchBarDelegate
 
-    [self presentViewController:locationsController
-                       animated:YES
-                     completion:nil];
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    LocationsViewController *locationsController = [self.storyboard instantiateViewControllerWithIdentifier:@"locationsController"];
+    [self presentViewController:locationsController animated:YES completion:nil];
 }
 
 
