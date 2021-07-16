@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *bioLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *profileImage;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end
 
@@ -41,6 +42,9 @@
     NSURL *url = [NSURL URLWithString: profileImageFile.url];
     NSData *fileData = [NSData dataWithContentsOfURL: url];
     self.profileImage.image = [[UIImage alloc] initWithData:fileData];
+    
+    // TODO: Set user feed of posted check-ins
+    
 }
 
 // TODO: viewWillAppear

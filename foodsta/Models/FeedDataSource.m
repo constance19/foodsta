@@ -55,8 +55,8 @@
         NSDate *createdAt = post.createdAt;
         NSString *timestamp = createdAt.shortTimeAgoSinceNow;
         
-        NSArray *strings = [[NSArray alloc] initWithObjects:username, timestamp, nil];
-        model.data = strings;
+        NSArray *usertime = [[NSArray alloc] initWithObjects:username, timestamp, nil];
+        model.data = usertime;
     }
     
     // Location cell

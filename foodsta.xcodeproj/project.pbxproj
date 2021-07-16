@@ -29,6 +29,7 @@
 		78042505269F9C9200E771CE /* EditProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78042504269F9C9200E771CE /* EditProfileViewController.m */; };
 		7804250C26A0DBD800E771CE /* FeedDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 7804250B26A0DBD800E771CE /* FeedDataSource.m */; };
 		7804250F26A14EA900E771CE /* PostCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7804250E26A14EA900E771CE /* PostCellModel.m */; };
+		787AC55D26A2480D0070E5A9 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 787AC55C26A2480D0070E5A9 /* ProfileViewController.m */; };
 		78A8137F26A183B600695571 /* UsernameTimestampCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 78A8137E26A183B600695571 /* UsernameTimestampCell.m */; };
 		78A8138226A1845D00695571 /* LocationNameCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 78A8138126A1845D00695571 /* LocationNameCell.m */; };
 		78A8138526A184BB00695571 /* imageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 78A8138426A184BB00695571 /* imageCell.m */; };
@@ -103,6 +104,8 @@
 		7804250B26A0DBD800E771CE /* FeedDataSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FeedDataSource.m; sourceTree = "<group>"; };
 		7804250D26A14EA900E771CE /* PostCellModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PostCellModel.h; sourceTree = "<group>"; };
 		7804250E26A14EA900E771CE /* PostCellModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PostCellModel.m; sourceTree = "<group>"; };
+		787AC55B26A2480D0070E5A9 /* ProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
+		787AC55C26A2480D0070E5A9 /* ProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		78A8137D26A183B600695571 /* UsernameTimestampCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UsernameTimestampCell.h; sourceTree = "<group>"; };
 		78A8137E26A183B600695571 /* UsernameTimestampCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UsernameTimestampCell.m; sourceTree = "<group>"; };
 		78A8138026A1845D00695571 /* LocationNameCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocationNameCell.h; sourceTree = "<group>"; };
@@ -249,6 +252,8 @@
 				780424E8269D4F0600E771CE /* LoginViewController.m */,
 				780424EC269D51B100E771CE /* FeedViewController.h */,
 				780424ED269D51B100E771CE /* FeedViewController.m */,
+				787AC55B26A2480D0070E5A9 /* ProfileViewController.h */,
+				787AC55C26A2480D0070E5A9 /* ProfileViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -535,6 +540,7 @@
 				78A8138E26A1854700695571 /* ratingCell.m in Sources */,
 				78042505269F9C9200E771CE /* EditProfileViewController.m in Sources */,
 				78A8138226A1845D00695571 /* LocationNameCell.m in Sources */,
+				787AC55D26A2480D0070E5A9 /* ProfileViewController.m in Sources */,
 				780424E0269D315A00E771CE /* LocationCell.m in Sources */,
 				7804250C26A0DBD800E771CE /* FeedDataSource.m in Sources */,
 				780424EE269D51B100E771CE /* FeedViewController.m in Sources */,

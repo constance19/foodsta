@@ -22,6 +22,7 @@
 #import "likeCell.h"
 #import "captionCell.h"
 #import "ratingCell.h"
+#import "ProfileViewController.h"
 
 @interface FeedViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -167,6 +168,7 @@
 // MARK: UITableViewDelegate
 
 // For separator between sections (posts)
+// TODO: fix UI of separator (too thick)
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
     CGRect sepFrame = CGRectMake(0, tableView.frame.size.height, self.view.bounds.size.width, 1);
     UIView *separatorView =[[UIView alloc] initWithFrame:sepFrame];
@@ -182,14 +184,23 @@
 }
 
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if ([[segue identifier] isEqualToString:@"profileSegue"]) {
+        UITableViewCell *tappedCell = sender;
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
+        Post *post = self.feedDataSource.arrayOfPosts[indexPath.section];
+                    
+        UINavigationController *navController = [segue destinationViewController];
+        ProfileViewController *profileController = navController.topViewController;
+        profileController.user = post[@"author"];
+    }
 }
-*/
+
 
 @end
