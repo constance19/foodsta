@@ -27,6 +27,14 @@
 		780424FF269E5B0E00E771CE /* LocationDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 780424FE269E5B0E00E771CE /* LocationDetailsViewController.m */; };
 		78042502269F912C00E771CE /* SelfViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78042501269F912C00E771CE /* SelfViewController.m */; };
 		78042505269F9C9200E771CE /* EditProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78042504269F9C9200E771CE /* EditProfileViewController.m */; };
+		7804250C26A0DBD800E771CE /* FeedDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 7804250B26A0DBD800E771CE /* FeedDataSource.m */; };
+		7804250F26A14EA900E771CE /* PostCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7804250E26A14EA900E771CE /* PostCellModel.m */; };
+		78A8137F26A183B600695571 /* UsernameTimestampCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 78A8137E26A183B600695571 /* UsernameTimestampCell.m */; };
+		78A8138226A1845D00695571 /* LocationNameCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 78A8138126A1845D00695571 /* LocationNameCell.m */; };
+		78A8138526A184BB00695571 /* imageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 78A8138426A184BB00695571 /* imageCell.m */; };
+		78A8138826A184EA00695571 /* likeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 78A8138726A184EA00695571 /* likeCell.m */; };
+		78A8138B26A1852100695571 /* captionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 78A8138A26A1852100695571 /* captionCell.m */; };
+		78A8138E26A1854700695571 /* ratingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 78A8138D26A1854700695571 /* ratingCell.m */; };
 		E4B6B47959F79E483DDBEA65 /* Pods_foodstaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50185661E04E68223708872F /* Pods_foodstaTests.framework */; };
 		F2EAC73CF64B1ABC7BFCF585 /* Pods_foodsta_foodstaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E40072F959FD3C6A5E6EAAC1 /* Pods_foodsta_foodstaUITests.framework */; };
 /* End PBXBuildFile section */
@@ -91,6 +99,22 @@
 		78042501269F912C00E771CE /* SelfViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelfViewController.m; sourceTree = "<group>"; };
 		78042503269F9C9200E771CE /* EditProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditProfileViewController.h; sourceTree = "<group>"; };
 		78042504269F9C9200E771CE /* EditProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditProfileViewController.m; sourceTree = "<group>"; };
+		7804250A26A0DBD800E771CE /* FeedDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FeedDataSource.h; sourceTree = "<group>"; };
+		7804250B26A0DBD800E771CE /* FeedDataSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FeedDataSource.m; sourceTree = "<group>"; };
+		7804250D26A14EA900E771CE /* PostCellModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PostCellModel.h; sourceTree = "<group>"; };
+		7804250E26A14EA900E771CE /* PostCellModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PostCellModel.m; sourceTree = "<group>"; };
+		78A8137D26A183B600695571 /* UsernameTimestampCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UsernameTimestampCell.h; sourceTree = "<group>"; };
+		78A8137E26A183B600695571 /* UsernameTimestampCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UsernameTimestampCell.m; sourceTree = "<group>"; };
+		78A8138026A1845D00695571 /* LocationNameCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocationNameCell.h; sourceTree = "<group>"; };
+		78A8138126A1845D00695571 /* LocationNameCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocationNameCell.m; sourceTree = "<group>"; };
+		78A8138326A184BB00695571 /* imageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = imageCell.h; sourceTree = "<group>"; };
+		78A8138426A184BB00695571 /* imageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = imageCell.m; sourceTree = "<group>"; };
+		78A8138626A184EA00695571 /* likeCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = likeCell.h; sourceTree = "<group>"; };
+		78A8138726A184EA00695571 /* likeCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = likeCell.m; sourceTree = "<group>"; };
+		78A8138926A1852100695571 /* captionCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = captionCell.h; sourceTree = "<group>"; };
+		78A8138A26A1852100695571 /* captionCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = captionCell.m; sourceTree = "<group>"; };
+		78A8138C26A1854700695571 /* ratingCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ratingCell.h; sourceTree = "<group>"; };
+		78A8138D26A1854700695571 /* ratingCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ratingCell.m; sourceTree = "<group>"; };
 		94DBCF63251A45821B4D96D8 /* Pods_foodsta.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_foodsta.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDED1C488468ADD58D63CDDE /* Pods-foodstaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-foodstaTests.release.xcconfig"; path = "Target Support Files/Pods-foodstaTests/Pods-foodstaTests.release.xcconfig"; sourceTree = "<group>"; };
 		DDA34CDF962E3DCE4D4CD92D /* Pods-foodsta.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-foodsta.release.xcconfig"; path = "Target Support Files/Pods-foodsta/Pods-foodsta.release.xcconfig"; sourceTree = "<group>"; };
@@ -174,34 +198,15 @@
 		780424A2269D2E6300E771CE /* foodsta */ = {
 			isa = PBXGroup;
 			children = (
-				780424D8269D2E7500E771CE /* Location.h */,
-				780424D9269D2E7500E771CE /* Location.m */,
 				780424A3269D2E6300E771CE /* AppDelegate.h */,
 				780424A4269D2E6300E771CE /* AppDelegate.m */,
 				780424A6269D2E6300E771CE /* SceneDelegate.h */,
 				780424A7269D2E6300E771CE /* SceneDelegate.m */,
-				780424E1269D3DB000E771CE /* LocationsViewController.h */,
-				780424E2269D3DB000E771CE /* LocationsViewController.m */,
-				780424DE269D315A00E771CE /* LocationCell.h */,
-				780424DF269D315A00E771CE /* LocationCell.m */,
-				780424AC269D2E6300E771CE /* Main.storyboard */,
-				78042500269F912C00E771CE /* SelfViewController.h */,
-				78042501269F912C00E771CE /* SelfViewController.m */,
-				78042503269F9C9200E771CE /* EditProfileViewController.h */,
-				78042504269F9C9200E771CE /* EditProfileViewController.m */,
-				780424FD269E5B0E00E771CE /* LocationDetailsViewController.h */,
-				780424FE269E5B0E00E771CE /* LocationDetailsViewController.m */,
-				780424FA269E3A8C00E771CE /* PostCell.h */,
-				780424FB269E3A8C00E771CE /* PostCell.m */,
-				780424F7269D6BEC00E771CE /* ComposeViewController.h */,
-				780424F8269D6BEC00E771CE /* ComposeViewController.m */,
-				780424F4269D65F300E771CE /* Post.h */,
-				780424F5269D65F300E771CE /* Post.m */,
-				780424E7269D4F0600E771CE /* LoginViewController.h */,
-				780424E8269D4F0600E771CE /* LoginViewController.m */,
-				780424EC269D51B100E771CE /* FeedViewController.h */,
-				780424ED269D51B100E771CE /* FeedViewController.m */,
+				7804250726A0D8C200E771CE /* Models */,
+				7804250926A0D94D00E771CE /* Views */,
+				7804250626A0D8BA00E771CE /* View Controllers */,
 				780424AF269D2E6300E771CE /* Assets.xcassets */,
+				780424AC269D2E6300E771CE /* Main.storyboard */,
 				780424B1269D2E6300E771CE /* LaunchScreen.storyboard */,
 				780424B4269D2E6300E771CE /* Info.plist */,
 				780424B5269D2E6300E771CE /* main.m */,
@@ -225,6 +230,65 @@
 				780424CC269D2E6400E771CE /* Info.plist */,
 			);
 			path = foodstaUITests;
+			sourceTree = "<group>";
+		};
+		7804250626A0D8BA00E771CE /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				780424E1269D3DB000E771CE /* LocationsViewController.h */,
+				780424E2269D3DB000E771CE /* LocationsViewController.m */,
+				78042500269F912C00E771CE /* SelfViewController.h */,
+				78042501269F912C00E771CE /* SelfViewController.m */,
+				78042503269F9C9200E771CE /* EditProfileViewController.h */,
+				78042504269F9C9200E771CE /* EditProfileViewController.m */,
+				780424FD269E5B0E00E771CE /* LocationDetailsViewController.h */,
+				780424FE269E5B0E00E771CE /* LocationDetailsViewController.m */,
+				780424F7269D6BEC00E771CE /* ComposeViewController.h */,
+				780424F8269D6BEC00E771CE /* ComposeViewController.m */,
+				780424E7269D4F0600E771CE /* LoginViewController.h */,
+				780424E8269D4F0600E771CE /* LoginViewController.m */,
+				780424EC269D51B100E771CE /* FeedViewController.h */,
+				780424ED269D51B100E771CE /* FeedViewController.m */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		7804250726A0D8C200E771CE /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				780424F4269D65F300E771CE /* Post.h */,
+				780424F5269D65F300E771CE /* Post.m */,
+				780424D8269D2E7500E771CE /* Location.h */,
+				780424D9269D2E7500E771CE /* Location.m */,
+				7804250A26A0DBD800E771CE /* FeedDataSource.h */,
+				7804250B26A0DBD800E771CE /* FeedDataSource.m */,
+				7804250D26A14EA900E771CE /* PostCellModel.h */,
+				7804250E26A14EA900E771CE /* PostCellModel.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		7804250926A0D94D00E771CE /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				780424DE269D315A00E771CE /* LocationCell.h */,
+				780424DF269D315A00E771CE /* LocationCell.m */,
+				780424FA269E3A8C00E771CE /* PostCell.h */,
+				780424FB269E3A8C00E771CE /* PostCell.m */,
+				78A8137D26A183B600695571 /* UsernameTimestampCell.h */,
+				78A8137E26A183B600695571 /* UsernameTimestampCell.m */,
+				78A8138026A1845D00695571 /* LocationNameCell.h */,
+				78A8138126A1845D00695571 /* LocationNameCell.m */,
+				78A8138326A184BB00695571 /* imageCell.h */,
+				78A8138426A184BB00695571 /* imageCell.m */,
+				78A8138626A184EA00695571 /* likeCell.h */,
+				78A8138726A184EA00695571 /* likeCell.m */,
+				78A8138926A1852100695571 /* captionCell.h */,
+				78A8138A26A1852100695571 /* captionCell.m */,
+				78A8138C26A1854700695571 /* ratingCell.h */,
+				78A8138D26A1854700695571 /* ratingCell.m */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -465,14 +529,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				780424FC269E3A8C00E771CE /* PostCell.m in Sources */,
+				7804250F26A14EA900E771CE /* PostCellModel.m in Sources */,
+				78A8137F26A183B600695571 /* UsernameTimestampCell.m in Sources */,
 				780424DA269D2E7500E771CE /* Location.m in Sources */,
+				78A8138E26A1854700695571 /* ratingCell.m in Sources */,
 				78042505269F9C9200E771CE /* EditProfileViewController.m in Sources */,
+				78A8138226A1845D00695571 /* LocationNameCell.m in Sources */,
 				780424E0269D315A00E771CE /* LocationCell.m in Sources */,
+				7804250C26A0DBD800E771CE /* FeedDataSource.m in Sources */,
 				780424EE269D51B100E771CE /* FeedViewController.m in Sources */,
+				78A8138B26A1852100695571 /* captionCell.m in Sources */,
 				780424FF269E5B0E00E771CE /* LocationDetailsViewController.m in Sources */,
+				78A8138826A184EA00695571 /* likeCell.m in Sources */,
 				780424F9269D6BEC00E771CE /* ComposeViewController.m in Sources */,
 				780424A5269D2E6300E771CE /* AppDelegate.m in Sources */,
 				78042502269F912C00E771CE /* SelfViewController.m in Sources */,
+				78A8138526A184BB00695571 /* imageCell.m in Sources */,
 				780424F6269D65F300E771CE /* Post.m in Sources */,
 				780424B6269D2E6300E771CE /* main.m in Sources */,
 				780424E9269D4F0600E771CE /* LoginViewController.m in Sources */,

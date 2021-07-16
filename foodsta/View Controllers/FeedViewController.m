@@ -14,12 +14,20 @@
 #import "DateTools.h"
 #import "LocationDetailsViewController.h"
 #import "MBProgressHUD.h"
+#import "FeedDataSource.h"
+#import "PostCellModel.h"
+#import "UsernameTimestampCell.h"
+#import "LocationNameCell.h"
+#import "imageCell.h"
+#import "likeCell.h"
+#import "captionCell.h"
+#import "ratingCell.h"
 
 @interface FeedViewController () <UITableViewDelegate, UITableViewDataSource>
-
-@property (nonatomic, strong) NSArray *arrayOfPosts;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) FeedDataSource *feedDataSource;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
+
 
 @end
 
@@ -32,6 +40,8 @@
     self.tableView.dataSource = self;
     
     self.tableView.rowHeight = UITableViewAutomaticDimension;
+    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    self.feedDataSource = [[FeedDataSource alloc] init];
     
     // Pull to refresh
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
@@ -56,8 +66,9 @@
     // Fetch data asynchronously
     [postQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> * _Nullable posts, NSError * _Nullable error) {
         if (posts) {
-            // do something with the data fetched
-            self.arrayOfPosts = posts;
+            // Pass posts to data source
+            self.feedDataSource.arrayOfPosts = posts;
+            
             [self.tableView reloadData];
         }
         else {
@@ -65,6 +76,7 @@
         }
     }];
 }
+
 
 - (IBAction)onTapLogout:(id)sender {
     [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
@@ -92,71 +104,80 @@
 
 // MARK: UITableViewDatasource
 
+// Returns number of sections the table view should have (number of posts)
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return [self.feedDataSource numberOfSections];
+}
+
+// Returns number of rows in the section (number of components the post has)
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.arrayOfPosts.count;
+    return [self.feedDataSource numberOfRowsInSection:section];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    PostCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PostCell"];
+    // Get the model for current indexPath from FeedDataSource
+    PostCellModel *model = [self.feedDataSource modelForIndexPath:indexPath];
     
-    // Get and set the post
-    Post *post = self.arrayOfPosts[indexPath.row];
-    cell.post = post;
-    
-    // Reset image view so cell doesn't display a previously posted image
-    cell.locationImage.image = nil;
-    
-    // Load in post image if present
-    if ([post objectForKey:@"image"]) {
-        cell.locationImage.file = post[@"image"];
-        [cell.locationImage loadInBackground];
-    }
-
-    // TODO: Hide image view if user didn't attach an image for the post or make image required
-//    if ([post objectForKey:@"image"] == nil) {
-//        cell.locationImage.hidden = YES;
-//    }
-    
-    // Set the location
-    NSMutableAttributedString * str = [[NSMutableAttributedString alloc] initWithString:post.locationTitle];
-    [str addAttribute: NSLinkAttributeName value: post.locationUrl range: NSMakeRange(0, str.length)];
-    cell.locationView.attributedText = str;
-    cell.locationView.dataDetectorTypes = UIDataDetectorTypeLink;
-    [cell.locationView setFont:[UIFont systemFontOfSize:19]];
+    // Dequeue the cell with identifier based on model returned by FeedDataSource, load model into cell
+    switch (model.type) {
+        case PostCellModelTypeUsernameTimestamp: {
+            UsernameTimestampCell *cell = [tableView dequeueReusableCellWithIdentifier:@"usernameTimestampCell" forIndexPath:indexPath];
+            cell.usernameLabel.text = model.data[0];
+            cell.timestampLabel.text = model.data[1];
+            return cell;
+        }
+            
+        case PostCellModelTypeLocation: {
+            LocationNameCell *cell = [tableView dequeueReusableCellWithIdentifier:@"locationCell" forIndexPath:indexPath];
+            cell.locationView.attributedText = model.data;
+            cell.locationView.dataDetectorTypes = UIDataDetectorTypeLink;
+            [cell.locationView setFont:[UIFont systemFontOfSize:19]];
+            return cell;
+        }
         
-    // Set the caption
-    cell.captionLabel.text = post.caption;
-    
-    // Format and set createdAtString, convert Date to String using DateTool relative time
-    NSDate *createdAt = post.createdAt;
-    cell.timestampLabel.text = createdAt.shortTimeAgoSinceNow;
-    
-    // Set like count
-    NSString *likeCount = [NSString stringWithFormat:@"%@", post.likeCount];
-    [cell.likeButton setTitle:likeCount forState:UIControlStateNormal];
-    
-    // Set rating view
-    cell.ratingView.value = [post.rating doubleValue];
-
-    PFUser *user = post[@"author"];
-    if (user != nil) {
-        // User found! update username label with username
-        cell.usernameLabel.text = [NSString stringWithFormat:@"@%@", user.username];
-        
-    } else {
-        // No user found, set default username
-        cell.usernameLabel.text = @"@Default_Name";
+        case PostCellModelTypeImage: {
+            imageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"imageCell" forIndexPath:indexPath];
+            cell.locationImage.file = model.data;
+            [cell.locationImage loadInBackground];
+            return cell;
+        }
+            
+        case PostCellModelTypeLikeCount: {
+            likeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"likeCell" forIndexPath:indexPath];
+            NSString *likeCount = [NSString stringWithFormat:@"%@", model.data];
+            [cell.likeButton setTitle:likeCount forState:UIControlStateNormal];
+            return cell;
+        }
+            
+        case PostCellModelTypeCaption: {
+            captionCell *cell = [tableView dequeueReusableCellWithIdentifier:@"captionCell" forIndexPath:indexPath];
+            cell.captionLabel.text = model.data;
+            return cell;
+        }
+            
+        case PostCellModelTypeRating: {
+            ratingCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ratingCell" forIndexPath:indexPath];
+            cell.ratingView.value = [model.data doubleValue];
+            return cell;
+        }
     }
-    return cell;
 }
 
 
 // MARK: UITableViewDelegate
 
+// For separator between sections (posts)
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    CGRect sepFrame = CGRectMake(0, tableView.frame.size.height, self.view.bounds.size.width, 1);
+    UIView *separatorView =[[UIView alloc] initWithFrame:sepFrame];
+    separatorView.backgroundColor = tableView.separatorColor;
+    return separatorView;
+}
+
 // For infinite scrolling
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
-    if(indexPath.row + 1 == [self.arrayOfPosts count]){
-        [self loadPosts: (int)[self.arrayOfPosts count]+20];
+    if(indexPath.row + 1 == [self.feedDataSource.arrayOfPosts count]){
+        [self loadPosts: (int)[self.feedDataSource.arrayOfPosts count]+20];
     }
 }
 
