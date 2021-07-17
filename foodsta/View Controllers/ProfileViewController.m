@@ -20,7 +20,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     
     // Make profile image view circular
     self.profileImage.layer.cornerRadius = self.profileImage.frame.size.height /2;
@@ -36,7 +35,80 @@
     NSURL *url = [NSURL URLWithString: profileImageFile.url];
     NSData *fileData = [NSData dataWithContentsOfURL: url];
     self.profileImage.image = [[UIImage alloc] initWithData:fileData];
+    
+    // If clicked profile is current user, hide follow button
+    PFUser *currentUser = [PFUser currentUser];
+    if ([self.user[@"username"] isEqualToString:currentUser.username]) {
+        self.followButton.hidden = YES;
+    
+    // Set following status for non-current users
+    } else {
+        PFUser *currentUser = [PFUser currentUser];
+        NSArray *following = currentUser[@"following"];
+        
+        // If current user follows clicked user, follow button should be selected
+        if ([following containsObject: self.user[@"username"]]) {
+            [self.followButton setTitle:@"Following" forState:UIControlStateNormal];
+            [self.followButton setSelected:YES];
+        
+        // If current user does not follow clicked user, follow button should be unselected
+        } else {
+            [self.followButton setTitle:@"Follow" forState:UIControlStateNormal];
+        }
+    }
 }
+
+- (IBAction)onTapFollow:(id)sender {
+    PFUser *currentUser = [PFUser currentUser];
+    NSString *currentUsername = self.user.username;
+    
+    // Initialize following array if necessary
+    if (currentUser[@"following"] == nil) {
+        currentUser[@"following"] = [[NSMutableArray alloc] init];
+        [currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+            if (error) {
+                NSLog(@"Error updating following status", error.localizedDescription);
+            } else {
+                NSLog(@"Successfully updated following status!");
+            }
+        }];
+    }
+    
+    // Toggle following status for user
+    // Unfollow clicked user
+    if ([currentUser[@"following"] containsObject:currentUsername]) {
+        NSMutableArray *following = currentUser[@"following"];
+        [following removeObject: currentUsername];
+        currentUser[@"following"] = following;
+    
+    // Follow clicked user
+    } else {
+        NSMutableArray *following = currentUser[@"following"];
+        [following addObject: currentUsername];
+        currentUser[@"following"] = following;
+    }
+    
+    // Save new following data to Parse
+    [currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"Error updating following status", error.localizedDescription);
+        } else {
+            NSLog(@"Successfully updated following status!");
+            
+        }
+    }];
+    
+    // Toggle display of button
+    if ([self.followButton isSelected]) {
+        [self.followButton setSelected:NO];
+        [self.followButton setTitle:@"Follow" forState:UIControlStateNormal];
+    } else {
+        [self.followButton setTitle:@"Following" forState:UIControlStateNormal];
+        [self.followButton setSelected:YES];
+    }
+    
+}
+
 
 /*
 #pragma mark - Navigation

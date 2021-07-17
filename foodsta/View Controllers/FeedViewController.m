@@ -103,6 +103,9 @@
     [refreshControl endRefreshing];
 }
 
+-(IBAction)prepareForUnwind:(UIStoryboardSegue *)segue {
+}
+
 // MARK: UITableViewDatasource
 
 // Returns number of sections the table view should have (number of posts)
