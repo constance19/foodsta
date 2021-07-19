@@ -49,7 +49,7 @@
     NSData *fileData = [NSData dataWithContentsOfURL: url];
     self.profileImage.image = [[UIImage alloc] initWithData:fileData];
     
-    // TODO: Set user feed of posted check-ins
+    // User feed of posted check-ins
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
         

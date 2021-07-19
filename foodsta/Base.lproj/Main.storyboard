@@ -1079,6 +1079,9 @@
                                                         <color key="titleColor" systemColor="labelColor"/>
                                                     </state>
                                                     <state key="selected" image="heart.fill" catalog="system"/>
+                                                    <connections>
+                                                        <action selector="onTapLike:" destination="zv1-qr-Bhz" eventType="touchUpInside" id="vLG-Js-GUR"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>

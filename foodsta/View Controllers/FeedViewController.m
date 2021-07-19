@@ -154,8 +154,19 @@
         case PostCellModelTypeLikeCount: {
             likeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"likeCell" forIndexPath:indexPath];
             cell.post = model.post;
+            
+            // Set like count
             NSString *likeCount = [NSString stringWithFormat:@"%@", model.data];
             [cell.likeButton setTitle:likeCount forState:UIControlStateNormal];
+            
+            // Set selected state for like button if current user has already liked the post
+            PFUser *currentUser = [PFUser currentUser];
+            Post *currentPost = model.post;
+            
+            if ([currentUser[@"liked"] containsObject:currentPost]) {
+                [cell.likeButton setSelected:YES];
+            }
+                
             return cell;
         }
             

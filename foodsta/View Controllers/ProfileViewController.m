@@ -62,7 +62,7 @@
     PFUser *currentUser = [PFUser currentUser];
     NSString *profileUser = self.user;
     
-    // Initialize following array if necessary
+    // Initialize current user's following array if necessary
     if (currentUser[@"following"] == nil) {
         currentUser[@"following"] = [[NSMutableArray alloc] init];
         [currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
