@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (weak, nonatomic) IBOutlet PFImageView *locationImage;
 
+@property (weak, nonatomic) IBOutlet PFImageView *selfLocationImage;
+
 @end
 
 NS_ASSUME_NONNULL_END

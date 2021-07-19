@@ -13,6 +13,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timestampLabel;
 
+@property (weak, nonatomic) IBOutlet UILabel *selfUsernameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *selfTimestampLabel;
+
+
 @end
 
 NS_ASSUME_NONNULL_END

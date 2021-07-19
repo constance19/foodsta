@@ -6,10 +6,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FeedDataSource.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface SelfViewController : UIViewController
+
+@property (nonatomic, strong) FeedDataSource *feedDataSource;
 
 @end
 
