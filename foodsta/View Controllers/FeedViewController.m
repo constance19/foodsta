@@ -23,6 +23,7 @@
 #import "captionCell.h"
 #import "ratingCell.h"
 #import "ProfileViewController.h"
+#import "ComposeViewController.h"
 
 @interface FeedViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -62,6 +63,10 @@
     [postQuery includeKey:@"liked"];
     [postQuery includeKey:@"locationTitle"];
     [postQuery includeKey:@"image"];
+    
+    // Filter feed to include only posts by following users and current user
+    PFUser *currentUser = [PFUser currentUser];
+    [postQuery whereKey:@"author" containedIn:currentUser[@"following"]];
     postQuery.limit = numPosts;
 
     // Fetch data asynchronously
@@ -148,6 +153,7 @@
             
         case PostCellModelTypeLikeCount: {
             likeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"likeCell" forIndexPath:indexPath];
+            cell.post = model.post;
             NSString *likeCount = [NSString stringWithFormat:@"%@", model.data];
             [cell.likeButton setTitle:likeCount forState:UIControlStateNormal];
             return cell;
@@ -187,7 +193,6 @@
 }
 
 
-
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -202,6 +207,12 @@
         UINavigationController *navController = [segue destinationViewController];
         ProfileViewController *profileController = navController.topViewController;
         profileController.user = post[@"author"];
+    }
+    
+    if ([[segue identifier] isEqualToString:@"composeSegue"]) {
+        UINavigationController *navController = [segue destinationViewController];
+        ComposeViewController *composeController = navController.topViewController;
+        composeController.modalInPresentation = YES;
     }
 }
 

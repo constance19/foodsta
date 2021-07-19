@@ -60,7 +60,7 @@
 
 - (IBAction)onTapFollow:(id)sender {
     PFUser *currentUser = [PFUser currentUser];
-    NSString *currentUsername = self.user.username;
+    NSString *profileUser = self.user;
     
     // Initialize following array if necessary
     if (currentUser[@"following"] == nil) {
@@ -76,15 +76,15 @@
     
     // Toggle following status for user
     // Unfollow clicked user
-    if ([currentUser[@"following"] containsObject:currentUsername]) {
+    if ([currentUser[@"following"] containsObject:profileUser]) {
         NSMutableArray *following = currentUser[@"following"];
-        [following removeObject: currentUsername];
+        [following removeObject: profileUser];
         currentUser[@"following"] = following;
     
     // Follow clicked user
     } else {
         NSMutableArray *following = currentUser[@"following"];
-        [following addObject: currentUsername];
+        [following addObject: profileUser];
         currentUser[@"following"] = following;
     }
     

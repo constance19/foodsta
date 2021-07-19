@@ -83,6 +83,7 @@
 //    newUser.email = self.emailField.text;
     newUser.password = self.passwordField.text;
     
+    
     // call sign up function on the object
     [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
         // Error signing up
@@ -107,6 +108,21 @@
         // Successful sign up
         } else {
             NSLog(@"User registered successfully");
+            
+            // Add user to its own following list
+            PFUser *currentUser = [PFUser currentUser];
+            NSMutableArray *following = [[NSMutableArray alloc] init];
+            [following addObject: currentUser];
+            currentUser[@"following"] = following;
+
+            [currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                if (error) {
+                    NSLog(@"Error updating following status", error.localizedDescription);
+                } else {
+                    NSLog(@"Successfully updated following status!");
+                    
+                }
+            }];
             
             // manually segue to logged in view
             [self performSegueWithIdentifier:@"loginSegue" sender:self.signupButton];
