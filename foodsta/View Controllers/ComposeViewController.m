@@ -12,13 +12,14 @@
 #import "LocationsViewController.h"
 #import "HCSStarRatingView.h"
 
-@interface ComposeViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate, UISearchBarDelegate>
+@interface ComposeViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate, UITextFieldDelegate>
 
-@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (weak, nonatomic) IBOutlet UITextField *textField;
 @property (weak, nonatomic) IBOutlet UIImageView *locationImage;
 @property (weak, nonatomic) IBOutlet UITextView *captionView;
 @property (weak, nonatomic) IBOutlet UIButton *photoButton;
 @property (weak, nonatomic) IBOutlet HCSStarRatingView *ratingView;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
 @end
 
@@ -28,6 +29,9 @@ static NSString *const captionPlaceholder = @"Write a caption...";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    // Location text field
+    self.textField.delegate = self;
     
     // Set caption box display
     self.captionView.layer.borderWidth = 1.2f;
@@ -50,11 +54,11 @@ static NSString *const captionPlaceholder = @"Write a caption...";
     [self.photoButton setFrame:CGRectMake(173, 269, 130, 44)];
     
     // Set placeholder text for check-in location if user hasn't selected one
-    self.searchBar.placeholder = NSLocalizedString(@"Search Yelp..", @"Tells the user the search bar is linked to Yelp");
+    self.textField.placeholder = NSLocalizedString(@"Search Yelp..", @"Tells the user the search bar is linked to Yelp");
     
     // Set check-in location if user already selected one
     if (self.locationSelected) {
-        self.searchBar.text = self.location.name;
+        self.textField.text = self.location.name;
     }
 }
 
@@ -82,7 +86,7 @@ static NSString *const captionPlaceholder = @"Write a caption...";
 - (IBAction)onTapShare:(id)sender {
     
     // If user did not enter a location, present alert message
-    if ([self.searchBar.text length] == 0) {
+    if ([self.textField.text length] == 0) {
         NSString *alertTitle = NSLocalizedString(@"Missing location!", @"Alert message title for missing location");
         NSString *alertMessage = NSLocalizedString(@"Please enter a check-in location!", @"Alert message instructions for missing location");
         
@@ -111,7 +115,7 @@ static NSString *const captionPlaceholder = @"Write a caption...";
        [MBProgressHUD showHUDAddedTo:self.view animated:TRUE];
         
         // Post the image and caption and show the progress HUD
-        [Post postCheckIn:self.locationImage.image withCaption:caption withLocation:self.searchBar.text withUrl: self.location.yelpURL withRating:@(self.ratingView.value) withCompletion:^(BOOL succeeded, NSError *error) {
+        [Post postCheckIn:self.locationImage.image withCaption:caption withLocation:self.textField.text withUrl: self.location.yelpURL withRating:@(self.ratingView.value) withCompletion:^(BOOL succeeded, NSError *error) {
             if (error) {
                 NSLog(@"Error posting check-in", error.localizedDescription);
                 // Show the progress HUD while user is waiting for the post request to complete
@@ -184,12 +188,18 @@ static NSString *const captionPlaceholder = @"Write a caption...";
     [textView resignFirstResponder];
 }
 
-// MARK: UISearchBarDelegate
-
-- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
-    LocationsViewController *locationsController = [self.storyboard instantiateViewControllerWithIdentifier:locationsIdentifier];
-    [self presentViewController:locationsController animated:YES completion:nil];
+// MARK: UITextFieldDelegate
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    return NO;
 }
+
+//// MARK: UISearchBarDelegate
+//
+//- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+//    LocationsViewController *locationsController = [self.storyboard instantiateViewControllerWithIdentifier:locationsIdentifier];
+//    [self presentViewController:locationsController animated:YES completion:nil];
+//}
+
 
 
 /*
