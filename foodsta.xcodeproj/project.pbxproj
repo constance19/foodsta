@@ -30,6 +30,8 @@
 		7804250C26A0DBD800E771CE /* FeedDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 7804250B26A0DBD800E771CE /* FeedDataSource.m */; };
 		7804250F26A14EA900E771CE /* PostCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7804250E26A14EA900E771CE /* PostCellModel.m */; };
 		787AC55D26A2480D0070E5A9 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 787AC55C26A2480D0070E5A9 /* ProfileViewController.m */; };
+		787AC56026A661C80070E5A9 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 787AC55F26A661C80070E5A9 /* SearchViewController.m */; };
+		787AC56326A662560070E5A9 /* UserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 787AC56226A662560070E5A9 /* UserCell.m */; };
 		78A8137F26A183B600695571 /* UsernameTimestampCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 78A8137E26A183B600695571 /* UsernameTimestampCell.m */; };
 		78A8138226A1845D00695571 /* LocationNameCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 78A8138126A1845D00695571 /* LocationNameCell.m */; };
 		78A8138526A184BB00695571 /* imageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 78A8138426A184BB00695571 /* imageCell.m */; };
@@ -106,6 +108,10 @@
 		7804250E26A14EA900E771CE /* PostCellModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PostCellModel.m; sourceTree = "<group>"; };
 		787AC55B26A2480D0070E5A9 /* ProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		787AC55C26A2480D0070E5A9 /* ProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
+		787AC55E26A661C80070E5A9 /* SearchViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
+		787AC55F26A661C80070E5A9 /* SearchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
+		787AC56126A662560070E5A9 /* UserCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserCell.h; sourceTree = "<group>"; };
+		787AC56226A662560070E5A9 /* UserCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserCell.m; sourceTree = "<group>"; };
 		78A8137D26A183B600695571 /* UsernameTimestampCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UsernameTimestampCell.h; sourceTree = "<group>"; };
 		78A8137E26A183B600695571 /* UsernameTimestampCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UsernameTimestampCell.m; sourceTree = "<group>"; };
 		78A8138026A1845D00695571 /* LocationNameCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocationNameCell.h; sourceTree = "<group>"; };
@@ -254,6 +260,8 @@
 				780424ED269D51B100E771CE /* FeedViewController.m */,
 				787AC55B26A2480D0070E5A9 /* ProfileViewController.h */,
 				787AC55C26A2480D0070E5A9 /* ProfileViewController.m */,
+				787AC55E26A661C80070E5A9 /* SearchViewController.h */,
+				787AC55F26A661C80070E5A9 /* SearchViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -292,6 +300,8 @@
 				78A8138A26A1852100695571 /* captionCell.m */,
 				78A8138C26A1854700695571 /* ratingCell.h */,
 				78A8138D26A1854700695571 /* ratingCell.m */,
+				787AC56126A662560070E5A9 /* UserCell.h */,
+				787AC56226A662560070E5A9 /* UserCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -536,6 +546,7 @@
 				780424FC269E3A8C00E771CE /* PostCell.m in Sources */,
 				7804250F26A14EA900E771CE /* PostCellModel.m in Sources */,
 				78A8137F26A183B600695571 /* UsernameTimestampCell.m in Sources */,
+				787AC56326A662560070E5A9 /* UserCell.m in Sources */,
 				780424DA269D2E7500E771CE /* Location.m in Sources */,
 				78A8138E26A1854700695571 /* ratingCell.m in Sources */,
 				78042505269F9C9200E771CE /* EditProfileViewController.m in Sources */,
@@ -555,6 +566,7 @@
 				780424B6269D2E6300E771CE /* main.m in Sources */,
 				780424E9269D4F0600E771CE /* LoginViewController.m in Sources */,
 				780424A8269D2E6300E771CE /* SceneDelegate.m in Sources */,
+				787AC56026A661C80070E5A9 /* SearchViewController.m in Sources */,
 				780424E3269D3DB000E771CE /* LocationsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

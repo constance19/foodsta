@@ -157,14 +157,18 @@
             
             // Set like count
             NSString *likeCount = [NSString stringWithFormat:@"%@", model.data];
-            [cell.likeButton setTitle:likeCount forState:UIControlStateNormal];
+//            [cell.likeButton setTitle:likeCount forState:UIControlStateNormal];
             
             // Set selected state for like button if current user has already liked the post
             PFUser *currentUser = [PFUser currentUser];
             Post *currentPost = model.post;
             
+            // TODO: fix, like button state is inconsistent with Parse
             if ([currentUser[@"liked"] containsObject:currentPost]) {
+                [cell.likeButton setTitle:likeCount forState:UIControlStateSelected];
                 [cell.likeButton setSelected:YES];
+            } else {
+                [cell.likeButton setTitle:likeCount forState:UIControlStateNormal];
             }
                 
             return cell;
