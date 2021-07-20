@@ -22,16 +22,15 @@
     int count = 6;
     
     // Decrement number of rows if the post (section) does not have an image
-    if ([post objectForKey:@"image"] == nil) {
+    if (post.image == nil) {
         count--;
     }
     
     // Decrement number of rows if the post (section) does not have a caption
-    if ([post[@"caption"] isEqualToString:@""]) {
+    if ([post.caption isEqualToString:@""]) {
         count--;
     }
     
-    NSLog(@"%d", count);
     return count;
 }
 
@@ -43,12 +42,13 @@
     // Get the corresponding post using the section number
     Post *post = self.arrayOfPosts[section];
     PostCellModel *model = [[PostCellModel alloc] init];
+    model.post = post;
     
     // Username and timestamp cell
     if (row == 0) {
         model.type = PostCellModelTypeUsernameTimestamp;
         
-        PFUser *user = post[@"author"];
+        PFUser *user = post.author;
         NSString *username = [NSString stringWithFormat:@"@%@", user.username];
         
         // Format and set createdAtString, convert Date to String using DateTool relative time
@@ -74,7 +74,7 @@
     }
     
     // Case: if post doesn't have an image
-    if ([post objectForKey:@"image"] == nil) {
+    if ((post.image) == nil) {
         // Like cell
         if (row == 3) {
             model.type = PostCellModelTypeLikeCount;
@@ -82,7 +82,7 @@
         }
         
         // If post has a caption, also add caption cell
-        if (![post[@"caption"] isEqualToString:@""]) {
+        if (![post.caption isEqualToString:@""]) {
             if (row == 4) {
                 model.type = PostCellModelTypeCaption;
                 model.data = post.caption;
@@ -104,7 +104,7 @@
         }
         
         // If post has a caption, also add caption cell
-        if (![post[@"caption"] isEqualToString:@""]) {
+        if (![post.caption isEqualToString:@""]) {
             // Caption cell
             if (row == 5) {
                 model.type = PostCellModelTypeCaption;

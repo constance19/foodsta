@@ -6,6 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Post.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -20,8 +21,9 @@ typedef NS_ENUM(NSInteger, PostCellModelType) {
 
 @interface PostCellModel : NSObject
 
-@property PostCellModelType type;
-@property id data; // string, image, int, etc.
+@property (nonatomic) PostCellModelType type;
+@property (nonatomic, strong) id data; // string, image, int, etc.
+@property (nonatomic, strong) Post *post;
 
 @end
 
