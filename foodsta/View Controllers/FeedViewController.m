@@ -131,58 +131,70 @@
     switch (model.type) {
         case PostCellModelTypeUsernameTimestamp: {
             UsernameTimestampCell *cell = [tableView dequeueReusableCellWithIdentifier:@"usernameTimestampCell" forIndexPath:indexPath];
-            cell.usernameLabel.text = model.data[0];
-            cell.timestampLabel.text = model.data[1];
+            if ([model.data[0] isKindOfClass:[NSString class]] && [model.data[1] isKindOfClass:[NSString class]]) {
+                cell.usernameLabel.text = model.data[0];
+                cell.timestampLabel.text = model.data[1];
+            }
             return cell;
         }
             
         case PostCellModelTypeLocation: {
             LocationNameCell *cell = [tableView dequeueReusableCellWithIdentifier:@"locationCell" forIndexPath:indexPath];
-            cell.locationView.attributedText = model.data;
-            cell.locationView.dataDetectorTypes = UIDataDetectorTypeLink;
-            [cell.locationView setFont:[UIFont systemFontOfSize:19]];
+            if ([model.data isKindOfClass: [NSMutableAttributedString class]]) {
+                cell.locationView.attributedText = model.data;
+                cell.locationView.dataDetectorTypes = UIDataDetectorTypeLink;
+                [cell.locationView setFont:[UIFont systemFontOfSize:19]];
+            }
             return cell;
         }
         
         case PostCellModelTypeImage: {
             ImageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"imageCell" forIndexPath:indexPath];
-            cell.locationImage.file = model.data;
-            [cell.locationImage loadInBackground];
+            if ([model.data isKindOfClass:[PFFileObject class]]) {
+                cell.locationImage.file = model.data;
+                [cell.locationImage loadInBackground];
+            }
             return cell;
         }
             
         case PostCellModelTypeLikeCount: {
             LikeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"likeCell" forIndexPath:indexPath];
-            cell.post = model.post;
             
-            // Set like count
-            NSString *likeCount = [NSString stringWithFormat:@"%@", model.data];
+            if ([model.data isKindOfClass:[Post class]] && [model.data isKindOfClass:[NSNumber class]]) {
+                cell.post = model.post;
+            
+                // Set like count
+                NSString *likeCount = [NSString stringWithFormat:@"%@", model.data];
 //            [cell.likeButton setTitle:likeCount forState:UIControlStateNormal];
             
-            // Set selected state for like button if current user has already liked the post
-            PFUser *currentUser = [PFUser currentUser];
-            Post *currentPost = model.post;
+                // Set selected state for like button if current user has already liked the post
+                PFUser *currentUser = [PFUser currentUser];
+                Post *currentPost = model.post;
             
-            // TODO: fix, like button state is inconsistent with Parse
-            if ([currentUser[@"liked"] containsObject:currentPost]) {
-                [cell.likeButton setTitle:likeCount forState:UIControlStateSelected];
-                [cell.likeButton setSelected:YES];
-            } else {
-                [cell.likeButton setTitle:likeCount forState:UIControlStateNormal];
+                // TODO: fix, like button state is inconsistent with Parse
+                if ([currentUser[@"liked"] containsObject:currentPost]) {
+                    [cell.likeButton setTitle:likeCount forState:UIControlStateSelected];
+                    [cell.likeButton setSelected:YES];
+                } else {
+                    [cell.likeButton setTitle:likeCount forState:UIControlStateNormal];
+                }
             }
-                
             return cell;
         }
             
         case PostCellModelTypeCaption: {
             CaptionCell *cell = [tableView dequeueReusableCellWithIdentifier:@"captionCell" forIndexPath:indexPath];
-            cell.captionLabel.text = model.data;
+            if ([model.data isKindOfClass:[NSString class]]) {
+                cell.captionLabel.text = model.data;
+            }
             return cell;
         }
             
         case PostCellModelTypeRating: {
             RatingCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ratingCell" forIndexPath:indexPath];
-            cell.ratingView.value = [model.data doubleValue];
+            if ([model.data isKindOfClass:[NSNumber class]]) {
+                cell.ratingView.value = [model.data doubleValue];
+            }
             return cell;
         }
     }
@@ -200,10 +212,10 @@
     return separatorView;
 }
 
-// For infinite scrolling
+ //For infinite scrolling
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
-    if(indexPath.row + 1 == [self.feedDataSource.arrayOfPosts count]){
-        [self loadPosts: (int)[self.feedDataSource.arrayOfPosts count]+20];
+    if(indexPath.section + 1 == [self.feedDataSource.arrayOfPosts count]){
+//        [self loadPosts: (int)[self.feedDataSource.arrayOfPosts count]+20];
     }
 }
 

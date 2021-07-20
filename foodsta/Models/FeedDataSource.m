@@ -62,7 +62,7 @@
     // Location cell
     if (row == 1) {
         model.type = PostCellModelTypeLocation;
-        NSMutableAttributedString * str = [[NSMutableAttributedString alloc] initWithString:post.locationTitle];
+        NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:post.locationTitle];
         [str addAttribute: NSLinkAttributeName value: post.locationUrl range: NSMakeRange(0, str.length)];
         model.data = str;
     }
