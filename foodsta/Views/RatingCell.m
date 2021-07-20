@@ -5,9 +5,9 @@
 //  Created by constanceh on 7/16/21.
 //
 
-#import "ratingCell.h"
+#import "RatingCell.h"
 
-@implementation ratingCell
+@implementation RatingCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];

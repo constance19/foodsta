@@ -518,7 +518,7 @@
                                             <outlet property="selfLocationView" destination="990-tf-IKH" id="YeK-k9-PyK"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ratingCell" id="rfF-pK-JgS" customClass="ratingCell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ratingCell" id="rfF-pK-JgS" customClass="RatingCell">
                                         <rect key="frame" x="0.0" y="120.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rfF-pK-JgS" id="KBM-37-8lg">
@@ -557,7 +557,7 @@
                                             <outlet property="selfRatingView" destination="jV8-FY-s8K" id="WBe-Ou-80O"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="imageCell" rowHeight="229" id="WGu-M1-EBS" customClass="imageCell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="imageCell" rowHeight="229" id="WGu-M1-EBS" customClass="ImageCell">
                                         <rect key="frame" x="0.0" y="164" width="414" height="229"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="WGu-M1-EBS" id="kpp-OZ-ite">
@@ -579,7 +579,7 @@
                                             <outlet property="selfLocationImage" destination="saw-De-BUS" id="aok-kU-agU"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="likeCell" id="GBA-pH-Iua" customClass="likeCell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="likeCell" id="GBA-pH-Iua" customClass="LikeCell">
                                         <rect key="frame" x="0.0" y="393" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="GBA-pH-Iua" id="a02-On-3pY">
@@ -605,7 +605,7 @@
                                             <outlet property="selfLikeButton" destination="lY2-Fp-8Cx" id="16f-Nm-mnx"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="captionCell" id="gRt-9L-feT" customClass="captionCell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="captionCell" id="gRt-9L-feT" customClass="CaptionCell">
                                         <rect key="frame" x="0.0" y="436.5" width="414" height="43"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gRt-9L-feT" id="ADQ-H4-REM">
@@ -815,6 +815,7 @@
                                         <connections>
                                             <outlet property="profileImage" destination="Dpb-Zk-h8q" id="5SJ-ik-clm"/>
                                             <outlet property="usernameLabel" destination="RCf-Hw-E6B" id="w5r-eP-nBh"/>
+                                            <segue destination="w63-Vf-zMB" kind="presentation" identifier="searchProfileSegue" modalPresentationStyle="fullScreen" id="Nt0-qg-eOt"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -1034,7 +1035,7 @@
                                             <outlet property="locationView" destination="duq-PX-BtK" id="DcZ-H1-dfx"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="ratingCell" id="Pss-Q0-Ye1" customClass="ratingCell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="ratingCell" id="Pss-Q0-Ye1" customClass="RatingCell">
                                         <rect key="frame" x="0.0" y="111" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Pss-Q0-Ye1" id="MkR-Rc-S3J">
@@ -1071,7 +1072,7 @@
                                             <outlet property="ratingView" destination="W91-Wv-Cnz" id="vf0-Ly-981"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="imageCell" rowHeight="214" id="gzt-Tm-4VK" customClass="imageCell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="imageCell" rowHeight="214" id="gzt-Tm-4VK" customClass="ImageCell">
                                         <rect key="frame" x="0.0" y="154.5" width="414" height="214"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gzt-Tm-4VK" id="3dw-Cb-vqN">
@@ -1093,7 +1094,7 @@
                                             <outlet property="locationImage" destination="ZVN-nS-Iyr" id="Du6-Bn-NmC"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="likeCell" id="zv1-qr-Bhz" customClass="likeCell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="likeCell" id="zv1-qr-Bhz" customClass="LikeCell">
                                         <rect key="frame" x="0.0" y="368.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zv1-qr-Bhz" id="GA7-3l-wsJ">
@@ -1123,7 +1124,7 @@
                                             <outlet property="likeButton" destination="Ac2-B7-783" id="UXs-1G-Gaw"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="captionCell" id="PT1-u4-JXB" customClass="captionCell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="captionCell" id="PT1-u4-JXB" customClass="CaptionCell">
                                         <rect key="frame" x="0.0" y="412" width="414" height="43"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PT1-u4-JXB" id="LxW-GB-eeV">
@@ -1405,9 +1406,6 @@
         </scene>
     </scenes>
     <designables>
-        <designable name="2vL-YU-4Hk">
-            <size key="intrinsicContentSize" width="240" height="44"/>
-        </designable>
         <designable name="W91-Wv-Cnz">
             <size key="intrinsicContentSize" width="240" height="44"/>
         </designable>
@@ -1416,6 +1414,7 @@
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
+        <segue reference="HCa-r1-zI6"/>
         <segue reference="wId-7A-82a"/>
     </inferredMetricsTieBreakers>
     <resources>

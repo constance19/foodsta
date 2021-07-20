@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface captionCell : UITableViewCell
+@interface CaptionCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *captionLabel;
 
@@ -18,3 +18,4 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 NS_ASSUME_NONNULL_END
+

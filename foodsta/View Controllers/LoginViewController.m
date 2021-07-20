@@ -19,25 +19,29 @@
 
 @implementation LoginViewController
 
+NSString *loginIdentifier = @"LoginViewController";
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     // Set placeholder text of username and password text fields
-    self.usernameField.placeholder = @"Phone number, username, or email";
-    self.passwordField.placeholder = @"Password";
+    self.usernameField.placeholder = NSLocalizedString(@"Phone number, username, or email", @"Tells user what to enter for the username field");
+    self.passwordField.placeholder = NSLocalizedString(@"Password", @"Tells user to enter a password");
 }
 
 - (IBAction)onTapSignup:(id)sender {
     if([self.usernameField.text isEqual:@""] || [self.passwordField.text isEqual:@""]) {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Incomplete information!"
-                                                                       message:@"Please fill out all text fields!"
+        NSString *alertTitle = NSLocalizedString(@"Incomplete information!", @"Alert message title for failed signup");
+        NSString *alertMessage = NSLocalizedString(@"Please fill out all text fields!", @"Alert message instructions for failed signup");
+        
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:alertTitle
+                                                                       message:alertMessage
                                                                 preferredStyle:(UIAlertControllerStyleAlert)];
         
         // create an OK action
         UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK"
                                                            style:UIAlertActionStyleDefault
                                                          handler:^(UIAlertAction * _Nonnull action) {
-                                                                     // handle response here.
             
         }];
         
@@ -54,22 +58,23 @@
 
 - (IBAction)onTapLogin:(id)sender {
     if([self.usernameField.text isEqual:@""] || [self.passwordField.text isEqual:@""]){
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Incomplete information!"
-                                                                           message:@"Please fill out all text fields!"
+        NSString *alertTitle = NSLocalizedString(@"Incomplete information!", @"Alert message title for failed login");
+        NSString *alertMessage = NSLocalizedString(@"Please fill out all text fields!", @"Alert message instructions for failed login");
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:alertTitle
+                                                                           message:alertMessage
                                                                     preferredStyle:(UIAlertControllerStyleAlert)];
+    
+        // create an OK action
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK"
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction * _Nonnull action) {
+            
+        }];
+        // add the OK action to the alert controller
+        [alert addAction:okAction];
+        [self presentViewController:alert animated:YES completion:^{
+        }];
         
-            // create an OK action
-            UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK"
-                                                               style:UIAlertActionStyleDefault
-                                                             handler:^(UIAlertAction * _Nonnull action) {
-                                                                     // handle response here.
-            }];
-        
-            // add the OK action to the alert controller
-            [alert addAction:okAction];
-            [self presentViewController:alert animated:YES completion:^{
-                // optional code for what happens after the alert controller has finished presenting
-            }];
         }
         [self loginUser];
 }
@@ -89,8 +94,11 @@
         // Error signing up
         if (error != nil) {
             NSLog(@"Error: %@", error.localizedDescription);
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Invalid username!"
-                                                                           message:@"Enter valid username!"
+            
+            NSString *alertTitle = NSLocalizedString(@"Invalid username!", @"Alert message title for invalid username");
+            NSString *alertMessage = NSLocalizedString(@"Enter valid username!", @"Alert message instructions for invalid username");
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:alertTitle
+                                                                           message:alertMessage
                                                                     preferredStyle:(UIAlertControllerStyleAlert)];
                         
                             // create an OK action
@@ -139,8 +147,11 @@
         // Error logging in
         if (error != nil) {
             NSLog(@"User log in failed: %@", error.localizedDescription);
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Invalid username/password!"
-                                                                           message:@"Enter valid username and password!"
+            
+            NSString *alertTitle = NSLocalizedString(@"Invalid username/password!", @"Alert message title for invalid login");
+            NSString *alertMessage = NSLocalizedString(@"Enter valid username and password!", @"Alert message instructions for invalid login");
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:alertTitle
+                                                                           message:alertMessage
                                                                     preferredStyle:(UIAlertControllerStyleAlert)];
                         
                             // create an OK action

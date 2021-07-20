@@ -21,6 +21,8 @@
 
 @implementation LocationsViewController
 
+NSString *locationsIdentifier = @"locationsController";
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -29,8 +31,8 @@
     self.searchBar.delegate = self;
     
     // Set placeholder text of search bars
-    self.searchBar.placeholder = @"Cafes, pasta, delivery, etc.";
-    self.locationBar.placeholder = @"Location..";
+    self.searchBar.placeholder = NSLocalizedString(@"Cafes, pasta, delivery, etc.", @"Location search suggestions");
+    self.locationBar.placeholder = NSLocalizedString(@"Location..", @"User guidance to enter location");
 }
 
 - (IBAction)onTapSearch:(id)sender {

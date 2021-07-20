@@ -5,10 +5,10 @@
 //  Created by constanceh on 7/16/21.
 //
 
-#import "likeCell.h"
+#import "LikeCell.h"
 #import "Post.h"
 
-@implementation likeCell
+@implementation LikeCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];

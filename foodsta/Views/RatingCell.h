@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ratingCell : UITableViewCell
+@interface RatingCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet HCSStarRatingView *ratingView;
 

@@ -18,10 +18,10 @@
 #import "PostCellModel.h"
 #import "UsernameTimestampCell.h"
 #import "LocationNameCell.h"
-#import "imageCell.h"
-#import "likeCell.h"
-#import "captionCell.h"
-#import "ratingCell.h"
+#import "ImageCell.h"
+#import "LikeCell.h"
+#import "CaptionCell.h"
+#import "RatingCell.h"
 #import "ProfileViewController.h"
 #import "ComposeViewController.h"
 
@@ -95,7 +95,7 @@
             NSLog(@"User logged out successfully!");
             SceneDelegate *myDelegate = (SceneDelegate *)self.view.window.windowScene.delegate;
             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-            LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+            LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:loginIdentifier];
             myDelegate.window.rootViewController = loginViewController;
         }
     }];
@@ -145,14 +145,14 @@
         }
         
         case PostCellModelTypeImage: {
-            imageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"imageCell" forIndexPath:indexPath];
+            ImageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"imageCell" forIndexPath:indexPath];
             cell.locationImage.file = model.data;
             [cell.locationImage loadInBackground];
             return cell;
         }
             
         case PostCellModelTypeLikeCount: {
-            likeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"likeCell" forIndexPath:indexPath];
+            LikeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"likeCell" forIndexPath:indexPath];
             cell.post = model.post;
             
             // Set like count
@@ -175,13 +175,13 @@
         }
             
         case PostCellModelTypeCaption: {
-            captionCell *cell = [tableView dequeueReusableCellWithIdentifier:@"captionCell" forIndexPath:indexPath];
+            CaptionCell *cell = [tableView dequeueReusableCellWithIdentifier:@"captionCell" forIndexPath:indexPath];
             cell.captionLabel.text = model.data;
             return cell;
         }
             
         case PostCellModelTypeRating: {
-            ratingCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ratingCell" forIndexPath:indexPath];
+            RatingCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ratingCell" forIndexPath:indexPath];
             cell.ratingView.value = [model.data doubleValue];
             return cell;
         }
@@ -221,7 +221,7 @@
                     
         UINavigationController *navController = [segue destinationViewController];
         ProfileViewController *profileController = navController.topViewController;
-        profileController.user = post[@"author"];
+        profileController.user = post.author;
     }
     
     if ([[segue identifier] isEqualToString:@"composeSegue"]) {

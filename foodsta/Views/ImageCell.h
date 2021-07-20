@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface imageCell : UITableViewCell
+@interface ImageCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet PFImageView *locationImage;
 

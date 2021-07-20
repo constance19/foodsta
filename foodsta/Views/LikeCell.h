@@ -6,14 +6,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Post.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface likeCell : UITableViewCell
+@interface LikeCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UIButton *likeButton;
-
 @property (weak, nonatomic) IBOutlet UIButton *selfLikeButton;
+@property (nonatomic, strong) Post *post;
 
 @end
 

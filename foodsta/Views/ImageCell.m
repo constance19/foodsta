@@ -5,9 +5,9 @@
 //  Created by constanceh on 7/16/21.
 //
 
-#import "imageCell.h"
+#import "ImageCell.h"
 
-@implementation imageCell
+@implementation ImageCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];

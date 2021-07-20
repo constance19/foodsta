@@ -12,10 +12,10 @@
 #import "EditProfileViewController.h"
 #import "UsernameTimestampCell.h"
 #import "LocationNameCell.h"
-#import "ratingCell.h"
-#import "imageCell.h"
-#import "likeCell.h"
-#import "captionCell.h"
+#import "RatingCell.h"
+#import "ImageCell.h"
+#import "LikeCell.h"
+#import "CaptionCell.h"
 @import Parse;
 
 @interface SelfViewController () <UITableViewDelegate, UITableViewDataSource>
@@ -73,7 +73,7 @@
             NSLog(@"User logged out successfully!");
             SceneDelegate *myDelegate = (SceneDelegate *)self.view.window.windowScene.delegate;
             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-            LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+            LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:loginIdentifier];
             myDelegate.window.rootViewController = loginViewController;
         }
     }];
@@ -89,7 +89,9 @@
     [postQuery includeKey:@"liked"];
     [postQuery includeKey:@"locationTitle"];
     [postQuery includeKey:@"image"];
-    [postQuery whereKey:@"author" equalTo:currentUser];
+    if (currentUser != nil) {
+        [postQuery whereKey:@"author" equalTo:currentUser];
+    }
     postQuery.limit = numPosts;
 
     // Fetch data asynchronously
@@ -138,27 +140,27 @@
         }
         
         case PostCellModelTypeImage: {
-            imageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"imageCell" forIndexPath:indexPath];
+            ImageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"imageCell" forIndexPath:indexPath];
             cell.selfLocationImage.file = model.data;
             [cell.selfLocationImage loadInBackground];
             return cell;
         }
             
         case PostCellModelTypeLikeCount: {
-            likeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"likeCell" forIndexPath:indexPath];
+            LikeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"likeCell" forIndexPath:indexPath];
             NSString *likeCount = [NSString stringWithFormat:@"%@", model.data];
             [cell.selfLikeButton setTitle:likeCount forState:UIControlStateNormal];
             return cell;
         }
             
         case PostCellModelTypeCaption: {
-            captionCell *cell = [tableView dequeueReusableCellWithIdentifier:@"captionCell" forIndexPath:indexPath];
+            CaptionCell *cell = [tableView dequeueReusableCellWithIdentifier:@"captionCell" forIndexPath:indexPath];
             cell.selfCaptionLabel.text = model.data;
             return cell;
         }
             
         case PostCellModelTypeRating: {
-            ratingCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ratingCell" forIndexPath:indexPath];
+            RatingCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ratingCell" forIndexPath:indexPath];
             cell.selfRatingView.value = [model.data doubleValue];
             return cell;
         }
@@ -179,8 +181,8 @@
 
 // For infinite scrolling
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
-    if(indexPath.row + 1 == [self.feedDataSource.arrayOfPosts count]){
-        [self loadPosts: (int)[self.feedDataSource.arrayOfPosts count]+20];
+    if(indexPath.row + 1 == [self.feedDataSource.arrayOfPosts count]) {
+        [self loadPosts:(int)[self.feedDataSource.arrayOfPosts count] + 20];
     }
 }
 
@@ -195,6 +197,7 @@
     if ([[segue identifier] isEqualToString:@"editProfileSegue"]) {
         UINavigationController *navController = [segue destinationViewController];
         EditProfileViewController *editController = navController.topViewController;
+        editController.modalInPresentation = YES;
         
         // Pass back the updated profile picture to refresh the profile tab immediately
         editController.onDismiss = ^(UIViewController *sender, UIImage *profileImage, NSString *bio) {

@@ -7,6 +7,7 @@
 
 #import "SearchViewController.h"
 #import "UserCell.h"
+#import "ProfileViewController.h"
 @import Parse;
 
 @interface SearchViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
@@ -28,6 +29,8 @@
     
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.searchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    
+    self.searchBar.placeholder = NSLocalizedString(@"Search for user...", @"Tells the user to search for a user");
     
     // Load in users below the search bar
     [self loadUsers];
@@ -113,14 +116,22 @@
 }
 
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    
+    if ([[segue identifier] isEqualToString:@"searchProfileSegue"]) {
+        UserCell *tappedCell = sender;
+                    
+        UINavigationController *navController = [segue destinationViewController];
+        ProfileViewController *profileController = navController.topViewController;
+        profileController.user = tappedCell.user;
+    }
 }
-*/
+
 
 @end

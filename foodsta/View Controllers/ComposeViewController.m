@@ -24,6 +24,8 @@
 
 @implementation ComposeViewController
 
+static NSString *const captionPlaceholder = @"Write a caption...";
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -40,8 +42,7 @@
     
     // Set placeholder text for caption view
     self.captionView.delegate = self;
-//    self.captionView.text = @"Write a caption...";
-    self.captionView.text = NSLocalizedString(@"Write a caption...", @"Tells the user to enter a caption");
+    self.captionView.text = captionPlaceholder;
     UIColor *myBlack = [UIColor colorWithRed:0.7 green:0.7 blue:0.7 alpha:1.0];
     self.captionView.textColor = myBlack;
     
@@ -49,7 +50,7 @@
     [self.photoButton setFrame:CGRectMake(173, 269, 130, 44)];
     
     // Set placeholder text for check-in location if user hasn't selected one
-    self.searchBar.placeholder = @"Search Yelp..";
+    self.searchBar.placeholder = NSLocalizedString(@"Search Yelp..", @"Tells the user the search bar is linked to Yelp");
     
     // Set check-in location if user already selected one
     if (self.locationSelected) {
@@ -82,8 +83,11 @@
     
     // If user did not enter a location, present alert message
     if ([self.searchBar.text length] == 0) {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Missing location!"
-                                                                       message:@"Please enter a check-in location!"
+        NSString *alertTitle = NSLocalizedString(@"Missing location!", @"Alert message title for missing location");
+        NSString *alertMessage = NSLocalizedString(@"Please enter a check-in location!", @"Alert message instructions for missing location");
+        
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:alertTitle
+                                                                       message:alertMessage
                                                                 preferredStyle:(UIAlertControllerStyleAlert)];
         // create an OK action
         UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK"
@@ -99,7 +103,7 @@
     } else {
         // If user did not enter a caption, don't post placeholder caption
         NSString *caption = self.captionView.text;
-        if ([caption isEqualToString:@"Write a caption..."]) {
+        if ([caption isEqualToString:captionPlaceholder]) {
             caption = @"";
         }
         
@@ -163,7 +167,7 @@
 // Clear placeholder text when user begins editing the caption box
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
-    if ([textView.text isEqualToString:@"Write a caption..."]) {
+    if ([textView.text isEqualToString:captionPlaceholder]) {
         textView.text = @"";
         textView.textColor = [UIColor blackColor];
     }
@@ -174,7 +178,7 @@
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
     if ([textView.text isEqualToString:@""]) {
-        textView.text = @"Write a caption...";
+        textView.text = captionPlaceholder;
         textView.textColor = [UIColor lightGrayColor]; //optional
     }
     [textView resignFirstResponder];
@@ -183,7 +187,7 @@
 // MARK: UISearchBarDelegate
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
-    LocationsViewController *locationsController = [self.storyboard instantiateViewControllerWithIdentifier:@"locationsController"];
+    LocationsViewController *locationsController = [self.storyboard instantiateViewControllerWithIdentifier:locationsIdentifier];
     [self presentViewController:locationsController animated:YES completion:nil];
 }
 

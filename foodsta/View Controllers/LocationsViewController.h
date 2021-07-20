@@ -9,5 +9,7 @@
 
 @interface LocationsViewController : UIViewController
 
+extern NSString *locationsIdentifier;
+
 @end
 

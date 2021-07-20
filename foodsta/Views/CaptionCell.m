@@ -5,9 +5,9 @@
 //  Created by constanceh on 7/16/21.
 //
 
-#import "captionCell.h"
+#import "CaptionCell.h"
 
-@implementation captionCell
+@implementation CaptionCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
