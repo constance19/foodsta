@@ -115,7 +115,7 @@ static NSString *const captionPlaceholder = @"Write a caption...";
        [MBProgressHUD showHUDAddedTo:self.view animated:TRUE];
         
         // Post the image and caption and show the progress HUD
-        [Post postCheckIn:self.locationImage.image withCaption:caption withLocation:self.textField.text withUrl: self.location.yelpURL withRating:@(self.ratingView.value) withCompletion:^(BOOL succeeded, NSError *error) {
+        [Post postCheckIn:self.locationImage.image withCaption:caption withLocation:self.textField.text withUrl: self.location.yelpURL withRating:@(self.ratingView.value) withLatitude: self.location.latitude withLongitude: self.location.longitude withCompletion:^(BOOL succeeded, NSError *error) {
             if (error) {
                 NSLog(@"Error posting check-in", error.localizedDescription);
                 // Show the progress HUD while user is waiting for the post request to complete

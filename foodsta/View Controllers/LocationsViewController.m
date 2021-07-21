@@ -36,10 +36,11 @@ NSString *locationsIdentifier = @"locationsController";
 }
 
 - (IBAction)onTapSearch:(id)sender {
+    // Process the search term and location to be compatible with the Yelp API, i.e. converting spaces to +
     NSString *rawTerm = self.searchBar.text;
-    // Process the search term to be compatible with the Yelp API, i.e. converting spaces to +
     NSString *term = [rawTerm stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]];
-    NSString *location = self.locationBar.text;
+    NSString *rawLocation = self.locationBar.text;
+    NSString *location = [rawLocation stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]];
 
     NSMutableURLRequest *requestData = [[NSMutableURLRequest alloc] init];
     NSString *str = [NSString stringWithFormat: @"https://api.yelp.com/v3/businesses/search?term=%@&location=%@&radius=10000", term, location];

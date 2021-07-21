@@ -6,6 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
+@import Parse;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -15,6 +16,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSURL *imageURL;
 @property (nonatomic, strong) NSString *address;
 @property (nonatomic, strong) NSString *yelpURL;
+@property (nonatomic, strong) NSNumber *latitude;
+@property (nonatomic, strong) NSNumber *longitude;
+
 
 - (id)initWithDictionary:(NSDictionary *)dictionary;
 + (NSArray *)locationsWithDictionaries:(NSArray *)dictionaries;

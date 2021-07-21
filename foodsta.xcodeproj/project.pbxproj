@@ -32,6 +32,8 @@
 		787AC55D26A2480D0070E5A9 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 787AC55C26A2480D0070E5A9 /* ProfileViewController.m */; };
 		787AC56026A661C80070E5A9 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 787AC55F26A661C80070E5A9 /* SearchViewController.m */; };
 		787AC56326A662560070E5A9 /* UserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 787AC56226A662560070E5A9 /* UserCell.m */; };
+		787AC56626A7CA100070E5A9 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 787AC56526A7CA100070E5A9 /* MapViewController.m */; };
+		787AC56826A7D1BC0070E5A9 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 787AC56726A7D1BC0070E5A9 /* MapKit.framework */; };
 		78A8137F26A183B600695571 /* UsernameTimestampCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 78A8137E26A183B600695571 /* UsernameTimestampCell.m */; };
 		78A8138226A1845D00695571 /* LocationNameCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 78A8138126A1845D00695571 /* LocationNameCell.m */; };
 		78A8138526A184BB00695571 /* ImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 78A8138426A184BB00695571 /* ImageCell.m */; };
@@ -112,6 +114,9 @@
 		787AC55F26A661C80070E5A9 /* SearchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		787AC56126A662560070E5A9 /* UserCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserCell.h; sourceTree = "<group>"; };
 		787AC56226A662560070E5A9 /* UserCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserCell.m; sourceTree = "<group>"; };
+		787AC56426A7CA100070E5A9 /* MapViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
+		787AC56526A7CA100070E5A9 /* MapViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
+		787AC56726A7D1BC0070E5A9 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		78A8137D26A183B600695571 /* UsernameTimestampCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UsernameTimestampCell.h; sourceTree = "<group>"; };
 		78A8137E26A183B600695571 /* UsernameTimestampCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UsernameTimestampCell.m; sourceTree = "<group>"; };
 		78A8138026A1845D00695571 /* LocationNameCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocationNameCell.h; sourceTree = "<group>"; };
@@ -136,6 +141,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				787AC56826A7D1BC0070E5A9 /* MapKit.framework in Frameworks */,
 				173B620AB9D00480437DFAC8 /* Pods_foodsta.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -175,6 +181,7 @@
 		1D5B5A76F5E87DF50E11467E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				787AC56726A7D1BC0070E5A9 /* MapKit.framework */,
 				94DBCF63251A45821B4D96D8 /* Pods_foodsta.framework */,
 				E40072F959FD3C6A5E6EAAC1 /* Pods_foodsta_foodstaUITests.framework */,
 				50185661E04E68223708872F /* Pods_foodstaTests.framework */,
@@ -262,6 +269,8 @@
 				787AC55C26A2480D0070E5A9 /* ProfileViewController.m */,
 				787AC55E26A661C80070E5A9 /* SearchViewController.h */,
 				787AC55F26A661C80070E5A9 /* SearchViewController.m */,
+				787AC56426A7CA100070E5A9 /* MapViewController.h */,
+				787AC56526A7CA100070E5A9 /* MapViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -550,6 +559,7 @@
 				780424DA269D2E7500E771CE /* Location.m in Sources */,
 				78A8138E26A1854700695571 /* RatingCell.m in Sources */,
 				78042505269F9C9200E771CE /* EditProfileViewController.m in Sources */,
+				787AC56626A7CA100070E5A9 /* MapViewController.m in Sources */,
 				78A8138226A1845D00695571 /* LocationNameCell.m in Sources */,
 				787AC55D26A2480D0070E5A9 /* ProfileViewController.m in Sources */,
 				780424E0269D315A00E771CE /* LocationCell.m in Sources */,

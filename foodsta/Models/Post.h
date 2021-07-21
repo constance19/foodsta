@@ -25,10 +25,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *locationTitle;
 @property (nonatomic, strong) NSString *locationUrl;
 @property (nonatomic, strong) NSNumber *rating;
+@property (nonatomic, strong) NSNumber *latitude;
+@property (nonatomic, strong) NSNumber *longitude;
 
 
 + (PFFileObject *)getPFFileFromImage: (UIImage * _Nullable)image;
-+ (void) postCheckIn: ( UIImage * _Nullable )image withCaption: ( NSString * _Nullable )caption withLocation: (NSString * _Nullable)location withUrl: (NSString * _Nullable)url withRating: (NSNumber * _Nullable)rating withCompletion: (PFBooleanResultBlock  _Nullable)completion;
++ (void) postCheckIn: ( UIImage * _Nullable )image withCaption: ( NSString * _Nullable )caption withLocation: (NSString * _Nullable)location withUrl: (NSString * _Nullable)url withRating: (NSNumber * _Nullable)rating withLatitude: (NSNumber * _Nullable)latitude withLongitude: (NSNumber * _Nullable)longitude withCompletion: (PFBooleanResultBlock  _Nullable)completion;
 
 @end
 

@@ -19,6 +19,10 @@
     // Set the Yelp url of the location
     self.yelpURL = dictionary[@"url"];
     
+    // Set the latitude and longitude of the location
+    self.latitude = dictionary[@"coordinates"][@"latitude"];
+    self.longitude = dictionary[@"coordinates"][@"longitude"];
+    
     // Concatenate address components and set it to the location's property
     NSArray *address = dictionary[@"location"][@"display_address"];
     NSInteger count = [address count];
