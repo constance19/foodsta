@@ -33,26 +33,6 @@ static NSString *const captionPlaceholder = @"Write a caption...";
     // Location text field
     self.textField.delegate = self;
     
-    // Set caption box display
-    self.captionView.layer.borderWidth = 1.2f;
-    self.captionView.clipsToBounds = YES;
-    self.captionView.layer.cornerRadius = 3.0f;
-    self.captionView.layer.borderColor = UIColor.blackColor.CGColor;
-
-    // Set image view placeholder display
-    UIColor *myGray = [UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1.0];
-    self.locationImage.layer.backgroundColor = myGray.CGColor;
-    self.locationImage.image = nil;
-    
-    // Set placeholder text for caption view
-    self.captionView.delegate = self;
-    self.captionView.text = captionPlaceholder;
-    UIColor *myBlack = [UIColor colorWithRed:0.7 green:0.7 blue:0.7 alpha:1.0];
-    self.captionView.textColor = myBlack;
-    
-    // Set button display
-    [self.photoButton setFrame:CGRectMake(173, 269, 130, 44)];
-    
     // Set placeholder text for check-in location if user hasn't selected one
     self.textField.placeholder = NSLocalizedString(@"Search Yelp..", @"Tells the user the search bar is linked to Yelp");
     
@@ -60,6 +40,34 @@ static NSString *const captionPlaceholder = @"Write a caption...";
     if (self.locationSelected) {
         self.textField.text = self.location.name;
     }
+    
+    // Set caption box display
+    self.captionView.layer.borderWidth = 1.2f;
+    self.captionView.clipsToBounds = YES;
+    self.captionView.layer.cornerRadius = 3.0f;
+    self.captionView.layer.borderColor = UIColor.blackColor.CGColor;
+    
+    // Set placeholder text for caption view
+    self.captionView.delegate = self;
+    self.captionView.text = captionPlaceholder;
+    UIColor *myBlack = [UIColor colorWithRed:0.7 green:0.7 blue:0.7 alpha:1.0];
+    self.captionView.textColor = myBlack;
+    
+    // Dismiss keyboard upon tapping
+    UITapGestureRecognizer *tapScreen = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(dismissKeyboard)];
+    [self.view addGestureRecognizer:tapScreen];
+
+    // Set image view placeholder display
+    UIColor *myGray = [UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1.0];
+    self.locationImage.layer.backgroundColor = myGray.CGColor;
+    self.locationImage.image = nil;
+    
+    // Set select photo button display
+    [self.photoButton setFrame:CGRectMake(173, 269, 130, 44)];
+}
+
+-(void)dismissKeyboard {
+    [self.captionView resignFirstResponder];
 }
 
 - (IBAction)onTapPhoto:(id)sender {

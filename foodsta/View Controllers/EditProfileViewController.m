@@ -36,6 +36,14 @@
     self.profileImage.image = [[UIImage alloc] initWithData:fileData];
     
     self.bioField.text = user[@"bio"];
+    
+    // Dismiss keyboard upon tapping
+    UITapGestureRecognizer *tapScreen = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(dismissKeyboard)];
+    [self.view addGestureRecognizer:tapScreen];
+}
+
+-(void)dismissKeyboard {
+    [self.bioField resignFirstResponder];
 }
 
 - (IBAction)onTapDone:(id)sender {

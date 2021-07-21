@@ -1224,8 +1224,8 @@
                                     <constraint firstAttribute="width" constant="107" id="p5J-xA-fYo"/>
                                 </constraints>
                             </imageView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="utY-qo-bsc">
-                                <rect key="frame" x="0.0" y="230" width="414" height="555"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="utY-qo-bsc">
+                                <rect key="frame" x="0.0" y="225" width="414" height="614"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Ljm-r2-Tu7">
@@ -1278,7 +1278,7 @@
                             <constraint firstItem="5xN-3e-3B4" firstAttribute="leading" secondItem="5qI-Gf-sDJ" secondAttribute="leading" id="ahr-8v-n74"/>
                             <constraint firstItem="utY-qo-bsc" firstAttribute="trailing" secondItem="NjV-PJ-KOP" secondAttribute="trailing" id="avS-HF-K3j"/>
                             <constraint firstItem="NjV-PJ-KOP" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="2D3-Lk-tSa" secondAttribute="trailing" constant="20" id="fa9-w6-TGQ"/>
-                            <constraint firstItem="utY-qo-bsc" firstAttribute="top" secondItem="ocr-Bu-l0f" secondAttribute="bottom" constant="19" id="gF6-MA-6c9"/>
+                            <constraint firstItem="utY-qo-bsc" firstAttribute="top" secondItem="ocr-Bu-l0f" secondAttribute="bottom" constant="10" id="gl7-Io-H3l"/>
                             <constraint firstItem="2D3-Lk-tSa" firstAttribute="top" secondItem="NjV-PJ-KOP" secondAttribute="top" constant="33" id="kxy-3i-Xnr"/>
                         </constraints>
                     </view>

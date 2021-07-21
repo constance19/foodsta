@@ -27,6 +27,15 @@ NSString *loginIdentifier = @"LoginViewController";
     // Set placeholder text of username and password text fields
     self.usernameField.placeholder = NSLocalizedString(@"Phone number, username, or email", @"Tells user what to enter for the username field");
     self.passwordField.placeholder = NSLocalizedString(@"Password", @"Tells user to enter a password");
+    
+    // Dismiss keyboard upon tapping
+    UITapGestureRecognizer *tapScreen = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(dismissKeyboard)];
+    [self.view addGestureRecognizer:tapScreen];
+}
+
+-(void)dismissKeyboard {
+    [self.usernameField resignFirstResponder];
+    [self.passwordField resignFirstResponder];
 }
 
 - (IBAction)onTapSignup:(id)sender {
