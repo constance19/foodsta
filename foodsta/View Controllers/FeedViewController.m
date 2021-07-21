@@ -164,20 +164,18 @@
             
         case PostCellModelTypeLikeCount: {
             LikeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"likeCell" forIndexPath:indexPath];
+            [cell.likeButton setSelected:NO];
             
+            // Set selected state for like button if current user has already liked the post
             if ([model.post isKindOfClass:[Post class]] && [model.data isKindOfClass:[NSNumber class]]) {
                 cell.post = model.post;
             
-                // Set like count
-                NSString *likeCount = [NSString stringWithFormat:@"%@", model.data];
-//            [cell.likeButton setTitle:likeCount forState:UIControlStateNormal];
-            
-                // Set selected state for like button if current user has already liked the post
+                // Set like count and selected state for like button
                 PFUser *currentUser = [PFUser currentUser];
                 Post *currentPost = model.post;
                 NSArray *liked = currentUser[@"liked"];
+                NSString *likeCount = [NSString stringWithFormat:@"%@", model.data];
             
-                // TODO: fix, containsObject does not return true when the user already liked the current post
                 if ([liked containsObject:currentPost.objectId]) {
                     [cell.likeButton setSelected:YES];
                     [cell.likeButton setTitle:likeCount forState:UIControlStateSelected];

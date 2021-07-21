@@ -47,7 +47,6 @@
         PFUser *currentUser = [PFUser currentUser];
         NSArray *following = currentUser[@"following"];
 
-        // TODO: fix, containsObject not evaluating to true when it should
         // If current user follows clicked user, follow button should be selected
         if ([following containsObject:self.user.objectId]) {
             [self.followButton setTitle:@"Following" forState:UIControlStateNormal];
