@@ -55,6 +55,9 @@
     }];
 }
 
+-(IBAction)prepareForUnwind:(UIStoryboardSegue *)segue {
+}
+
 
 // MARK: UITableViewDatasource
 
@@ -114,7 +117,6 @@
     self.searchBar.text = @"";
     [self.searchBar resignFirstResponder];
 }
-
 
 
 #pragma mark - Navigation
