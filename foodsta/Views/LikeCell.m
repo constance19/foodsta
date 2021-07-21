@@ -46,7 +46,7 @@
         [self.likeButton setSelected:NO];
         
         NSMutableArray *liked = currentUser[@"liked"];
-        [liked removeObject: post];
+        [liked removeObject: post.objectId];
         currentUser[@"liked"] = liked;
     
     // Like
@@ -57,7 +57,7 @@
         [self.likeButton setSelected:YES];
         
         NSMutableArray *liked = currentUser[@"liked"];
-        [liked addObject: post];
+        [liked addObject: post.objectId];
         currentUser[@"liked"] = liked;
     }
     

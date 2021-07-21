@@ -49,7 +49,7 @@
 
         // TODO: fix, containsObject not evaluating to true when it should
         // If current user follows clicked user, follow button should be selected
-        if ([following containsObject:self.user]) {
+        if ([following containsObject:self.user.objectId]) {
             [self.followButton setTitle:@"Following" forState:UIControlStateNormal];
             [self.followButton setSelected:YES];
         
@@ -62,7 +62,7 @@
 
 - (IBAction)onTapFollow:(id)sender {
     PFUser *currentUser = [PFUser currentUser];
-    NSString *profileUser = self.user;
+    PFUser *profileUser = self.user;
     
     // Initialize current user's following array if necessary
     if (currentUser[@"following"] == nil) {
@@ -80,13 +80,13 @@
     // Unfollow clicked user
     if ([currentUser[@"following"] containsObject:profileUser]) {
         NSMutableArray *following = currentUser[@"following"];
-        [following removeObject: profileUser];
+        [following removeObject: profileUser.objectId];
         currentUser[@"following"] = following;
     
     // Follow clicked user
     } else {
         NSMutableArray *following = currentUser[@"following"];
-        [following addObject: profileUser];
+        [following addObject: profileUser.objectId];
         currentUser[@"following"] = following;
     }
     

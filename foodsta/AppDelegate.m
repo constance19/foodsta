@@ -20,11 +20,11 @@
     
     ParseClientConfiguration *config = [ParseClientConfiguration  configurationWithBlock:^(id<ParseMutableClientConfiguration> configuration) {
 
-//            configuration.applicationId = @"CqUJdeuiOgboOjTgjv7doUuoJKkdCvFZ3upyXcrr"; // <- UPDATE
-//            configuration.clientKey = @"8oWa0Lu36erdChXC3kSiAYND7fl6ullRRIwQcrNM"; // <- UPDATE
+            configuration.applicationId = @"0M723WfbPOyB8UpQb5pssvHvSDv3hk6fLzcVw4No"; // <- UPDATE
+            configuration.clientKey = @"bPm4pejszdD4V3MP8KrBF41XJkqB0CidH9Y1nPjG"; // <- UPDATE
         
-            configuration.applicationId = @"x5ysCWh1T1krqkliW0HBQtuXXWHHnQLFeM5uTf4J"; // <- UPDATE
-            configuration.clientKey = @"CbK4KsE4RvQhYmepXG0BzxndyCZgv2tgRMGBVaQg"; // <- UPDATE
+//            configuration.applicationId = @"x5ysCWh1T1krqkliW0HBQtuXXWHHnQLFeM5uTf4J"; // <- UPDATE
+//            configuration.clientKey = @"CbK4KsE4RvQhYmepXG0BzxndyCZgv2tgRMGBVaQg"; // <- UPDATE
             configuration.server = @"https://parseapi.back4app.com";
         }];
 

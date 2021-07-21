@@ -120,7 +120,7 @@ NSString *loginIdentifier = @"LoginViewController";
             // Add user to its own following list
             PFUser *currentUser = [PFUser currentUser];
             NSMutableArray *following = [[NSMutableArray alloc] init];
-            [following addObject: currentUser];
+            [following addObject: currentUser.objectId];
             currentUser[@"following"] = following;
 
             [currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {

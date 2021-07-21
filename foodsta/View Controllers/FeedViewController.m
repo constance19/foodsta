@@ -178,7 +178,7 @@
                 NSArray *liked = currentUser[@"liked"];
             
                 // TODO: fix, containsObject does not return true when the user already liked the current post
-                if ([liked containsObject:currentPost]) {
+                if ([liked containsObject:currentPost.objectId]) {
                     [cell.likeButton setSelected:YES];
                     [cell.likeButton setTitle:likeCount forState:UIControlStateSelected];
                 } else {
@@ -218,12 +218,12 @@
     return separatorView;
 }
 
- //For infinite scrolling
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
-    if(indexPath.section + 1 == [self.feedDataSource.arrayOfPosts count]){
-        [self loadPosts:(int)[self.feedDataSource.arrayOfPosts count] + 20];
-    }
-}
+// //For infinite scrolling
+//- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+//    if(indexPath.section + 1 == [self.feedDataSource.arrayOfPosts count]){
+//        [self loadPosts:(int)[self.feedDataSource.arrayOfPosts count] + 20];
+//    }
+//}
 
 
 // MARK: UsernameTimestampCellDelegate
