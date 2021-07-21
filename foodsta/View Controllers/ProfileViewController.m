@@ -44,6 +44,7 @@
 
     // Set following status for non-current users
     } else {
+        [self.followButton setSelected:NO];
         PFUser *currentUser = [PFUser currentUser];
         NSArray *following = currentUser[@"following"];
 
@@ -77,7 +78,7 @@
 
     // Toggle following status for user
     // Unfollow clicked user
-    if ([currentUser[@"following"] containsObject:profileUser]) {
+    if ([currentUser[@"following"] containsObject:profileUser.objectId]) {
         NSMutableArray *following = currentUser[@"following"];
         [following removeObject: profileUser.objectId];
         currentUser[@"following"] = following;
