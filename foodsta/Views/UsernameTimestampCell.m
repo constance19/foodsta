@@ -12,12 +12,19 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    UITapGestureRecognizer *usernameTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didTapUsername:)];
+    [self.usernameLabel addGestureRecognizer:usernameTap];
+    [self.usernameLabel setUserInteractionEnabled:YES];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
+- (void)didTapUsername:(UITapGestureRecognizer *)sender{
+    [self.delegate usernameTimestampCell:self didTap:self.post.author];
 }
 
 @end

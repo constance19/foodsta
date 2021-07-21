@@ -24,8 +24,9 @@
 #import "RatingCell.h"
 #import "ProfileViewController.h"
 #import "ComposeViewController.h"
+#import "Post.h"
 
-@interface FeedViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface FeedViewController () <UITableViewDelegate, UITableViewDataSource, UsernameTimestampCellDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) FeedDataSource *feedDataSource;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
@@ -63,6 +64,7 @@
     [postQuery includeKey:@"liked"];
     [postQuery includeKey:@"locationTitle"];
     [postQuery includeKey:@"image"];
+    [postQuery includeKey:@"postID"];
     
     // Filter feed to include only posts by following users and current user
     PFUser *currentUser = [PFUser currentUser];
@@ -131,9 +133,12 @@
     switch (model.type) {
         case PostCellModelTypeUsernameTimestamp: {
             UsernameTimestampCell *cell = [tableView dequeueReusableCellWithIdentifier:@"usernameTimestampCell" forIndexPath:indexPath];
-            if ([model.data[0] isKindOfClass:[NSString class]] && [model.data[1] isKindOfClass:[NSString class]]) {
+            cell.delegate = self;
+            
+            if ([model.data[0] isKindOfClass:[NSString class]] && [model.data[1] isKindOfClass:[NSString class]] && [model.post isKindOfClass:[Post class]]) {
                 cell.usernameLabel.text = model.data[0];
                 cell.timestampLabel.text = model.data[1];
+                cell.post = model.post;
             }
             return cell;
         }
@@ -160,7 +165,7 @@
         case PostCellModelTypeLikeCount: {
             LikeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"likeCell" forIndexPath:indexPath];
             
-            if ([model.data isKindOfClass:[Post class]] && [model.data isKindOfClass:[NSNumber class]]) {
+            if ([model.post isKindOfClass:[Post class]] && [model.data isKindOfClass:[NSNumber class]]) {
                 cell.post = model.post;
             
                 // Set like count
@@ -170,11 +175,12 @@
                 // Set selected state for like button if current user has already liked the post
                 PFUser *currentUser = [PFUser currentUser];
                 Post *currentPost = model.post;
+                NSArray *liked = currentUser[@"liked"];
             
-                // TODO: fix, like button state is inconsistent with Parse
-                if ([currentUser[@"liked"] containsObject:currentPost]) {
-                    [cell.likeButton setTitle:likeCount forState:UIControlStateSelected];
+                // TODO: fix, containsObject does not return true when the user already liked the current post
+                if ([liked containsObject:currentPost]) {
                     [cell.likeButton setSelected:YES];
+                    [cell.likeButton setTitle:likeCount forState:UIControlStateSelected];
                 } else {
                     [cell.likeButton setTitle:likeCount forState:UIControlStateNormal];
                 }
@@ -215,10 +221,15 @@
  //For infinite scrolling
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
     if(indexPath.section + 1 == [self.feedDataSource.arrayOfPosts count]){
-//        [self loadPosts: (int)[self.feedDataSource.arrayOfPosts count]+20];
+        [self loadPosts:(int)[self.feedDataSource.arrayOfPosts count] + 20];
     }
 }
 
+
+// MARK: UsernameTimestampCellDelegate
+-(void)usernameTimestampCell:(UsernameTimestampCell *) usernameTimestampCell didTap: (PFUser *)user {
+    [self performSegueWithIdentifier:@"profileSegue" sender:user];
+}
 
 #pragma mark - Navigation
 
@@ -226,16 +237,15 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    
+    // Segue from username label to profile page
     if ([[segue identifier] isEqualToString:@"profileSegue"]) {
-        UITableViewCell *tappedCell = sender;
-        NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
-        Post *post = self.feedDataSource.arrayOfPosts[indexPath.section];
-                    
         UINavigationController *navController = [segue destinationViewController];
         ProfileViewController *profileController = navController.topViewController;
-        profileController.user = post.author;
+        profileController.user = sender;
     }
     
+    // Segue from Check In button to compose page
     if ([[segue identifier] isEqualToString:@"composeSegue"]) {
         UINavigationController *navController = [segue destinationViewController];
         ComposeViewController *composeController = navController.topViewController;

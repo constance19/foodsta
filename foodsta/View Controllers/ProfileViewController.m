@@ -6,6 +6,7 @@
 //
 
 #import "ProfileViewController.h"
+@import Parse;
 
 @interface ProfileViewController ()
 
@@ -29,25 +30,26 @@
     // Set username and bio labels
     self.usernameLabel.text = [NSString stringWithFormat:@"@%@", self.user.username];
     self.bioLabel.text = self.user[@"bio"];
-    
+
     // Set profile image
     PFFileObject *profileImageFile = self.user[@"profileImage"];
     NSURL *url = [NSURL URLWithString: profileImageFile.url];
     NSData *fileData = [NSData dataWithContentsOfURL: url];
     self.profileImage.image = [[UIImage alloc] initWithData:fileData];
-    
+
     // If clicked profile is current user, hide follow button
     PFUser *currentUser = [PFUser currentUser];
     if ([self.user[@"username"] isEqualToString:currentUser.username]) {
         self.followButton.hidden = YES;
-    
+
     // Set following status for non-current users
     } else {
         PFUser *currentUser = [PFUser currentUser];
         NSArray *following = currentUser[@"following"];
-        
+
+        // TODO: fix, containsObject not evaluating to true when it should
         // If current user follows clicked user, follow button should be selected
-        if ([following containsObject: self.user[@"username"]]) {
+        if ([following containsObject:self.user]) {
             [self.followButton setTitle:@"Following" forState:UIControlStateNormal];
             [self.followButton setSelected:YES];
         
@@ -73,7 +75,7 @@
             }
         }];
     }
-    
+
     // Toggle following status for user
     // Unfollow clicked user
     if ([currentUser[@"following"] containsObject:profileUser]) {

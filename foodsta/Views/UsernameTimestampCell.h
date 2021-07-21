@@ -6,8 +6,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Post.h"
 
 NS_ASSUME_NONNULL_BEGIN
+
+@protocol UsernameTimestampCellDelegate;
 
 @interface UsernameTimestampCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
@@ -16,6 +19,15 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *selfUsernameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *selfTimestampLabel;
 
+@property (nonatomic, weak) id<UsernameTimestampCellDelegate> delegate;
+@property (nonatomic, strong) Post *post;
+
+@end
+
+
+@protocol UsernameTimestampCellDelegate
+
+-(void)usernameTimestampCell:(UsernameTimestampCell *) usernameTimestampCell didTap: (PFUser *)user;
 
 @end
 

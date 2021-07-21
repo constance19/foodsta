@@ -47,6 +47,7 @@
     // Username and timestamp cell
     if (row == 0) {
         model.type = PostCellModelTypeUsernameTimestamp;
+        model.post = post;
         
         PFUser *user = post.author;
         NSString *username = [NSString stringWithFormat:@"@%@", user.username];
