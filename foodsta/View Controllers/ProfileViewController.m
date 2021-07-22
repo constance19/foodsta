@@ -80,27 +80,58 @@
             }
         }];
     }
+    
+    // Initialize profile user's followers array if necessary
+    if (profileUser[@"followers"] == nil) {
+        profileUser[@"followers"] = [[NSMutableArray alloc] init];
+        [profileUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+            if (error) {
+                NSLog(@"Error updating follower status", error.localizedDescription);
+            } else {
+                NSLog(@"Successfully updated follower status!");
+            }
+        }];
+    }
 
     // Toggle following status for user
-    // Unfollow clicked user
+    // Case: unfollow clicked user
     if ([currentUser[@"following"] containsObject:profileUser.objectId]) {
         NSMutableArray *following = currentUser[@"following"];
         [following removeObject: profileUser.objectId];
         currentUser[@"following"] = following;
+        
+        NSMutableArray *followers = profileUser[@"followers"];
+        [followers removeObject: currentUser.objectId];
+        profileUser[@"followers"] = followers;
     
-    // Follow clicked user
+    // Case: follow clicked user
     } else {
+        
         NSMutableArray *following = currentUser[@"following"];
         [following addObject: profileUser.objectId];
         currentUser[@"following"] = following;
+        
+        NSMutableArray *followers = profileUser[@"followers"];
+        [followers addObject: currentUser.objectId];
+        profileUser[@"followers"] = followers;
     }
     
-    // Save new following data to Parse
+    // Save updated following data to Parse
     [currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if (error) {
             NSLog(@"Error updating following status", error.localizedDescription);
         } else {
             NSLog(@"Successfully updated following status!");
+            
+        }
+    }];
+    
+    // Save updated followers data to Parse
+    [profileUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"Error updating follower status", error.localizedDescription);
+        } else {
+            NSLog(@"Successfully updated follower status!");
             
         }
     }];

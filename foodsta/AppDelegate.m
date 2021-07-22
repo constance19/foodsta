@@ -23,8 +23,8 @@
             configuration.applicationId = @"0M723WfbPOyB8UpQb5pssvHvSDv3hk6fLzcVw4No"; // <- UPDATE
             configuration.clientKey = @"bPm4pejszdD4V3MP8KrBF41XJkqB0CidH9Y1nPjG"; // <- UPDATE
         
-//            configuration.applicationId = @"x5ysCWh1T1krqkliW0HBQtuXXWHHnQLFeM5uTf4J"; // <- UPDATE
-//            configuration.clientKey = @"CbK4KsE4RvQhYmepXG0BzxndyCZgv2tgRMGBVaQg"; // <- UPDATE
+//            configuration.applicationId = @"DMEVJy22E9uOHzC2IfT4wVd4RCl8qWL6CJmR3nWV"; // <- UPDATE
+//            configuration.clientKey = @"szJAnnLHb1kPneYsXDKi7nVONgGKCSgxZ1I6VzeR"; // <- UPDATE
             configuration.server = @"https://parseapi.back4app.com";
         }];
 

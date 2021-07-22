@@ -45,6 +45,7 @@
 		78F59C2926A9045200781EC7 /* LocationAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 78F59C2826A9045200781EC7 /* LocationAnnotation.m */; };
 		78F59C2C26A92FDB00781EC7 /* PostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78F59C2B26A92FDB00781EC7 /* PostViewController.m */; };
 		78F59C3226A93B0F00781EC7 /* LocationAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 78F59C3126A93B0F00781EC7 /* LocationAnnotationView.m */; };
+		78F59C3526AA23E100781EC7 /* FollowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78F59C3426AA23E100781EC7 /* FollowViewController.m */; };
 		E4B6B47959F79E483DDBEA65 /* Pods_foodstaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50185661E04E68223708872F /* Pods_foodstaTests.framework */; };
 		F2EAC73CF64B1ABC7BFCF585 /* Pods_foodsta_foodstaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E40072F959FD3C6A5E6EAAC1 /* Pods_foodsta_foodstaUITests.framework */; };
 /* End PBXBuildFile section */
@@ -143,6 +144,8 @@
 		78F59C2B26A92FDB00781EC7 /* PostViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PostViewController.m; sourceTree = "<group>"; };
 		78F59C3026A93B0F00781EC7 /* LocationAnnotationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocationAnnotationView.h; sourceTree = "<group>"; };
 		78F59C3126A93B0F00781EC7 /* LocationAnnotationView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocationAnnotationView.m; sourceTree = "<group>"; };
+		78F59C3326AA23E100781EC7 /* FollowViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FollowViewController.h; sourceTree = "<group>"; };
+		78F59C3426AA23E100781EC7 /* FollowViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FollowViewController.m; sourceTree = "<group>"; };
 		94DBCF63251A45821B4D96D8 /* Pods_foodsta.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_foodsta.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDED1C488468ADD58D63CDDE /* Pods-foodstaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-foodstaTests.release.xcconfig"; path = "Target Support Files/Pods-foodstaTests/Pods-foodstaTests.release.xcconfig"; sourceTree = "<group>"; };
 		DDA34CDF962E3DCE4D4CD92D /* Pods-foodsta.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-foodsta.release.xcconfig"; path = "Target Support Files/Pods-foodsta/Pods-foodsta.release.xcconfig"; sourceTree = "<group>"; };
@@ -291,6 +294,8 @@
 				78F59C2026A8E34C00781EC7 /* SetLocationViewController.m */,
 				78F59C2A26A92FDB00781EC7 /* PostViewController.h */,
 				78F59C2B26A92FDB00781EC7 /* PostViewController.m */,
+				78F59C3326AA23E100781EC7 /* FollowViewController.h */,
+				78F59C3426AA23E100781EC7 /* FollowViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -591,6 +596,7 @@
 				780424E0269D315A00E771CE /* LocationCell.m in Sources */,
 				7804250C26A0DBD800E771CE /* FeedDataSource.m in Sources */,
 				780424EE269D51B100E771CE /* FeedViewController.m in Sources */,
+				78F59C3526AA23E100781EC7 /* FollowViewController.m in Sources */,
 				78A8138B26A1852100695571 /* CaptionCell.m in Sources */,
 				780424FF269E5B0E00E771CE /* LocationDetailsViewController.m in Sources */,
 				78A8138826A184EA00695571 /* LikeCell.m in Sources */,
