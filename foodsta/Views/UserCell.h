@@ -16,6 +16,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (nonatomic, strong) PFUser *user;
 
+@property (weak, nonatomic) IBOutlet UIImageView *followProfileImage;
+@property (weak, nonatomic) IBOutlet UILabel *followUsernameLabel;
+
+
 @end
 
 NS_ASSUME_NONNULL_END
