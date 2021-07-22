@@ -145,6 +145,8 @@
             
         case PostCellModelTypeLocation: {
             LocationNameCell *cell = [tableView dequeueReusableCellWithIdentifier:@"locationCell" forIndexPath:indexPath];
+            
+            // Set location view text that links to Yelp webpage
             if ([model.data isKindOfClass: [NSMutableAttributedString class]]) {
                 cell.locationView.attributedText = model.data;
                 cell.locationView.dataDetectorTypes = UIDataDetectorTypeLink;
@@ -155,9 +157,16 @@
         
         case PostCellModelTypeImage: {
             ImageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"imageCell" forIndexPath:indexPath];
+            
+            // Convert file to image and set it to the image view
             if ([model.data isKindOfClass:[PFFileObject class]]) {
-                cell.locationImage.file = model.data;
-                [cell.locationImage loadInBackground];
+                PFFileObject *imageFile = model.data;
+                if (imageFile) {
+                    NSURL *url = [NSURL URLWithString: imageFile.url];
+                    NSData *fileData = [NSData dataWithContentsOfURL: url];
+                    UIImage *photo = [[UIImage alloc] initWithData:fileData];
+                    cell.locationImage.image = photo;
+                }
             }
             return cell;
         }
@@ -170,12 +179,13 @@
             if ([model.post isKindOfClass:[Post class]] && [model.data isKindOfClass:[NSNumber class]]) {
                 cell.post = model.post;
             
-                // Set like count and selected state for like button
+                // Set like count for like button
                 PFUser *currentUser = [PFUser currentUser];
                 Post *currentPost = model.post;
                 NSArray *liked = currentUser[@"liked"];
                 NSString *likeCount = [NSString stringWithFormat:@"%@", model.data];
             
+                // Set selected state for like button
                 if ([liked containsObject:currentPost.objectId]) {
                     [cell.likeButton setSelected:YES];
                     [cell.likeButton setTitle:likeCount forState:UIControlStateSelected];
@@ -188,6 +198,8 @@
             
         case PostCellModelTypeCaption: {
             CaptionCell *cell = [tableView dequeueReusableCellWithIdentifier:@"captionCell" forIndexPath:indexPath];
+            
+            // Set caption label
             if ([model.data isKindOfClass:[NSString class]]) {
                 cell.captionLabel.text = model.data;
             }
@@ -196,6 +208,8 @@
             
         case PostCellModelTypeRating: {
             RatingCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ratingCell" forIndexPath:indexPath];
+            
+            // Set rating
             if ([model.data isKindOfClass:[NSNumber class]]) {
                 cell.ratingView.value = [model.data doubleValue];
             }
