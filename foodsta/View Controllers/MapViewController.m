@@ -7,27 +7,42 @@
 
 #import "MapViewController.h"
 #import <MapKit/MapKit.h>
+#import <CoreLocation/CoreLocation.h>
 #import "Post.h"
+#import "SetLocationViewController.h"
 @import Parse;
 
-@interface MapViewController ()
+@interface MapViewController () <MKMapViewDelegate, CLLocationManagerDelegate>
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (nonatomic, strong) NSArray *arrayOfPosts;
 @property (nonatomic, strong) NSArray *arrayOfLocations;
+@property (nonatomic) CLLocationManager *locationManager;
 
 @end
+
+#define METERS_PER_MILE 1609.344
 
 @implementation MapViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    MKCoordinateRegion sfRegion = MKCoordinateRegionMake(CLLocationCoordinate2DMake(37.783333, -122.416667), MKCoordinateSpanMake(0.1, 0.1));
-    [self.mapView setRegion:sfRegion animated:false];
+    // CLLocationManager to access user's location while app is in use
+    self.locationManager = [[CLLocationManager alloc] init];
+    [self.locationManager requestWhenInUseAuthorization];
+    self.locationManager.delegate = self;
+    
+    self.mapView.delegate = self;
+    self.mapView.showsUserLocation = YES;
     
     // Add annotations for check-in locations
     [self makeAnnotations];
+}
+
+- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation {
+    MKCoordinateRegion region = MKCoordinateRegionMake(CLLocationCoordinate2DMake(userLocation.coordinate.latitude, userLocation.coordinate.longitude), MKCoordinateSpanMake(0.1, 0.1));
+    [self.mapView setRegion:region animated:YES];
 }
 
 - (void)makeAnnotations {
@@ -81,14 +96,21 @@
 }
 
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    
+    // Segue from Set Location button
+    if ([[segue identifier] isEqualToString:@"setLocationSegue"]) {
+        UINavigationController *navController = [segue destinationViewController];
+        SetLocationViewController *setLocationController = navController.topViewController;
+        setLocationController.modalInPresentation = YES;
+    }
 }
-*/
+
 
 @end

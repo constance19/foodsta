@@ -40,6 +40,8 @@
 		78A8138826A184EA00695571 /* LikeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 78A8138726A184EA00695571 /* LikeCell.m */; };
 		78A8138B26A1852100695571 /* CaptionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 78A8138A26A1852100695571 /* CaptionCell.m */; };
 		78A8138E26A1854700695571 /* RatingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 78A8138D26A1854700695571 /* RatingCell.m */; };
+		78F59C2126A8E34C00781EC7 /* SetLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78F59C2026A8E34C00781EC7 /* SetLocationViewController.m */; };
+		78F59C2326A8EC2200781EC7 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78F59C2226A8EC2200781EC7 /* CoreLocation.framework */; };
 		E4B6B47959F79E483DDBEA65 /* Pods_foodstaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50185661E04E68223708872F /* Pods_foodstaTests.framework */; };
 		F2EAC73CF64B1ABC7BFCF585 /* Pods_foodsta_foodstaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E40072F959FD3C6A5E6EAAC1 /* Pods_foodsta_foodstaUITests.framework */; };
 /* End PBXBuildFile section */
@@ -129,6 +131,9 @@
 		78A8138A26A1852100695571 /* CaptionCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CaptionCell.m; sourceTree = "<group>"; };
 		78A8138C26A1854700695571 /* RatingCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RatingCell.h; sourceTree = "<group>"; };
 		78A8138D26A1854700695571 /* RatingCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RatingCell.m; sourceTree = "<group>"; };
+		78F59C1F26A8E34C00781EC7 /* SetLocationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SetLocationViewController.h; sourceTree = "<group>"; };
+		78F59C2026A8E34C00781EC7 /* SetLocationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SetLocationViewController.m; sourceTree = "<group>"; };
+		78F59C2226A8EC2200781EC7 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		94DBCF63251A45821B4D96D8 /* Pods_foodsta.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_foodsta.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDED1C488468ADD58D63CDDE /* Pods-foodstaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-foodstaTests.release.xcconfig"; path = "Target Support Files/Pods-foodstaTests/Pods-foodstaTests.release.xcconfig"; sourceTree = "<group>"; };
 		DDA34CDF962E3DCE4D4CD92D /* Pods-foodsta.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-foodsta.release.xcconfig"; path = "Target Support Files/Pods-foodsta/Pods-foodsta.release.xcconfig"; sourceTree = "<group>"; };
@@ -141,6 +146,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				78F59C2326A8EC2200781EC7 /* CoreLocation.framework in Frameworks */,
 				787AC56826A7D1BC0070E5A9 /* MapKit.framework in Frameworks */,
 				173B620AB9D00480437DFAC8 /* Pods_foodsta.framework in Frameworks */,
 			);
@@ -181,6 +187,7 @@
 		1D5B5A76F5E87DF50E11467E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				78F59C2226A8EC2200781EC7 /* CoreLocation.framework */,
 				787AC56726A7D1BC0070E5A9 /* MapKit.framework */,
 				94DBCF63251A45821B4D96D8 /* Pods_foodsta.framework */,
 				E40072F959FD3C6A5E6EAAC1 /* Pods_foodsta_foodstaUITests.framework */,
@@ -271,6 +278,8 @@
 				787AC55F26A661C80070E5A9 /* SearchViewController.m */,
 				787AC56426A7CA100070E5A9 /* MapViewController.h */,
 				787AC56526A7CA100070E5A9 /* MapViewController.m */,
+				78F59C1F26A8E34C00781EC7 /* SetLocationViewController.h */,
+				78F59C2026A8E34C00781EC7 /* SetLocationViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -569,6 +578,7 @@
 				780424FF269E5B0E00E771CE /* LocationDetailsViewController.m in Sources */,
 				78A8138826A184EA00695571 /* LikeCell.m in Sources */,
 				780424F9269D6BEC00E771CE /* ComposeViewController.m in Sources */,
+				78F59C2126A8E34C00781EC7 /* SetLocationViewController.m in Sources */,
 				780424A5269D2E6300E771CE /* AppDelegate.m in Sources */,
 				78042502269F912C00E771CE /* SelfViewController.m in Sources */,
 				78A8138526A184BB00695571 /* ImageCell.m in Sources */,
