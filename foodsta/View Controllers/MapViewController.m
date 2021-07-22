@@ -11,9 +11,11 @@
 #import "Post.h"
 #import "SetLocationViewController.h"
 #import "LocationAnnotation.h"
+#import "PostViewController.h"
+#import "LocationAnnotationView.h"
 @import Parse;
 
-@interface MapViewController () <MKMapViewDelegate, CLLocationManagerDelegate>
+@interface MapViewController () <MKMapViewDelegate, CLLocationManagerDelegate, LocationAnnotationViewDelegate>
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (nonatomic, strong) NSArray *arrayOfPosts;
@@ -47,6 +49,7 @@
     [postQuery includeKey:@"locationTitle"];
     [postQuery includeKey:@"latitude"];
     [postQuery includeKey:@"longitude"];
+    [postQuery includeKey:@"author"];
     
     // Only include posts by following users and current user
     PFUser *currentUser = [PFUser currentUser];
@@ -133,26 +136,43 @@
         
     // Add custom annotation view for post locations
     } else {
-        MKAnnotationView *annotationView = (MKAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:@"Pin"];
+        LocationAnnotationView *annotationView = (LocationAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:@"Pin"];
         
         // Make a pin with pop-up containing image and details button
         if (annotationView == nil) {
-            annotationView = [[MKMarkerAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"Pin"];
+            annotationView = [[LocationAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"Pin"];
             annotationView.canShowCallout = true;
             annotationView.leftCalloutAccessoryView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0, 0.0, 50.0, 50.0)];
             annotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
         }
-               
+        
+        // Set post image (if present) as annotation view's callout image
         LocationAnnotation *locationAnnotation = annotation;
         if (locationAnnotation.photo) {
             UIImageView *calloutImage = (UIImageView*)annotationView.leftCalloutAccessoryView;
             calloutImage.image = locationAnnotation.photo;
         }
         
+        // Set Post property of LocationAnnotationView
+        annotationView.post = locationAnnotation.post;
+        
         return annotationView;
     }
  }
 
+// Segue to post when user taps detail disclosure button in annotation view callout
+- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
+    LocationAnnotationView *locationAnnotationView = (LocationAnnotationView *)view;
+    locationAnnotationView.delegate = self;
+    [locationAnnotationView.delegate locationAnnotationView:locationAnnotationView didTap:locationAnnotationView.post];
+}
+
+
+// MARK: LocationAnnotationViewDelegate
+
+- (void)locationAnnotationView:(LocationAnnotationView *)locationAnnotationView didTap:(Post *)post {
+    [self performSegueWithIdentifier:@"annotationPostSegue" sender:post];
+}
 
 
 
@@ -168,6 +188,12 @@
         UINavigationController *navController = [segue destinationViewController];
         SetLocationViewController *setLocationController = navController.topViewController;
         setLocationController.modalInPresentation = YES;
+    }
+    
+    // Segue from annotation callout detail disclosure button
+    if ([[segue identifier] isEqualToString:@"annotationPostSegue"]) {
+        PostViewController *postController = [segue destinationViewController];
+        postController.post = sender;
     }
 }
 
