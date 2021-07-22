@@ -1458,6 +1458,14 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="heart.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="qE3-6N-hpB">
+                                <rect key="frame" x="167" y="260" width="80" height="25"/>
+                                <color key="tintColor" systemColor="systemRedColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="80" id="n6u-0r-2ze"/>
+                                    <constraint firstAttribute="height" constant="80" id="q3A-hq-JGU"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ZaP-PN-auk"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -1475,10 +1483,12 @@
                             <constraint firstItem="Mis-Bw-p3e" firstAttribute="leading" secondItem="xiM-Af-J3A" secondAttribute="trailing" constant="1" id="Lod-JL-eWO"/>
                             <constraint firstItem="ZaP-PN-auk" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="62N-Kx-eHN" secondAttribute="bottom" constant="20" id="Lw9-32-iz5"/>
                             <constraint firstItem="62N-Kx-eHN" firstAttribute="leading" secondItem="nio-3S-fFh" secondAttribute="leading" id="Ob0-xN-93e"/>
+                            <constraint firstItem="qE3-6N-hpB" firstAttribute="centerY" secondItem="yGg-j7-jiw" secondAttribute="centerY" id="Qy9-FJ-UZM"/>
                             <constraint firstItem="lrC-tX-OVP" firstAttribute="trailing" secondItem="nio-3S-fFh" secondAttribute="trailing" id="d9s-na-lZf"/>
                             <constraint firstItem="xiM-Af-J3A" firstAttribute="leading" secondItem="nio-3S-fFh" secondAttribute="leading" id="dWq-KO-dFW"/>
                             <constraint firstItem="yGg-j7-jiw" firstAttribute="top" secondItem="Yx9-Mm-VQF" secondAttribute="bottom" constant="20" id="e6F-Uc-Byd"/>
                             <constraint firstItem="Pu5-HX-MmL" firstAttribute="leading" secondItem="nio-3S-fFh" secondAttribute="leading" id="gpw-6S-wS7"/>
+                            <constraint firstItem="qE3-6N-hpB" firstAttribute="centerX" secondItem="yGg-j7-jiw" secondAttribute="centerX" id="h4m-3U-UZN"/>
                             <constraint firstItem="yGg-j7-jiw" firstAttribute="leading" secondItem="ZaP-PN-auk" secondAttribute="leading" constant="25" id="hhR-0z-G4g"/>
                             <constraint firstItem="Mis-Bw-p3e" firstAttribute="leading" secondItem="xiM-Af-J3A" secondAttribute="trailing" constant="1" id="ikn-5h-PBV"/>
                             <constraint firstItem="ZaP-PN-auk" firstAttribute="trailing" secondItem="yGg-j7-jiw" secondAttribute="trailing" constant="25" id="ksX-jo-tbz"/>
@@ -1491,6 +1501,7 @@
                     <connections>
                         <outlet property="captionLabel" destination="62N-Kx-eHN" id="S5I-gV-FWD"/>
                         <outlet property="likeButton" destination="Pu5-HX-MmL" id="c4l-lV-4MB"/>
+                        <outlet property="likeHeart" destination="qE3-6N-hpB" id="Bas-Fa-ao9"/>
                         <outlet property="locationImage" destination="yGg-j7-jiw" id="KwL-5Y-x72"/>
                         <outlet property="locationView" destination="Mis-Bw-p3e" id="EOZ-1w-0wx"/>
                         <outlet property="ratingView" destination="Yx9-Mm-VQF" id="9Xx-Pk-VmV"/>
