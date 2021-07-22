@@ -9,6 +9,7 @@
 #import "LocationAnnotationView.h"
 #import "HCSStarRatingView.h"
 #import "DateTools.h"
+#import "ProfileViewController.h"
 @import Parse;
 
 @interface PostViewController ()
@@ -133,6 +134,74 @@
 
 // Double tap to like gesture recognizer on the post image
 - (IBAction)doubleTapImage:(id)sender {
+    // Do not do anything if the post is already liked
+    if (self.likeButton.isSelected) {
+        return;
+    }
+    
+    PFUser *currentUser = [PFUser currentUser];
+    Post *post = self.post;
+    int likeCount = [post.likeCount intValue];
+    
+    // Initialize current user's liked array if necessary
+    if (currentUser[@"liked"] == nil) {
+        currentUser[@"liked"] = [[NSMutableArray alloc] init];
+        [currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+            if (error) {
+                NSLog(@"Error updating current user's liked array", error.localizedDescription);
+            } else {
+                NSLog(@"Successfully updated current user's liked array!");
+            }
+        }];
+    }
+    
+    // Increment like count and set selected state of like button
+    likeCount++;
+    NSString *likes = [NSString stringWithFormat:@"%i", likeCount];
+    [self.likeButton setTitle:likes forState:UIControlStateNormal];
+    [self.likeButton setSelected:YES];
+    
+    // Add newly liked post to user's "liked" array
+    NSMutableArray *liked = currentUser[@"liked"];
+    [liked addObject: post.objectId];
+    currentUser[@"liked"] = liked;
+    
+    // Save current user's liked array updates to Parse
+    [currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"Error updating current user's liked array", error.localizedDescription);
+        } else {
+            NSLog(@"Successfully updated current user's liked array!");
+        }
+    }];
+    
+    // Save post's updated like count to Parse
+    post.likeCount = [NSNumber numberWithInt:likeCount];
+    [post saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"Error updating like count", error.localizedDescription);
+        } else {
+            NSLog(@"Successfully updated like count!");
+            
+        }
+    }];
+    
+    // Animate heart that appears upon double tapping
+    [UIView animateWithDuration:0.3f delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+            self.likeHeart.transform = CGAffineTransformMakeScale(1.3, 1.3);
+            self.likeHeart.alpha = 1.0;
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.1f delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+            self.likeHeart.transform = CGAffineTransformMakeScale(1.0, 1.0);
+        } completion:^(BOOL finished) {
+            [UIView animateWithDuration:0.3f delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+                self.likeHeart.transform = CGAffineTransformMakeScale(1.3, 1.3);
+                self.likeHeart.alpha = 0.0;
+            } completion:^(BOOL finished) {
+                self.likeHeart.transform = CGAffineTransformMakeScale(1.0, 1.0);
+            }];
+        }];
+    }];
 }
 
 
