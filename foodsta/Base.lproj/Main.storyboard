@@ -1214,18 +1214,18 @@
             <objects>
                 <viewController id="RN1-DJ-c7o" customClass="ProfileViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3c7-4d-vMq">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ocr-Bu-l0f">
-                                <rect key="frame" x="20" y="108" width="107" height="107"/>
+                                <rect key="frame" x="20" y="76" width="107" height="107"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="107" id="UxK-hs-pP5"/>
                                     <constraint firstAttribute="width" constant="107" id="p5J-xA-fYo"/>
                                 </constraints>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="utY-qo-bsc">
-                                <rect key="frame" x="0.0" y="225" width="414" height="614"/>
+                                <rect key="frame" x="0.0" y="193" width="414" height="592"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Ljm-r2-Tu7">
@@ -1239,19 +1239,19 @@
                                 </prototypes>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2D3-Lk-tSa">
-                                <rect key="frame" x="135" y="121" width="91" height="21"/>
+                                <rect key="frame" x="135" y="89" width="91" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="bio" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5qI-Gf-sDJ">
-                                <rect key="frame" x="135" y="150" width="259" height="20.5"/>
+                                <rect key="frame" x="135" y="118" width="259" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5xN-3e-3B4">
-                                <rect key="frame" x="135" y="181.5" width="46" height="30"/>
+                                <rect key="frame" x="135" y="149.5" width="46" height="30"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                 <color key="tintColor" red="0.89479273560000006" green="0.85251945259999995" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <state key="normal" title="Follow">
@@ -1714,7 +1714,7 @@
                 </tapGestureRecognizer>
                 <tapGestureRecognizer id="QQu-vU-AgF">
                     <connections>
-                        <segue destination="w63-Vf-zMB" kind="presentation" modalPresentationStyle="fullScreen" id="9pE-Xq-XYn"/>
+                        <segue destination="w63-Vf-zMB" kind="presentation" identifier="postProfileSegue" id="9pE-Xq-XYn"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
@@ -1827,7 +1827,7 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="bAE-q7-G4k"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="rVn-bw-oPp">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

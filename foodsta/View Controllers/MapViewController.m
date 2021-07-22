@@ -50,6 +50,7 @@
     [postQuery includeKey:@"latitude"];
     [postQuery includeKey:@"longitude"];
     [postQuery includeKey:@"author"];
+    [postQuery includeKey:@"likeCount"];
     
     // Only include posts by following users and current user
     PFUser *currentUser = [PFUser currentUser];
@@ -192,7 +193,8 @@
     
     // Segue from annotation callout detail disclosure button
     if ([[segue identifier] isEqualToString:@"annotationPostSegue"]) {
-        PostViewController *postController = [segue destinationViewController];
+        UINavigationController *navController = [segue destinationViewController];
+        PostViewController *postController = navController.topViewController;
         postController.post = sender;
     }
 }

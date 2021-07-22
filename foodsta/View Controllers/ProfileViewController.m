@@ -58,6 +58,11 @@
             [self.followButton setTitle:@"Follow" forState:UIControlStateNormal];
         }
     }
+    
+    // Hide back button if profile is presented from map annotation post
+    if (self.hideBackButton) {
+        self.navigationItem.leftBarButtonItem = nil;
+    }
 }
 
 - (IBAction)onTapFollow:(id)sender {

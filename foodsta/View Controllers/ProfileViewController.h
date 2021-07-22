@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface ProfileViewController : UIViewController
 
 @property PFUser *user;
+@property (nonatomic) bool hideBackButton;
 
 @end
 
