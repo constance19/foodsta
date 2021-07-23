@@ -22,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *likeButton;
 @property (weak, nonatomic) IBOutlet UILabel *captionLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *likeHeart;
+@property (weak, nonatomic) IBOutlet UIView *popupView;
 
 @end
 
@@ -29,6 +30,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    // Set rounded corners for the pop-up view
+    self.popupView.layer.cornerRadius = 10;
+    self.popupView.layer.masksToBounds = YES;
+    
     
     // Set username label
     PFUser *author = self.post.author;
@@ -204,7 +210,9 @@
     }];
 }
 
-
+- (IBAction)onTapClose:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 #pragma mark - Navigation
 

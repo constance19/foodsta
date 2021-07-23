@@ -226,8 +226,9 @@
     
     // Segue from annotation callout detail disclosure button
     if ([[segue identifier] isEqualToString:@"annotationPostSegue"]) {
-        UINavigationController *navController = [segue destinationViewController];
-        PostViewController *postController = navController.topViewController;
+//        UINavigationController *navController = [segue destinationViewController];
+//        PostViewController *postController = navController.topViewController;
+        PostViewController *postController = [segue destinationViewController];
         postController.post = sender;
     }
 }
