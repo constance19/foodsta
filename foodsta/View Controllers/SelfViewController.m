@@ -16,6 +16,7 @@
 #import "ImageCell.h"
 #import "LikeCell.h"
 #import "CaptionCell.h"
+#import "FollowViewController.h"
 @import Parse;
 
 @interface SelfViewController () <UITableViewDelegate, UITableViewDataSource>
@@ -23,6 +24,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *bioLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *profileImage;
+@property (weak, nonatomic) IBOutlet UILabel *followerCount;
+@property (weak, nonatomic) IBOutlet UILabel *followingCount;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end
@@ -48,6 +51,38 @@
     NSURL *url = [NSURL URLWithString: profileImageFile.url];
     NSData *fileData = [NSData dataWithContentsOfURL: url];
     self.profileImage.image = [[UIImage alloc] initWithData:fileData];
+    
+    // Get query of followings for the current user
+    PFQuery *followingQuery = [PFQuery queryWithClassName:@"Followers"];
+    [followingQuery includeKey:@"userid"];
+    [followingQuery includeKey:@"followerid"];
+    [followingQuery whereKey:@"followerid" equalTo:user.objectId];
+    
+    // Set following count
+    [followingQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable following, NSError * _Nullable error) {
+        if (following != nil) {
+            int count = following.count;
+            self.followingCount.text = [NSString stringWithFormat: @"%d", count];
+        } else {
+            self.followingCount.text = @"0";
+        }
+    }];
+    
+    // Get query of followers for the current user
+    PFQuery *followerQuery = [PFQuery queryWithClassName:@"Followers"];
+    [followerQuery includeKey:@"userid"];
+    [followerQuery includeKey:@"followerid"];
+    [followerQuery whereKey:@"userid" equalTo:user.objectId];
+    
+    // Set follower count
+    [followerQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable followers, NSError * _Nullable error) {
+        if (followers != nil) {
+            int count = followers.count;
+            self.followerCount.text = [NSString stringWithFormat: @"%d", count];
+        } else {
+            self.followerCount.text = @"0";
+        }
+    }];
     
     // User feed of posted check-ins
     self.tableView.delegate = self;
@@ -179,14 +214,33 @@
     return separatorView;
 }
 
-// For infinite scrolling
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
-    if(indexPath.row + 1 == [self.feedDataSource.arrayOfPosts count]) {
-        [self loadPosts:(int)[self.feedDataSource.arrayOfPosts count] + 20];
-    }
-}
+//// For infinite scrolling
+//- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+//    if(indexPath.section + 1 == [self.feedDataSource.arrayOfPosts count]) {
+//        [self loadPosts:(int)[self.feedDataSource.arrayOfPosts count] + 20];
+//    }
+//}
+
 
 #pragma mark - Navigation
+
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
+    if ([identifier isEqualToString:@"selfFollowingSegue"] || [identifier isEqualToString:@"selfFollowingCountSegue"]) {
+        if ([self.followingCount.text isEqualToString:@"0"]) {
+            return NO;
+        }
+        return YES;
+    }
+    
+    if ([identifier isEqualToString:@"selfFollowerSegue"] || [identifier isEqualToString:@"selfFollowerCountSegue"]) {
+        if ([self.followerCount.text isEqualToString:@"0"]) {
+            return NO;
+        }
+        return YES;
+    }
+    
+    return YES;
+}
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -204,6 +258,24 @@
             self.profileImage.image = profileImage;
             self.bioLabel.text = bio;
         };
+    }
+    
+    // Segue to Following page
+    if ([[segue identifier] isEqualToString:@"selfFollowingSegue"] || [[segue identifier] isEqualToString:@"selfFollowingCountSegue"]) {
+        UINavigationController *navController = [segue destinationViewController];
+        FollowViewController *followingController = navController.topViewController;
+        followingController.title = @"Following";
+        followingController.user = [PFUser currentUser];
+        followingController.isFollowing = YES;
+    }
+    
+    // Segue to Followers page
+    if ([[segue identifier] isEqualToString:@"selfFollowerSegue"] || [[segue identifier] isEqualToString:@"selfFollowerCountSegue"]) {
+        UINavigationController *navController = [segue destinationViewController];
+        FollowViewController *followerController = navController.topViewController;
+        followerController.title = @"Followers";
+        followerController.user = [PFUser currentUser];
+        followerController.isFollowing = NO;
     }
 }
 

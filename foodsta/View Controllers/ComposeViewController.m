@@ -201,15 +201,6 @@ static NSString *const captionPlaceholder = @"Write a caption...";
     return NO;
 }
 
-//// MARK: UISearchBarDelegate
-//
-//- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
-//    LocationsViewController *locationsController = [self.storyboard instantiateViewControllerWithIdentifier:locationsIdentifier];
-//    [self presentViewController:locationsController animated:YES completion:nil];
-//}
-
-
-
 /*
 #pragma mark - Navigation
 

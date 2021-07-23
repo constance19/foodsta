@@ -125,7 +125,7 @@
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable follows, NSError * _Nullable error) {
         
         if (follows != nil) {
-            // Follow: add a Parse object with a follower relationship
+            // Follow: add a Parse object with a follower relationship and increment follower count
             if (follows.count == 0) {
                 PFObject *followPair = [PFObject objectWithClassName:@"Followers"];
                 followPair[@"userid"] = self.user.objectId;
@@ -141,13 +141,23 @@
                     }
                 }];
                 
-            // Unfollow: remove the Parse object for the follower relationship
+                // Increment follower count immediately
+                int updateCount = [self.followerCount.text intValue];
+                updateCount++;
+                self.followerCount.text = [NSString stringWithFormat: @"%d", updateCount];
+                
+            // Unfollow: remove the Parse object for the follower relationship and decrement follower count
             } else {
                 PFObject *followPair = follows[0];
                 [query getObjectInBackgroundWithId:followPair.objectId block:^(PFObject *followPair, NSError *error) {
                     // Delete follow pair object from Parse
                     [followPair deleteInBackground];
                 }];
+                
+                // Decrement follower count immediately
+                int updateCount = [self.followerCount.text intValue];
+                updateCount--;
+                self.followerCount.text = [NSString stringWithFormat: @"%d", updateCount];
             }
         }
     }];
@@ -160,7 +170,6 @@
         [self.followButton setTitle:@"Following" forState:UIControlStateNormal];
         [self.followButton setSelected:YES];
     }
-    
 }
 
 
@@ -207,7 +216,6 @@
         followerController.user = self.user;
         followerController.isFollowing = NO;
     }
-    
 }
 
 @end
