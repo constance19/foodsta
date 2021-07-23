@@ -15,6 +15,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *bioLabel;
 @property (weak, nonatomic) IBOutlet UIButton *followButton;
+@property (weak, nonatomic) IBOutlet UILabel *followingCount;
+@property (weak, nonatomic) IBOutlet UILabel *followerCount;
 
 @end
 
@@ -46,19 +48,63 @@
     // Set following status for non-current users
     } else {
         [self.followButton setSelected:NO];
-        PFUser *currentUser = [PFUser currentUser];
-        NSArray *following = currentUser[@"following"];
-
-        // If current user follows clicked user, follow button should be selected
-        if ([following containsObject:self.user.objectId]) {
-            [self.followButton setTitle:@"Following" forState:UIControlStateNormal];
-            [self.followButton setSelected:YES];
         
-        // If current user does not follow clicked user, follow button should be unselected
-        } else {
-            [self.followButton setTitle:@"Follow" forState:UIControlStateNormal];
-        }
+        // Query to determine whether current user follows the profile user
+        PFQuery *query = [PFQuery queryWithClassName:@"Followers"];
+        [query includeKey:@"userid"];
+        [query includeKey:@"followerid"];
+        [query whereKey:@"userid" equalTo:self.user.objectId];
+        [query whereKey:@"followerid" equalTo:[PFUser currentUser].objectId];
+        
+        [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable follows, NSError * _Nullable error) {
+            if (follows != nil) {
+                // Current user does not follow the profile user
+                if (follows.count == 0) {
+                    [self.followButton setTitle:@"Follow" forState:UIControlStateNormal];
+                    
+                // Current user is following the profile user
+                } else {
+                    [self.followButton setTitle:@"Following" forState:UIControlStateNormal];
+                    [self.followButton setSelected:YES];
+                }
+                
+            } else {
+                NSLog(@"%@", error.localizedDescription);
+            }
+        }];
     }
+    
+    // Get query of followings for the profile user
+    PFQuery *followingQuery = [PFQuery queryWithClassName:@"Followers"];
+    [followingQuery includeKey:@"userid"];
+    [followingQuery includeKey:@"followerid"];
+    [followingQuery whereKey:@"followerid" equalTo:self.user.objectId];
+    
+    // Set following count
+    [followingQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable following, NSError * _Nullable error) {
+        if (following != nil) {
+            int count = following.count;
+            self.followingCount.text = [NSString stringWithFormat: @"%d", count];
+        } else {
+            self.followingCount.text = @"0";
+        }
+    }];
+    
+    // Get query of followers for the profile user
+    PFQuery *followerQuery = [PFQuery queryWithClassName:@"Followers"];
+    [followerQuery includeKey:@"userid"];
+    [followerQuery includeKey:@"followerid"];
+    [followerQuery whereKey:@"userid" equalTo:self.user.objectId];
+    
+    // Set follower count
+    [followerQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable followers, NSError * _Nullable error) {
+        if (followers != nil) {
+            int count = followers.count;
+            self.followerCount.text = [NSString stringWithFormat: @"%d", count];
+        } else {
+            self.followerCount.text = @"0";
+        }
+    }];
     
     // Hide back button if profile is presented from map annotation post
     if (self.hideBackButton) {
@@ -70,74 +116,43 @@
     PFUser *currentUser = [PFUser currentUser];
     PFUser *profileUser = self.user;
     
-    // Initialize current user's following array if necessary
-    if (currentUser[@"following"] == nil) {
-        currentUser[@"following"] = [[NSMutableArray alloc] init];
-        [currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-            if (error) {
-                NSLog(@"Error updating following status", error.localizedDescription);
-            } else {
-                NSLog(@"Successfully updated following status!");
-            }
-        }];
-    }
-    
-    // Initialize profile user's followers array if necessary
-    if (profileUser[@"followers"] == nil) {
-        profileUser[@"followers"] = [[NSMutableArray alloc] init];
-        [profileUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-            if (error) {
-                NSLog(@"Error updating follower status", error.localizedDescription);
-            } else {
-                NSLog(@"Successfully updated follower status!");
-            }
-        }];
-    }
+    // Determine whether the current user follows the profile user
+    PFQuery *query = [PFQuery queryWithClassName:@"Followers"];
+    [query includeKey:@"userid"];
+    [query includeKey:@"followerid"];
+    [query whereKey:@"userid" equalTo:self.user.objectId];
+    [query whereKey:@"followerid" equalTo:[PFUser currentUser].objectId];
+    [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable follows, NSError * _Nullable error) {
+        
+        if (follows != nil) {
+            // Follow: add a Parse object with a follower relationship
+            if (follows.count == 0) {
+                PFObject *followPair = [PFObject objectWithClassName:@"Followers"];
+                followPair[@"userid"] = self.user.objectId;
+                followPair[@"followerid"] = currentUser.objectId;
 
-    // Toggle following status for user
-    // Case: unfollow clicked user
-    if ([currentUser[@"following"] containsObject:profileUser.objectId]) {
-        NSMutableArray *following = currentUser[@"following"];
-        [following removeObject: profileUser.objectId];
-        currentUser[@"following"] = following;
-        
-        NSMutableArray *followers = profileUser[@"followers"];
-        [followers removeObject: currentUser.objectId];
-        profileUser[@"followers"] = followers;
-    
-    // Case: follow clicked user
-    } else {
-        
-        NSMutableArray *following = currentUser[@"following"];
-        [following addObject: profileUser.objectId];
-        currentUser[@"following"] = following;
-        
-        NSMutableArray *followers = profileUser[@"followers"];
-        [followers addObject: currentUser.objectId];
-        profileUser[@"followers"] = followers;
-    }
-    
-    // Save updated following data to Parse
-    [currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-        if (error) {
-            NSLog(@"Error updating following status", error.localizedDescription);
-        } else {
-            NSLog(@"Successfully updated following status!");
-            
+                [followPair saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                    if (succeeded) {
+                        NSLog(@"Successfully followed");
+                          
+                    } else {
+                        // There was a problem, check error.description
+                        NSLog(@"%@", error.localizedDescription);
+                    }
+                }];
+                
+            // Unfollow: remove the Parse object for the follower relationship
+            } else {
+                PFObject *followPair = follows[0];
+                [query getObjectInBackgroundWithId:followPair.objectId block:^(PFObject *followPair, NSError *error) {
+                    // Delete follow pair object from Parse
+                    [followPair deleteInBackground];
+                }];
+            }
         }
     }];
     
-    // Save updated followers data to Parse
-    [profileUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-        if (error) {
-            NSLog(@"Error updating follower status", error.localizedDescription);
-        } else {
-            NSLog(@"Successfully updated follower status!");
-            
-        }
-    }];
-    
-    // Toggle display of button
+    // Toggle display of follow/following button
     if ([self.followButton isSelected]) {
         [self.followButton setSelected:NO];
         [self.followButton setTitle:@"Follow" forState:UIControlStateNormal];
@@ -151,16 +166,48 @@
 
 #pragma mark - Navigation
 
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
+    if ([identifier isEqualToString:@"followingSegue"] || [identifier isEqualToString:@"followingCountSegue"]) {
+        if ([self.followingCount.text isEqualToString:@"0"]) {
+            return NO;
+        }
+        return YES;
+    }
+    
+    if ([identifier isEqualToString:@"followerSegue"] || [identifier isEqualToString:@"followerCountSegue"]) {
+        if ([self.followerCount.text isEqualToString:@"0"]) {
+            return NO;
+        }
+        return YES;
+    }
+    
+    return YES;
+}
+
+
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
     
-    if ([[segue identifier] isEqualToString:@"followingSegue"]) {
+    // Segue to Following page
+    if ([[segue identifier] isEqualToString:@"followingSegue"] || [[segue identifier] isEqualToString:@"followingCountSegue"]) {
         UINavigationController *navController = [segue destinationViewController];
         FollowViewController *followingController = navController.topViewController;
+        followingController.title = @"Following";
         followingController.user = self.user;
+        followingController.isFollowing = YES;
     }
+    
+    // Segue to Followers page
+    if ([[segue identifier] isEqualToString:@"followerSegue"] || [[segue identifier] isEqualToString:@"followerCountSegue"]) {
+        UINavigationController *navController = [segue destinationViewController];
+        FollowViewController *followerController = navController.topViewController;
+        followerController.title = @"Followers";
+        followerController.user = self.user;
+        followerController.isFollowing = NO;
+    }
+    
 }
 
 @end

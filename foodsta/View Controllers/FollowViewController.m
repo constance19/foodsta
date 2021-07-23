@@ -11,7 +11,7 @@
 @interface FollowViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (nonatomic, strong) NSArray *following;
+@property (nonatomic, strong) NSArray *follows;
 
 @end
 
@@ -24,39 +24,61 @@
     self.tableView.dataSource = self;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     
-    self.following = self.user[@"following"];
     [self loadUsers];
 }
 
+// Retrieve array of followings or followers
 - (void) loadUsers {
-    // Construct PFQuery
-    PFQuery *userQuery = [PFUser query];
-    [userQuery includeKey:@"objectId"];
-    [userQuery includeKey:@"username"];
-    [userQuery includeKey:@"profileImage"];
+    // Construct PFQuery of follow pair PFObjects
+    PFQuery *followObjectQuery = [PFQuery queryWithClassName:@"Followers"];
+    [followObjectQuery includeKey:@"userid"];
+    [followObjectQuery includeKey:@"followerid"];
     
-    // Filter feed to include only posts by following users and current user
-    PFUser *currentUser = [PFUser currentUser];
-    [userQuery whereKey:@"objectId" containedIn:self.user[@"following"]];
+    // Case: Following page
+    if (self.isFollowing) {
+        [followObjectQuery whereKey:@"followerid" equalTo:self.user.objectId];
+    
+    // Case: Followers page
+    } else {
+        [followObjectQuery whereKey:@"userid" equalTo:self.user.objectId];
+    }
 
-    // Fetch data asynchronously
-    [userQuery findObjectsInBackgroundWithBlock:^(NSArray<PFUser *> * _Nullable users, NSError * _Nullable error) {
-        if (users) {
-            // Pass posts to data source
-            self.following = users;
+    // Fetch query of follow PFObjects asynchronously
+    [followObjectQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable followObjects, NSError * _Nullable error) {
+        if (followObjects) {
+            // Make array of object ids for followers or followings
+            NSMutableArray *followIds = [[NSMutableArray alloc] init];
+            for (PFObject *followObject in followObjects) {
+                if (self.isFollowing) {
+                    [followIds addObject:followObject[@"userid"]];
+                } else {
+                    [followIds addObject:followObject[@"followerid"]];
+                }
+            }
             
-            [self.tableView reloadData];
-        }
-        else {
-            NSLog(@"😫😫😫 Error getting followings: %@", error.localizedDescription);
+            // Get query of users with matching object ids for the table view
+            PFQuery *followQuery = [PFUser query];
+            [followQuery whereKey:@"objectId" containedIn:followIds];
+            [followQuery findObjectsInBackgroundWithBlock:^(NSArray<PFUser *> *_Nullable follows, NSError * _Nullable error) {
+                if (follows) {
+                    self.follows = follows;
+                    [self.tableView reloadData];
+                } else {
+                    NSLog(@"😫😫😫 Error getting follows: %@", error.localizedDescription);
+                }
+            }];
+            
+        } else {
+            NSLog(@"😫😫😫 Error getting follow objects: %@", error.localizedDescription);
         }
     }];
 }
 
+
 // MARK: UITableViewDatasource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.following.count;
+    return self.follows.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -67,11 +89,12 @@
     cell.followProfileImage.layer.masksToBounds = YES;
     cell.followProfileImage.layer.borderWidth = 0;
     
-    // Get and set the username and profile picture for the cell
-    PFUser *user = self.following[indexPath.row];
+    // Get and set the username for the cell
+    PFUser *user = self.follows[indexPath.row];
     cell.user = user;
     cell.followUsernameLabel.text = [NSString stringWithFormat:@"@%@", user[@"username"]];
     
+    // Get and set the profile picture for the cell
     PFFileObject *profileImageFile = user[@"profileImage"];
     NSURL *url = [NSURL URLWithString: profileImageFile.url];
     NSData *fileData = [NSData dataWithContentsOfURL: url];

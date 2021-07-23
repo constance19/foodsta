@@ -1239,8 +1239,8 @@
                                 </prototypes>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2D3-Lk-tSa">
-                                <rect key="frame" x="135" y="89" width="91" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="135" y="89" width="93" height="21"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -1251,9 +1251,9 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Following" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1NZ-GI-Kx0">
-                                <rect key="frame" x="135" y="152.5" width="71" height="21"/>
+                                <rect key="frame" x="279" y="148.5" width="72" height="21"/>
                                 <gestureRecognizers/>
-                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                                 <connections>
@@ -1261,7 +1261,7 @@
                                 </connections>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5xN-3e-3B4">
-                                <rect key="frame" x="240" y="84.5" width="46" height="30"/>
+                                <rect key="frame" x="242" y="84.5" width="46" height="30"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                 <color key="tintColor" red="0.89479273560000006" green="0.85251945259999995" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <state key="normal" title="Follow">
@@ -1272,25 +1272,61 @@
                                     <action selector="onTapFollow:" destination="RN1-DJ-c7o" eventType="touchUpInside" id="bqv-gt-8e2"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="16" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Bp-xi-WHd">
+                                <rect key="frame" x="255" y="148.5" width="18" height="21"/>
+                                <gestureRecognizers/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="sKk-Pu-qKX" appends="YES" id="co3-8w-xdn"/>
+                                </connections>
+                            </label>
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="16" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="29V-TN-9Zb">
+                                <rect key="frame" x="135" y="148.5" width="18" height="21"/>
+                                <gestureRecognizers/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="yZU-nj-RFS" appends="YES" id="dZF-Vg-bXk"/>
+                                </connections>
+                            </label>
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Followers" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fHg-Kd-seX">
+                                <rect key="frame" x="159" y="148.5" width="72" height="21"/>
+                                <gestureRecognizers/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="SHz-5e-BXo" appends="YES" id="dVc-JQ-g9N"/>
+                                </connections>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="NjV-PJ-KOP"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="NjV-PJ-KOP" firstAttribute="bottom" secondItem="utY-qo-bsc" secondAttribute="bottom" constant="23" id="29D-VA-hDL"/>
                             <constraint firstItem="5qI-Gf-sDJ" firstAttribute="leading" secondItem="ocr-Bu-l0f" secondAttribute="trailing" constant="8" symbolic="YES" id="2ko-HQ-Arz"/>
+                            <constraint firstItem="29V-TN-9Zb" firstAttribute="top" secondItem="5qI-Gf-sDJ" secondAttribute="bottom" constant="10" id="63H-Sj-JIB"/>
+                            <constraint firstItem="8Bp-xi-WHd" firstAttribute="leading" secondItem="fHg-Kd-seX" secondAttribute="trailing" constant="24" id="67q-07-ds3"/>
                             <constraint firstItem="ocr-Bu-l0f" firstAttribute="top" secondItem="NjV-PJ-KOP" secondAttribute="top" constant="20" id="7sO-dB-XQy"/>
-                            <constraint firstItem="1NZ-GI-Kx0" firstAttribute="leading" secondItem="5qI-Gf-sDJ" secondAttribute="leading" id="85K-GT-dL9"/>
                             <constraint firstItem="ocr-Bu-l0f" firstAttribute="leading" secondItem="NjV-PJ-KOP" secondAttribute="leading" constant="20" id="8Jg-aA-XHz"/>
                             <constraint firstItem="5qI-Gf-sDJ" firstAttribute="top" secondItem="2D3-Lk-tSa" secondAttribute="bottom" constant="8" symbolic="YES" id="8mZ-8H-sTj"/>
                             <constraint firstItem="5xN-3e-3B4" firstAttribute="leading" secondItem="2D3-Lk-tSa" secondAttribute="trailing" constant="14" id="8n7-kc-EIa"/>
-                            <constraint firstItem="1NZ-GI-Kx0" firstAttribute="top" secondItem="5qI-Gf-sDJ" secondAttribute="bottom" constant="14" id="EPj-fe-JUq"/>
                             <constraint firstItem="2D3-Lk-tSa" firstAttribute="leading" secondItem="ocr-Bu-l0f" secondAttribute="trailing" constant="8" symbolic="YES" id="Kvg-Dr-Dhq"/>
+                            <constraint firstItem="fHg-Kd-seX" firstAttribute="centerY" secondItem="29V-TN-9Zb" secondAttribute="centerY" id="L3m-1i-fa1"/>
+                            <constraint firstItem="fHg-Kd-seX" firstAttribute="leading" secondItem="29V-TN-9Zb" secondAttribute="trailing" constant="6" id="LQY-K0-KDG"/>
                             <constraint firstItem="utY-qo-bsc" firstAttribute="leading" secondItem="NjV-PJ-KOP" secondAttribute="leading" id="MFg-9G-qvG"/>
                             <constraint firstItem="NjV-PJ-KOP" firstAttribute="trailing" secondItem="5qI-Gf-sDJ" secondAttribute="trailing" constant="20" id="SiX-0u-3Mf"/>
                             <constraint firstItem="utY-qo-bsc" firstAttribute="trailing" secondItem="NjV-PJ-KOP" secondAttribute="trailing" id="avS-HF-K3j"/>
+                            <constraint firstItem="29V-TN-9Zb" firstAttribute="leading" secondItem="2D3-Lk-tSa" secondAttribute="leading" id="cli-pl-KR1"/>
+                            <constraint firstItem="1NZ-GI-Kx0" firstAttribute="centerY" secondItem="29V-TN-9Zb" secondAttribute="centerY" id="diI-uM-ihz"/>
                             <constraint firstItem="utY-qo-bsc" firstAttribute="top" secondItem="ocr-Bu-l0f" secondAttribute="bottom" constant="10" id="gl7-Io-H3l"/>
                             <constraint firstItem="5xN-3e-3B4" firstAttribute="centerY" secondItem="2D3-Lk-tSa" secondAttribute="centerY" id="h86-BF-jJf"/>
+                            <constraint firstItem="8Bp-xi-WHd" firstAttribute="centerY" secondItem="29V-TN-9Zb" secondAttribute="centerY" id="iDH-de-yjg"/>
                             <constraint firstItem="2D3-Lk-tSa" firstAttribute="top" secondItem="NjV-PJ-KOP" secondAttribute="top" constant="33" id="kxy-3i-Xnr"/>
+                            <constraint firstItem="1NZ-GI-Kx0" firstAttribute="leading" secondItem="8Bp-xi-WHd" secondAttribute="trailing" constant="6" id="mKs-bZ-1VO"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Profile" id="ZOy-ku-jzi">
@@ -1303,6 +1339,8 @@
                     <connections>
                         <outlet property="bioLabel" destination="5qI-Gf-sDJ" id="7ER-Hk-ANw"/>
                         <outlet property="followButton" destination="5xN-3e-3B4" id="3FD-yc-i2z"/>
+                        <outlet property="followerCount" destination="29V-TN-9Zb" id="LEm-Xb-22k"/>
+                        <outlet property="followingCount" destination="8Bp-xi-WHd" id="mhz-yy-fhd"/>
                         <outlet property="profileImage" destination="ocr-Bu-l0f" id="jgy-1m-5HV"/>
                         <outlet property="usernameLabel" destination="2D3-Lk-tSa" id="Xn5-Ld-rtI"/>
                     </connections>
@@ -1311,6 +1349,21 @@
                 <tapGestureRecognizer id="s1Y-W5-wxj">
                     <connections>
                         <segue destination="iyU-8C-779" kind="presentation" identifier="followingSegue" id="yU2-9d-m5h"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="sKk-Pu-qKX">
+                    <connections>
+                        <segue destination="iyU-8C-779" kind="presentation" identifier="followingCountSegue" id="EnB-CV-J6a"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="SHz-5e-BXo">
+                    <connections>
+                        <segue destination="iyU-8C-779" kind="presentation" identifier="followerCountSegue" id="RhI-dF-yQE"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="yZU-nj-RFS">
+                    <connections>
+                        <segue destination="iyU-8C-779" kind="presentation" identifier="followerSegue" id="dcL-xX-L8R"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
@@ -1799,6 +1852,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="EnB-CV-J6a"/>
         <segue reference="9pE-Xq-XYn"/>
         <segue reference="hnQ-Cv-n1M"/>
     </inferredMetricsTieBreakers>

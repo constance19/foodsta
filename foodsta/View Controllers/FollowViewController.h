@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface FollowViewController : UIViewController
 
 @property (nonatomic, strong) PFUser *user;
+@property (nonatomic) bool isFollowing; // Whether view controller should display the user's followers or followings
 
 @end
 
