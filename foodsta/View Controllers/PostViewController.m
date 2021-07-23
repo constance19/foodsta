@@ -32,7 +32,7 @@
     [super viewDidLoad];
     
     // Set rounded corners for the pop-up view
-    self.popupView.layer.cornerRadius = 10;
+    self.popupView.layer.cornerRadius = 15;
     self.popupView.layer.masksToBounds = YES;
     
     

@@ -1559,9 +1559,9 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" title="Friend Map" id="d4E-CI-jsV">
-                        <barButtonItem key="rightBarButtonItem" title="Set Location" id="qiX-fq-NuA">
+                        <barButtonItem key="rightBarButtonItem" title="Refresh" image="arrow.clockwise" catalog="system" id="qiX-fq-NuA">
                             <connections>
-                                <segue destination="SZu-Vv-Pk0" kind="presentation" identifier="setLocationSegue" id="f4N-iY-DTf"/>
+                                <action selector="onTapRefresh:" destination="GI9-Qe-bhC" id="5Kg-DS-CWT"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -1583,16 +1583,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NiA-CJ-WI2">
-                                <rect key="frame" x="22" y="178" width="370" height="540"/>
+                                <rect key="frame" x="22" y="198" width="370" height="500"/>
                                 <subviews>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kUC-jP-fNy">
                                         <rect key="frame" x="0.0" y="20" width="370" height="429"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qW9-gO-6lt">
-                                                <rect key="frame" x="0.0" y="0.0" width="370" height="540"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="370" height="500"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="540" id="dWF-8z-Oji"/>
                                                     <constraint firstAttribute="width" constant="370" id="uo9-OJ-RTZ"/>
                                                 </constraints>
                                             </imageView>
@@ -1705,14 +1704,15 @@
                                             <constraint firstItem="qW9-gO-6lt" firstAttribute="centerY" secondItem="kUC-jP-fNy" secondAttribute="centerY" id="DXj-yD-bUp"/>
                                             <constraint firstItem="nio-3S-fFh" firstAttribute="top" secondItem="kUC-jP-fNy" secondAttribute="top" constant="32" id="DZX-0V-iwt"/>
                                             <constraint firstItem="Yx9-Mm-VQF" firstAttribute="top" secondItem="Mis-Bw-p3e" secondAttribute="bottom" constant="12" id="GCJ-MW-Ps7"/>
-                                            <constraint firstAttribute="height" constant="540" id="HE0-sZ-amK"/>
                                             <constraint firstItem="62N-Kx-eHN" firstAttribute="leading" secondItem="nio-3S-fFh" secondAttribute="leading" id="Ini-jW-BIk"/>
                                             <constraint firstItem="Yx9-Mm-VQF" firstAttribute="leading" secondItem="Mis-Bw-p3e" secondAttribute="leading" id="Nmf-0Y-8b7"/>
                                             <constraint firstItem="QRe-SK-Omf" firstAttribute="trailing" secondItem="62N-Kx-eHN" secondAttribute="trailing" constant="20" id="UfT-Lu-CW4"/>
+                                            <constraint firstAttribute="bottom" secondItem="62N-Kx-eHN" secondAttribute="bottom" constant="20" id="WPz-DR-xjp"/>
                                             <constraint firstAttribute="width" constant="370" id="Z5O-D5-6JR"/>
                                             <constraint firstItem="yGg-j7-jiw" firstAttribute="top" secondItem="Yx9-Mm-VQF" secondAttribute="bottom" constant="20" id="eDR-BW-YtQ"/>
                                             <constraint firstItem="qW9-gO-6lt" firstAttribute="centerX" secondItem="kUC-jP-fNy" secondAttribute="centerX" id="etR-Ji-jF6"/>
                                             <constraint firstItem="xiM-Af-J3A" firstAttribute="centerY" secondItem="Mis-Bw-p3e" secondAttribute="centerY" id="fOZ-xV-JrO"/>
+                                            <constraint firstAttribute="height" constant="500" id="gHE-nV-Qqq"/>
                                             <constraint firstItem="Mis-Bw-p3e" firstAttribute="leading" secondItem="xiM-Af-J3A" secondAttribute="trailing" constant="1" id="ixi-5n-7nI"/>
                                             <constraint firstItem="62N-Kx-eHN" firstAttribute="top" secondItem="Pu5-HX-MmL" secondAttribute="bottom" constant="14" id="obN-cL-sfS"/>
                                             <constraint firstItem="Mis-Bw-p3e" firstAttribute="top" secondItem="nio-3S-fFh" secondAttribute="bottom" constant="13" id="p2E-Ry-Qjt"/>
@@ -1727,9 +1727,10 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="370" id="1kl-MP-Lgk"/>
-                                    <constraint firstAttribute="height" constant="540" id="28N-gV-Lpv"/>
                                     <constraint firstItem="kUC-jP-fNy" firstAttribute="centerX" secondItem="NiA-CJ-WI2" secondAttribute="centerX" id="51R-63-pqC"/>
                                     <constraint firstItem="kUC-jP-fNy" firstAttribute="centerY" secondItem="NiA-CJ-WI2" secondAttribute="centerY" id="8fC-lv-IQc"/>
+                                    <constraint firstAttribute="bottom" secondItem="qW9-gO-6lt" secondAttribute="bottom" id="G6g-XR-YFU"/>
+                                    <constraint firstAttribute="bottom" secondItem="kUC-jP-fNy" secondAttribute="bottom" id="g3N-Bp-gJz"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -1772,7 +1773,7 @@
             <objects>
                 <viewController id="g1h-ib-zdO" customClass="SetLocationViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="EVb-5i-iev">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="Ad5-Is-aAl"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -1911,7 +1912,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="SZu-Vv-Pk0" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="afc-za-ymF">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -1948,6 +1949,7 @@
         <segue reference="hnQ-Cv-n1M"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="arrow.clockwise" catalog="system" width="115" height="128"/>
         <image name="heart" catalog="system" width="128" height="109"/>
         <image name="heart.fill" catalog="system" width="128" height="109"/>
         <image name="house" catalog="system" width="128" height="106"/>

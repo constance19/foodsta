@@ -138,6 +138,24 @@
     }];
 }
 
+// Refresh the annotations on the map
+- (IBAction)onTapRefresh:(id)sender {
+    // Get array of all annotations except the user's current location
+    id userLocation = [self.mapView userLocation];
+    NSMutableArray *pins = [[NSMutableArray alloc] initWithArray:[self.mapView annotations]];
+    if (userLocation != nil ) {
+        [pins removeObject:userLocation]; // avoid removing user location off the map
+    }
+
+    // Remove the pins from the map
+    [self.mapView removeAnnotations:pins];
+    pins = nil;
+    
+    // Refresh: add the updated annotations
+    [self makeAnnotations];
+}
+
+
 // Resizing input post image to fit the annotation pin callout
 - (UIImage *)resizeImage:(UIImage *)image withSize:(CGSize)size {
     UIImageView *resizeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
