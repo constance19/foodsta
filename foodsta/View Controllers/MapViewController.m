@@ -44,63 +44,96 @@
 }
 
 - (void)makeAnnotations {
-    // Construct PFQuery
-    PFQuery *postQuery = [Post query];
-    [postQuery includeKey:@"locationTitle"];
-    [postQuery includeKey:@"latitude"];
-    [postQuery includeKey:@"longitude"];
-    [postQuery includeKey:@"author"];
-    [postQuery includeKey:@"likeCount"];
-    
-    // Only include posts by following users and current user
+    // Construct PFQuery of follow pair PFObjects
     PFUser *currentUser = [PFUser currentUser];
-    [postQuery whereKey:@"author" containedIn:currentUser[@"following"]];
-
-    // Fetch data asynchronously
-    [postQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> * _Nullable posts, NSError * _Nullable error) {
-        if (posts) {
-            // Fetch array of posts
-            self.arrayOfPosts = posts;
+    PFQuery *followingObjectQuery = [PFQuery queryWithClassName:@"Followers"];
+    [followingObjectQuery includeKey:@"userid"];
+    [followingObjectQuery includeKey:@"followerid"];
+    [followingObjectQuery whereKey:@"followerid" equalTo:currentUser.objectId];
+    
+    // Fetch query of follow PFObjects asynchronously
+    [followingObjectQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable followingObjects, NSError * _Nullable error) {
+        if (followingObjects) {
+            // Make array of object ids for followings
+            NSMutableArray *followingIds = [[NSMutableArray alloc] init];
+            for (PFObject *followingObject in followingObjects) {
+                [followingIds addObject:followingObject[@"userid"]];
+            }
             
-            // Fetch array of locations with coordinate properties
-            NSMutableArray *locations = [[NSMutableArray alloc] init];
-            for (Post *post in self.arrayOfPosts) {
-                if (post.latitude && post.longitude) {
-                    double latitude = [post.latitude doubleValue];
-                    double longitude = [post.longitude doubleValue];
+            // Get query of users with matching object ids for the table view
+            PFQuery *followingQuery = [PFUser query];
+            [followingQuery whereKey:@"objectId" containedIn:followingIds];
+            [followingQuery findObjectsInBackgroundWithBlock:^(NSArray<PFUser *> *_Nullable following, NSError * _Nullable error) {
+                if (following) {
+                    // Add current user to array of authors that should show up on the post feed
+                    NSMutableArray *feedUsers = [NSMutableArray arrayWithArray:following];
+                    [feedUsers addObject:currentUser];
                     
-                    CLLocation *location = [[CLLocation alloc] initWithLatitude:latitude longitude:longitude];
-                    [locations addObject:location];
+                    // Construct PFQuery
+                    PFQuery *postQuery = [Post query];
+                    [postQuery includeKey:@"locationTitle"];
+                    [postQuery includeKey:@"latitude"];
+                    [postQuery includeKey:@"longitude"];
+                    [postQuery includeKey:@"author"];
+                    [postQuery includeKey:@"likeCount"];
+                    
+                    // Filter feed to include only posts by following users and current user
+                    [postQuery whereKey:@"author" containedIn:feedUsers];
+
+                    // Fetch data asynchronously
+                    [postQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> * _Nullable posts, NSError * _Nullable error) {
+                        if (posts) {
+                            self.arrayOfPosts = posts;
+                            
+                            // Fetch array of locations with coordinate properties
+                            NSMutableArray *locations = [[NSMutableArray alloc] init];
+                            for (Post *post in self.arrayOfPosts) {
+                                if (post.latitude && post.longitude) {
+                                    double latitude = [post.latitude doubleValue];
+                                    double longitude = [post.longitude doubleValue];
+                                    
+                                    CLLocation *location = [[CLLocation alloc] initWithLatitude:latitude longitude:longitude];
+                                    [locations addObject:location];
+                                }
+                            }
+                            self.arrayOfLocations = locations;
+                            
+                            // Iterate through each location, get its coordinates, and add LocationAnnotation pins to the map
+                            for (int i = 0; i < [self.arrayOfLocations count]; i++) {
+                                CLLocation *location = self.arrayOfLocations[i];
+                                CLLocationCoordinate2D coordinate = [location coordinate];
+                                Post *post = self.arrayOfPosts[i];
+                                
+                                // Set the coordinate and post for the annotation
+                                LocationAnnotation *annotation = [[LocationAnnotation alloc] init];
+                                annotation.coordinate = coordinate;
+                                annotation.post = post;
+                                
+                                // Set the post image for the annotation
+                                PFFileObject *imageFile = post.image;
+                                if (imageFile) {
+                                    NSURL *url = [NSURL URLWithString: imageFile.url];
+                                    NSData *fileData = [NSData dataWithContentsOfURL: url];
+                                    UIImage *photo = [[UIImage alloc] initWithData:fileData];
+                                    annotation.photo = [self resizeImage:photo withSize:CGSizeMake(50.0, 50.0)];
+                                }
+                                
+                                // Add annotation to the map
+                                [self.mapView addAnnotation:annotation];
+                            }
+                            
+                        } else {
+                            NSLog(@"😫😫😫 Error getting feed posts: %@", error.localizedDescription);
+                        }
+                    }];
+                    
+                } else {
+                    NSLog(@"😫😫😫 Error getting followings: %@", error.localizedDescription);
                 }
-            }
-            self.arrayOfLocations = locations;
+            }];
             
-            // Iterate through each location, get its coordinates, and add LocationAnnotation pins to the map
-            for (int i = 0; i < [self.arrayOfLocations count]; i++) {
-                CLLocation *location = self.arrayOfLocations[i];
-                CLLocationCoordinate2D coordinate = [location coordinate];
-                Post *post = self.arrayOfPosts[i];
-                
-                // Set the coordinate and post for the annotation
-                LocationAnnotation *annotation = [[LocationAnnotation alloc] init];
-                annotation.coordinate = coordinate;
-                annotation.post = post;
-                
-                // Set the post image for the annotation
-                PFFileObject *imageFile = post.image;
-                if (imageFile) {
-                    NSURL *url = [NSURL URLWithString: imageFile.url];
-                    NSData *fileData = [NSData dataWithContentsOfURL: url];
-                    UIImage *photo = [[UIImage alloc] initWithData:fileData];
-                    annotation.photo = [self resizeImage:photo withSize:CGSizeMake(50.0, 50.0)];
-                }
-                
-                // Add annotation to the map
-                [self.mapView addAnnotation:annotation];
-            }
-        }
-        else {
-            NSLog(@"😫😫😫 Error getting posts: %@", error.localizedDescription);
+        } else {
+            NSLog(@"😫😫😫 Error getting following objects: %@", error.localizedDescription);
         }
     }];
 }

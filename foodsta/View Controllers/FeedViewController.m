@@ -57,30 +57,63 @@
 }
 
 - (void) loadPosts: (int) numPosts {
-    // Construct PFQuery
-    PFQuery *postQuery = [Post query];
-    [postQuery orderByDescending:@"createdAt"];
-    [postQuery includeKey:@"author"];
-    [postQuery includeKey:@"liked"];
-    [postQuery includeKey:@"locationTitle"];
-    [postQuery includeKey:@"image"];
-    [postQuery includeKey:@"postID"];
-    
-    // Filter feed to include only posts by following users and current user
+    // Construct PFQuery of follow pair PFObjects
     PFUser *currentUser = [PFUser currentUser];
-    [postQuery whereKey:@"author" containedIn:currentUser[@"following"]];
-    postQuery.limit = numPosts;
-
-    // Fetch data asynchronously
-    [postQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> * _Nullable posts, NSError * _Nullable error) {
-        if (posts) {
-            // Pass posts to data source
-            self.feedDataSource.arrayOfPosts = posts;
+    PFQuery *followingObjectQuery = [PFQuery queryWithClassName:@"Followers"];
+    [followingObjectQuery includeKey:@"userid"];
+    [followingObjectQuery includeKey:@"followerid"];
+    [followingObjectQuery whereKey:@"followerid" equalTo:currentUser.objectId];
+    
+    // Fetch query of follow PFObjects asynchronously
+    [followingObjectQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable followingObjects, NSError * _Nullable error) {
+        if (followingObjects) {
+            // Make array of object ids for followings
+            NSMutableArray *followingIds = [[NSMutableArray alloc] init];
+            for (PFObject *followingObject in followingObjects) {
+                [followingIds addObject:followingObject[@"userid"]];
+            }
             
-            [self.tableView reloadData];
-        }
-        else {
-            NSLog(@"😫😫😫 Error getting home timeline: %@", error.localizedDescription);
+            // Get query of users with matching object ids for the table view
+            PFQuery *followingQuery = [PFUser query];
+            [followingQuery whereKey:@"objectId" containedIn:followingIds];
+            [followingQuery findObjectsInBackgroundWithBlock:^(NSArray<PFUser *> *_Nullable following, NSError * _Nullable error) {
+                if (following) {
+                    // Add current user to array of authors that should show up on the post feed
+                    NSMutableArray *feedUsers = [NSMutableArray arrayWithArray:following];
+                    [feedUsers addObject:currentUser];
+                    
+                    // Construct PFQuery
+                    PFQuery *postQuery = [Post query];
+                    [postQuery orderByDescending:@"createdAt"];
+                    [postQuery includeKey:@"author"];
+                    [postQuery includeKey:@"liked"];
+                    [postQuery includeKey:@"locationTitle"];
+                    [postQuery includeKey:@"image"];
+                    [postQuery includeKey:@"postID"];
+                    
+                    // Filter feed to include only posts by following users and current user
+                    [postQuery whereKey:@"author" containedIn:feedUsers];
+                    postQuery.limit = numPosts;
+
+                    // Fetch data asynchronously
+                    [postQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> * _Nullable posts, NSError * _Nullable error) {
+                        if (posts) {
+                            // Pass posts to data source
+                            self.feedDataSource.arrayOfPosts = posts;
+                            [self.tableView reloadData];
+                        }
+                        else {
+                            NSLog(@"😫😫😫 Error getting home timeline: %@", error.localizedDescription);
+                        }
+                    }];
+                    
+                } else {
+                    NSLog(@"😫😫😫 Error getting followings: %@", error.localizedDescription);
+                }
+            }];
+            
+        } else {
+            NSLog(@"😫😫😫 Error getting following objects: %@", error.localizedDescription);
         }
     }];
 }
