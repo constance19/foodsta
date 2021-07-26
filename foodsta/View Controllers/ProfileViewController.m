@@ -24,7 +24,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+        
     // Make profile image view circular
     self.profileImage.layer.cornerRadius = self.profileImage.frame.size.height /2;
     self.profileImage.layer.masksToBounds = YES;
