@@ -13,6 +13,7 @@
 #import "LocationAnnotation.h"
 #import "PostViewController.h"
 #import "LocationAnnotationView.h"
+#import "MapLocationsViewController.h"
 @import Parse;
 
 @interface MapViewController () <MKMapViewDelegate, CLLocationManagerDelegate, LocationAnnotationViewDelegate>
@@ -79,6 +80,10 @@
                     
                     // Filter feed to include only posts by following users and current user
                     [postQuery whereKey:@"author" containedIn:feedUsers];
+                    
+                    // Only get the most recent 20 posts
+                    [postQuery orderByDescending:@"createdAt"];
+                    postQuery.limit = 20;
 
                     // Fetch data asynchronously
                     [postQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> * _Nullable posts, NSError * _Nullable error) {
@@ -248,6 +253,13 @@
 //        PostViewController *postController = navController.topViewController;
         PostViewController *postController = [segue destinationViewController];
         postController.post = sender;
+    }
+    
+    // Segue from Check-Ins button
+    if ([[segue identifier] isEqualToString:@"mapLocationSegue"]) {
+        UINavigationController *navController = [segue destinationViewController];
+        MapLocationsViewController *mapLocationsController = navController.topViewController;
+        mapLocationsController.arrayOfPosts = self.arrayOfPosts;
     }
 }
 
