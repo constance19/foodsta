@@ -9,7 +9,7 @@
 
 @interface ContainerTabController ()
 
-@property (weak, nonatomic) IBOutlet UITabBar *tabBar;
+@property (weak, nonatomic) IBOutlet UITabBar *toggleTabBar;
 
 @end
 
@@ -17,8 +17,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self.tabBar setHidden:YES];
+        
+    // Hide tab bar
+    [self.toggleTabBar setHidden:YES];
+        UIView *contentView;
+        if ([[self.view.subviews objectAtIndex:0] isKindOfClass:[UITabBar class]]) {
+            contentView = [self.view.subviews objectAtIndex:1];
+        } else {
+            contentView = [self.view.subviews objectAtIndex:0];
+        }
+    contentView.frame = self.view.bounds;
 }
 
 /*

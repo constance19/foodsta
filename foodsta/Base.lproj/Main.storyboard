@@ -372,7 +372,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="10413.04347826087" y="515.625"/>
+            <point key="canvasLocation" x="11320.289855072464" y="515.625"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="xuX-Vj-qk0">
@@ -439,7 +439,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p9l-oy-Vay" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="11289.85507246377" y="515.625"/>
+            <point key="canvasLocation" x="12197.101449275364" y="515.625"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="RWv-Mn-7P0">
@@ -1374,11 +1374,14 @@
                                     <segment title="Feed"/>
                                     <segment title="Map"/>
                                 </segments>
+                                <connections>
+                                    <action selector="onTapToggle:" destination="RN1-DJ-c7o" eventType="valueChanged" id="vtu-le-3HQ"/>
+                                </connections>
                             </segmentedControl>
                             <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uJe-Q2-B5k">
                                 <rect key="frame" x="0.0" y="268" width="414" height="648"/>
                                 <connections>
-                                    <segue destination="STZ-OE-q0u" kind="embed" id="ySl-SW-ADB"/>
+                                    <segue destination="STZ-OE-q0u" kind="embed" identifier="toggleTabSegue" id="ySl-SW-ADB"/>
                                 </connections>
                             </containerView>
                         </subviews>
@@ -1397,7 +1400,7 @@
                             <constraint firstItem="5qI-Gf-sDJ" firstAttribute="top" secondItem="2D3-Lk-tSa" secondAttribute="bottom" constant="12" id="8mZ-8H-sTj"/>
                             <constraint firstItem="5xN-3e-3B4" firstAttribute="leading" secondItem="2D3-Lk-tSa" secondAttribute="trailing" constant="14" id="8n7-kc-EIa"/>
                             <constraint firstItem="O1K-wq-Kes" firstAttribute="trailing" secondItem="NjV-PJ-KOP" secondAttribute="trailing" id="FT5-4I-8bB"/>
-                            <constraint firstItem="uJe-Q2-B5k" firstAttribute="top" secondItem="O1K-wq-Kes" secondAttribute="bottom" id="IBr-ne-uaQ"/>
+                            <constraint firstItem="uJe-Q2-B5k" firstAttribute="top" secondItem="O1K-wq-Kes" secondAttribute="bottom" constant="14" id="IBr-ne-uaQ"/>
                             <constraint firstItem="O1K-wq-Kes" firstAttribute="top" secondItem="ocr-Bu-l0f" secondAttribute="bottom" constant="14" id="IF7-Rv-5z6"/>
                             <constraint firstItem="2D3-Lk-tSa" firstAttribute="leading" secondItem="ocr-Bu-l0f" secondAttribute="trailing" constant="8" symbolic="YES" id="Kvg-Dr-Dhq"/>
                             <constraint firstItem="fHg-Kd-seX" firstAttribute="centerY" secondItem="29V-TN-9Zb" secondAttribute="centerY" id="L3m-1i-fa1"/>
@@ -1407,7 +1410,6 @@
                             <constraint firstItem="1NZ-GI-Kx0" firstAttribute="centerY" secondItem="29V-TN-9Zb" secondAttribute="centerY" id="diI-uM-ihz"/>
                             <constraint firstItem="5xN-3e-3B4" firstAttribute="centerY" secondItem="2D3-Lk-tSa" secondAttribute="centerY" id="h86-BF-jJf"/>
                             <constraint firstItem="8Bp-xi-WHd" firstAttribute="centerY" secondItem="29V-TN-9Zb" secondAttribute="centerY" id="iDH-de-yjg"/>
-                            <constraint firstItem="uJe-Q2-B5k" firstAttribute="top" secondItem="O1K-wq-Kes" secondAttribute="bottom" id="kV5-68-XBy"/>
                             <constraint firstItem="2D3-Lk-tSa" firstAttribute="top" secondItem="NjV-PJ-KOP" secondAttribute="top" constant="33" id="kxy-3i-Xnr"/>
                             <constraint firstItem="1NZ-GI-Kx0" firstAttribute="leading" secondItem="8Bp-xi-WHd" secondAttribute="trailing" constant="6" id="mKs-bZ-1VO"/>
                         </constraints>
@@ -1421,10 +1423,12 @@
                     </navigationItem>
                     <connections>
                         <outlet property="bioLabel" destination="5qI-Gf-sDJ" id="7ER-Hk-ANw"/>
+                        <outlet property="feedMapToggle" destination="O1K-wq-Kes" id="QDh-pr-JoZ"/>
                         <outlet property="followButton" destination="5xN-3e-3B4" id="3FD-yc-i2z"/>
                         <outlet property="followerCount" destination="29V-TN-9Zb" id="LEm-Xb-22k"/>
                         <outlet property="followingCount" destination="8Bp-xi-WHd" id="mhz-yy-fhd"/>
                         <outlet property="profileImage" destination="ocr-Bu-l0f" id="jgy-1m-5HV"/>
+                        <outlet property="toggleContainer" destination="uJe-Q2-B5k" id="3MH-BQ-dLX"/>
                         <outlet property="usernameLabel" destination="2D3-Lk-tSa" id="Xn5-Ld-rtI"/>
                     </connections>
                 </viewController>
@@ -2243,7 +2247,7 @@
             </objects>
             <point key="canvasLocation" x="4672" y="-1199"/>
         </scene>
-        <!--Item 2-->
+        <!--View Controller-->
         <scene sceneID="4Gi-aq-vU1">
             <objects>
                 <viewController id="555-na-0Qm" sceneMemberID="viewController">
@@ -2252,25 +2256,25 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="UUG-8t-Zoz">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="599"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="648"/>
                             </mapView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="LaC-E7-DBU"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstAttribute="bottom" secondItem="UUG-8t-Zoz" secondAttribute="bottom" id="GF5-C1-a1g"/>
                             <constraint firstItem="UUG-8t-Zoz" firstAttribute="trailing" secondItem="LaC-E7-DBU" secondAttribute="trailing" id="NBh-gL-iJG"/>
-                            <constraint firstItem="UUG-8t-Zoz" firstAttribute="top" secondItem="RBO-Rq-qWf" secondAttribute="top" id="Nfj-dn-7Wf"/>
                             <constraint firstItem="UUG-8t-Zoz" firstAttribute="leading" secondItem="LaC-E7-DBU" secondAttribute="leading" id="ePO-Be-IjD"/>
-                            <constraint firstItem="UUG-8t-Zoz" firstAttribute="bottom" secondItem="LaC-E7-DBU" secondAttribute="bottom" id="lyh-8a-iph"/>
+                            <constraint firstItem="UUG-8t-Zoz" firstAttribute="top" secondItem="RBO-Rq-qWf" secondAttribute="top" id="x1C-F2-Fr3"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 2" id="5Wp-NP-9vs"/>
+                    <navigationItem key="navigationItem" id="7Db-zJ-5aU"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kOb-t1-jJZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4919" y="76"/>
+            <point key="canvasLocation" x="5826.0869565217399" y="75.669642857142847"/>
         </scene>
-        <!--Item 1-->
+        <!--View Controller-->
         <scene sceneID="tG6-kW-XXf">
             <objects>
                 <viewController id="jmK-NT-Col" sceneMemberID="viewController">
@@ -2279,7 +2283,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Ggh-bL-v8n">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="599"/>
+                                <rect key="frame" x="0.0" y="-49" width="414" height="648"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="35" id="iYI-R1-Swm">
@@ -2455,31 +2459,31 @@
                         <viewLayoutGuide key="safeArea" id="iV0-EP-w1N"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Ggh-bL-v8n" firstAttribute="top" secondItem="5Xe-Ff-QvO" secondAttribute="top" id="1km-ds-ejn"/>
+                            <constraint firstItem="Ggh-bL-v8n" firstAttribute="top" secondItem="5Xe-Ff-QvO" secondAttribute="top" constant="-49" id="1km-ds-ejn"/>
                             <constraint firstItem="Ggh-bL-v8n" firstAttribute="trailing" secondItem="iV0-EP-w1N" secondAttribute="trailing" id="I3e-sa-kdc"/>
                             <constraint firstItem="Ggh-bL-v8n" firstAttribute="leading" secondItem="iV0-EP-w1N" secondAttribute="leading" id="vhZ-Zd-7Fj"/>
                             <constraint firstItem="Ggh-bL-v8n" firstAttribute="bottom" secondItem="iV0-EP-w1N" secondAttribute="bottom" id="xZd-Lk-xxL"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 1" id="FAh-8e-84D"/>
+                    <navigationItem key="navigationItem" id="uzy-q9-Ism"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M4f-nA-BCx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4918.840579710145" y="-530.35714285714289"/>
+            <point key="canvasLocation" x="5826.0869565217399" y="-530.35714285714289"/>
         </scene>
         <!--Container Tab Controller-->
         <scene sceneID="3Do-mI-i3c">
             <objects>
-                <tabBarController hidesBottomBarWhenPushed="YES" id="STZ-OE-q0u" customClass="ContainerTabController" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="containerTabController" hidesBottomBarWhenPushed="YES" id="STZ-OE-q0u" customClass="ContainerTabController" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="0Wx-lG-ux6">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <outlet property="tabBar" destination="0Wx-lG-ux6" id="N7K-PL-pcI"/>
-                        <segue destination="jmK-NT-Col" kind="relationship" relationship="viewControllers" id="SEv-FG-yd8"/>
-                        <segue destination="555-na-0Qm" kind="relationship" relationship="viewControllers" id="hhZ-1m-vr3"/>
+                        <outlet property="toggleTabBar" destination="0Wx-lG-ux6" id="XLB-Po-WEp"/>
+                        <segue destination="ULL-QX-kg1" kind="relationship" relationship="viewControllers" destinationCreationSelector="toggleFeedSegue" id="SEv-FG-yd8"/>
+                        <segue destination="xaK-h1-W2l" kind="relationship" relationship="viewControllers" destinationCreationSelector="toggleMapSegue" id="hhZ-1m-vr3"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="At3-iC-7y6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -2571,6 +2575,42 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dpa-cI-ogq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="13380" y="2096"/>
+        </scene>
+        <!--Item 1-->
+        <scene sceneID="c9e-PP-LtV">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LWq-km-MHG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="ULL-QX-kg1" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item 1" id="FAh-8e-84D"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="6e8-Wa-us6">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="jmK-NT-Col" kind="relationship" relationship="rootViewController" id="M1U-Vq-se2"/>
+                    </connections>
+                </navigationController>
+            </objects>
+            <point key="canvasLocation" x="4918.840579710145" y="-530.35714285714289"/>
+        </scene>
+        <!--Item 2-->
+        <scene sceneID="HBv-di-taH">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5Df-PN-Nbd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="xaK-h1-W2l" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item 2" id="5Wp-NP-9vs"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="l0y-Q0-bv5">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="555-na-0Qm" kind="relationship" relationship="rootViewController" id="0z6-vI-s4y"/>
+                    </connections>
+                </navigationController>
+            </objects>
+            <point key="canvasLocation" x="4918.840579710145" y="75.669642857142847"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
