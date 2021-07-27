@@ -2247,10 +2247,10 @@
             </objects>
             <point key="canvasLocation" x="4672" y="-1199"/>
         </scene>
-        <!--View Controller-->
+        <!--Container Map View Controller-->
         <scene sceneID="4Gi-aq-vU1">
             <objects>
-                <viewController id="555-na-0Qm" sceneMemberID="viewController">
+                <viewController id="555-na-0Qm" customClass="ContainerMapViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="RBO-Rq-qWf">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="648"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2269,6 +2269,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="7Db-zJ-5aU"/>
+                    <connections>
+                        <outlet property="mapView" destination="UUG-8t-Zoz" id="tUR-ro-aV6"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kOb-t1-jJZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -2482,8 +2485,8 @@
                     </tabBar>
                     <connections>
                         <outlet property="toggleTabBar" destination="0Wx-lG-ux6" id="XLB-Po-WEp"/>
-                        <segue destination="ULL-QX-kg1" kind="relationship" relationship="viewControllers" destinationCreationSelector="toggleFeedSegue" id="SEv-FG-yd8"/>
-                        <segue destination="xaK-h1-W2l" kind="relationship" relationship="viewControllers" destinationCreationSelector="toggleMapSegue" id="hhZ-1m-vr3"/>
+                        <segue destination="ULL-QX-kg1" kind="relationship" relationship="viewControllers" id="SEv-FG-yd8"/>
+                        <segue destination="xaK-h1-W2l" kind="relationship" relationship="viewControllers" id="hhZ-1m-vr3"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="At3-iC-7y6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -1,5 +1,5 @@
 //
-//  ContainerTabController.h
+//  ContainerMapViewController.h
 //  foodsta
 //
 //  Created by constanceh on 7/26/21.
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ContainerTabController : UITabBarController
+@interface ContainerMapViewController : UIViewController
 
 @property (nonatomic, strong) PFUser *user;
 
