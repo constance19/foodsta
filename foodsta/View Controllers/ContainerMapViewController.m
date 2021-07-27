@@ -12,8 +12,9 @@
 #import "LocationAnnotation.h"
 #import "LocationAnnotationView.h"
 #import "ContainerTabController.h"
+#import "PostViewController.h"
 
-@interface ContainerMapViewController () <MKMapViewDelegate, CLLocationManagerDelegate>
+@interface ContainerMapViewController () <MKMapViewDelegate, CLLocationManagerDelegate, LocationAnnotationViewDelegate>
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (nonatomic, strong) NSArray *arrayOfPosts;
@@ -161,14 +162,75 @@
     }
  }
 
-/*
+// Animation for each annotation's pin drop onto the map
+- (void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)views {
+    for (LocationAnnotationView *annotationView in views) {
+        // Don't pin drop if annotation is user's current location
+        if ([annotationView.annotation isKindOfClass:[MKUserLocation class]]) {
+            continue;
+        }
+
+        // Don't pin drop if pin is not in visible map region
+        MKMapPoint point =  MKMapPointForCoordinate(annotationView.annotation.coordinate);
+        if (!MKMapRectContainsPoint(self.mapView.visibleMapRect, point)) {
+            continue;
+        }
+        
+        // Move annotation out of view
+        CGRect endFrame = annotationView.frame;
+        annotationView.frame = CGRectMake(annotationView.frame.origin.x, annotationView.frame.origin.y - self.view.frame.size.height,
+                                          annotationView.frame.size.width, annotationView.frame.size.height);
+
+        // Animate drop
+        [UIView animateWithDuration:0.5 delay:0.04*[views indexOfObject:annotationView] options: UIViewAnimationOptionCurveLinear animations:^{
+            annotationView.frame = endFrame;
+            
+        // Animate bounce
+        }completion:^(BOOL finished){
+            if (finished) {
+                [UIView animateWithDuration:0.05 animations:^{
+                    annotationView.transform = CGAffineTransformMakeScale(1.0, 0.8);
+                    
+                }completion:^(BOOL finished){
+                    if (finished) {
+                        [UIView animateWithDuration:0.1 animations:^{
+                            annotationView.transform = CGAffineTransformIdentity;
+                        }];
+                    }
+                }];
+            }
+        }];
+    }
+}
+
+// Segue to post when user taps detail disclosure button in annotation view callout
+- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
+    LocationAnnotationView *locationAnnotationView = (LocationAnnotationView *)view;
+    locationAnnotationView.delegate = self;
+    [locationAnnotationView.delegate locationAnnotationView:locationAnnotationView didTap:locationAnnotationView.post];
+}
+
+
+// MARK: LocationAnnotationViewDelegate
+
+- (void)locationAnnotationView:(LocationAnnotationView *)locationAnnotationView didTap:(Post *)post {
+    [self performSegueWithIdentifier:@"containerAnnotationPostSegue" sender:post];
+}
+
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    
+    // Segue from annotation callout detail disclosure button
+    if ([[segue identifier] isEqualToString:@"containerAnnotationPostSegue"]) {
+        PostViewController *postController = [segue destinationViewController];
+        postController.post = sender;
+    }
 }
-*/
+
 
 @end

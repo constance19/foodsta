@@ -7,6 +7,7 @@
 
 #import "ProfileViewController.h"
 #import "FollowViewController.h"
+#import "ContainerTabController.h"
 @import Parse;
 
 @interface ProfileViewController ()
@@ -17,6 +18,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *followButton;
 @property (weak, nonatomic) IBOutlet UILabel *followingCount;
 @property (weak, nonatomic) IBOutlet UILabel *followerCount;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *feedMapToggle;
+@property (weak, nonatomic) IBOutlet UIView *toggleContainer;
 
 @end
 
@@ -111,6 +114,25 @@
         self.navigationItem.leftBarButtonItem = nil;
     }
 }
+
+- (IBAction)onTapToggle:(id)sender {
+    // Switching to feed view
+    if (self.feedMapToggle.selectedSegmentIndex == 0) {
+        [self.tabBarController setSelectedIndex:0];
+        
+//        ContainerTabController *tbc = [self.storyboard instantiateViewControllerWithIdentifier:@"containerTabController"];
+//        tbc.selectedIndex = 0;
+
+        
+    // Switching to map view
+    } else {
+        [self.tabBarController setSelectedIndex:1];
+        
+//        ContainerTabController *tbc = [self.storyboard instantiateViewControllerWithIdentifier:@"containerTabController"];
+//        tbc.selectedIndex = 1;
+    }
+}
+
 
 - (IBAction)onTapFollow:(id)sender {
     PFUser *currentUser = [PFUser currentUser];
@@ -215,6 +237,12 @@
         followerController.title = @"Followers";
         followerController.user = self.user;
         followerController.isFollowing = NO;
+    }
+    
+    // Segue from toggle to tab controller
+    if ([[segue identifier] isEqualToString:@"toggleTabSegue"]) {
+        ContainerTabController *tabController = [segue destinationViewController];
+        tabController.user = self.user;
     }
 }
 
