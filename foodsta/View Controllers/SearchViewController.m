@@ -26,13 +26,16 @@
     self.tableView.dataSource = self;
     self.searchBar.delegate = self;
     
-    
     self.tableView.rowHeight = UITableViewAutomaticDimension;
+    [self.searchBar becomeFirstResponder];
     self.searchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
-    
     self.searchBar.placeholder = NSLocalizedString(@"Search for user...", @"Tells the user to search for a user");
     
-    // Load in users below the search bar
+    // Load in user's recent searches
+    PFUser *currentUser = [PFUser currentUser];
+    self.filteredUsers = currentUser[@"searches"];
+    
+    // Fetch and save Parse user query
     [self loadUsers];
 }
 
@@ -48,9 +51,6 @@
             if (strongSelf) {
                 if (users) {
                     strongSelf.arrayOfUsers = users;
-                    strongSelf.filteredUsers = self.arrayOfUsers;
-                    
-                    [strongSelf.tableView reloadData];
                     
                 } else {
                     NSLog(@"😫😫😫 Error getting users: %@", error.localizedDescription);
@@ -77,11 +77,13 @@
     cell.profileImage.layer.masksToBounds = YES;
     cell.profileImage.layer.borderWidth = 0;
     
-    // Get and set the username and profile picture for the cell
+    // Get and set the username for the cell
     PFUser *user = self.filteredUsers[indexPath.row];
+    [user fetchIfNeeded];
     cell.user = user;
     cell.usernameLabel.text = [NSString stringWithFormat:@"@%@", user.username];
     
+    // Get and set the profile picture for the cell
     PFFileObject *profileImageFile = user[@"profileImage"];
     NSURL *url = [NSURL URLWithString: profileImageFile.url];
     NSData *fileData = [NSData dataWithContentsOfURL: url];
@@ -101,10 +103,13 @@
             return [username containsString:searchText];
         }];
         
+        // Reset array of user results based on search text matches
         self.filteredUsers = [self.arrayOfUsers filteredArrayUsingPredicate:predicate];
 
+    // If empty search bar, load in recent search history
     } else {
-        self.filteredUsers = self.arrayOfUsers;
+        PFUser *currentUser = [PFUser currentUser];
+        self.filteredUsers = currentUser[@"searches"];
     }
 
     [self.tableView reloadData];
@@ -117,6 +122,11 @@
 
 // When user clicks cancel button, delete text and hide cancel button
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    // Reset table view to recent search history
+    PFUser *currentUser = [PFUser currentUser];
+    self.filteredUsers = currentUser[@"searches"];
+    [self.tableView reloadData];
+    
     self.searchBar.showsCancelButton = NO;
     self.searchBar.text = @"";
     [self.searchBar resignFirstResponder];
@@ -131,11 +141,36 @@
     // Pass the selected object to the new view controller.
     
     if ([[segue identifier] isEqualToString:@"searchProfileSegue"]) {
+        // Pass clicked user to profile view controller
         UserCell *tappedCell = sender;
-                    
         UINavigationController *navController = [segue destinationViewController];
         ProfileViewController *profileController = navController.topViewController;
         profileController.user = tappedCell.user;
+        
+        // Initialize Parse recent searches array if necessary
+        PFUser *currentUser = [PFUser currentUser];
+        if (currentUser[@"searches"] == nil) {
+            currentUser[@"searches"] = [[NSMutableArray alloc] init];
+        }
+        [currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+            if (error) {
+                NSLog(@"Error updating recent searches", error.localizedDescription);
+            } else {
+                NSLog(@"Successfully updated recent searches!");
+            }
+        }];
+        
+        // Add clicked user to Parse recent searches array
+        NSMutableArray *searches = currentUser[@"searches"];
+        [searches addObject:tappedCell.user];
+        currentUser[@"searches"] = searches;
+        [currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+            if (error) {
+                NSLog(@"Error updating recent searches", error.localizedDescription);
+            } else {
+                NSLog(@"Successfully updated recent searches!");
+            }
+        }];
     }
 }
 
