@@ -17,16 +17,17 @@
 #import "LikeCell.h"
 #import "CaptionCell.h"
 #import "FollowViewController.h"
+#import "ContainerTabController.h"
 @import Parse;
 
-@interface SelfViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface SelfViewController ()
 
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *bioLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *profileImage;
 @property (weak, nonatomic) IBOutlet UILabel *followerCount;
 @property (weak, nonatomic) IBOutlet UILabel *followingCount;
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *feedMapToggle;
 
 @end
 
@@ -90,19 +91,7 @@
                 }
             }
     }];
-    
-    // User feed of posted check-ins
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
-        
-    self.tableView.rowHeight = UITableViewAutomaticDimension;
-    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-    self.feedDataSource = [[FeedDataSource alloc] init];
-    
-    [self loadPosts:20];
 }
-
-// TODO: viewWillAppear
 
 - (IBAction)onTapLogout:(id)sender {
     [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
@@ -121,110 +110,18 @@
     }];
 }
 
-- (void) loadPosts: (int) numPosts {
-    PFUser *currentUser = [PFUser currentUser];
+// Switch between map and posts feed
+- (IBAction)onTapToggle:(id)sender {
+    ContainerTabController *tabController = self.childViewControllers.lastObject;
     
-    // Construct PFQuery
-    PFQuery *postQuery = [Post query];
-    [postQuery orderByDescending:@"createdAt"];
-    [postQuery includeKey:@"author"];
-    [postQuery includeKey:@"liked"];
-    [postQuery includeKey:@"locationTitle"];
-    [postQuery includeKey:@"image"];
-    if (currentUser != nil) {
-        [postQuery whereKey:@"author" equalTo:currentUser];
-    }
-    postQuery.limit = numPosts;
-
-    // Fetch data asynchronously
-    typeof(self) __weak weakSelf = self;
-    [postQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> * _Nullable posts, NSError * _Nullable error) {
-        typeof(weakSelf) strongSelf = weakSelf;  // strong by default
-            if (strongSelf) {
-                if (posts) {
-                    // Pass posts to data source
-                    strongSelf.feedDataSource.arrayOfPosts = posts;
-                    
-                    [strongSelf.tableView reloadData];
-                }
-                else {
-                    NSLog(@"😫😫😫 Error getting home timeline: %@", error.localizedDescription);
-                }
-            }
-    }];
-}
-
-// MARK: UITableViewDataSource
-
-// Returns number of sections the table view should have (number of posts)
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return [self.feedDataSource numberOfSections];
-}
-
-// Returns number of rows in the section (number of components the post has)
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.feedDataSource numberOfRowsInSection:section];
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Get the model for current indexPath from FeedDataSource
-    PostCellModel *model = [self.feedDataSource modelForIndexPath:indexPath];
-    
-    // Dequeue the cell with identifier based on model returned by FeedDataSource, load model into cell
-    switch (model.type) {
-        case PostCellModelTypeUsernameTimestamp: {
-            UsernameTimestampCell *cell = [tableView dequeueReusableCellWithIdentifier:@"usernameTimestampCell" forIndexPath:indexPath];
-            cell.selfUsernameLabel.text = model.data[0];
-            cell.selfTimestampLabel.text = model.data[1];
-            return cell;
-        }
-            
-        case PostCellModelTypeLocation: {
-            LocationNameCell *cell = [tableView dequeueReusableCellWithIdentifier:@"locationCell" forIndexPath:indexPath];
-            cell.selfLocationView.attributedText = model.data;
-            cell.selfLocationView.dataDetectorTypes = UIDataDetectorTypeLink;
-            [cell.selfLocationView setFont:[UIFont systemFontOfSize:19]];
-            return cell;
-        }
+    // Switching to feed view
+    if (self.feedMapToggle.selectedSegmentIndex == 0) {
+        [tabController setSelectedIndex:0];
         
-        case PostCellModelTypeImage: {
-            ImageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"imageCell" forIndexPath:indexPath];
-            cell.selfLocationImage.file = model.data;
-            [cell.selfLocationImage loadInBackground];
-            return cell;
-        }
-            
-        case PostCellModelTypeLikeCount: {
-            LikeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"likeCell" forIndexPath:indexPath];
-            NSString *likeCount = [NSString stringWithFormat:@"%@", model.data];
-            [cell.selfLikeButton setTitle:likeCount forState:UIControlStateNormal];
-            return cell;
-        }
-            
-        case PostCellModelTypeCaption: {
-            CaptionCell *cell = [tableView dequeueReusableCellWithIdentifier:@"captionCell" forIndexPath:indexPath];
-            cell.selfCaptionLabel.text = model.data;
-            return cell;
-        }
-            
-        case PostCellModelTypeRating: {
-            RatingCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ratingCell" forIndexPath:indexPath];
-            cell.selfRatingView.value = [model.data doubleValue];
-            return cell;
-        }
+    // Switching to map view
+    } else {
+        [tabController setSelectedIndex:1];
     }
-}
-
-
-// MARK: UITableViewDelegate
-
-// For separator between sections (posts)
-// TODO: fix UI of separator (too thick)
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-    CGRect sepFrame = CGRectMake(0, tableView.frame.size.height, self.view.bounds.size.width, 1);
-    UIView *separatorView =[[UIView alloc] initWithFrame:sepFrame];
-    separatorView.backgroundColor = tableView.separatorColor;
-    return separatorView;
 }
 
 //// For infinite scrolling
@@ -290,6 +187,12 @@
         followerController.title = @"Followers";
         followerController.user = [PFUser currentUser];
         followerController.isFollowing = NO;
+    }
+    
+    // Segue from toggle to tab bar controller
+    if ([[segue identifier] isEqualToString:@"selfToggleTabSegue"]) {
+        ContainerTabController *tabController = [segue destinationViewController];
+        tabController.user = [PFUser currentUser];
     }
 }
 
