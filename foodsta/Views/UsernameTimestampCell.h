@@ -19,6 +19,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *selfUsernameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *selfTimestampLabel;
 
+@property (weak, nonatomic) IBOutlet UILabel *containerUsernameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *containerTimestampLabel;
+
 @property (nonatomic, weak) id<UsernameTimestampCellDelegate> delegate;
 @property (nonatomic, strong) Post *post;
 

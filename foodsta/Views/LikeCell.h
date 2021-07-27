@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (weak, nonatomic) IBOutlet UIButton *likeButton;
 @property (weak, nonatomic) IBOutlet UIButton *selfLikeButton;
+@property (weak, nonatomic) IBOutlet UIButton *containerLikeButton;
 @property (nonatomic, strong) Post *post;
 
 @end

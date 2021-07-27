@@ -50,6 +50,7 @@
 		78F59C3E26ACB22B00781EC7 /* MapLocationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78F59C3D26ACB22B00781EC7 /* MapLocationsViewController.m */; };
 		78F59C4126AF5F6400781EC7 /* ContainerTabController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78F59C4026AF5F6400781EC7 /* ContainerTabController.m */; };
 		78F59C4426AF805B00781EC7 /* ContainerMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78F59C4326AF805B00781EC7 /* ContainerMapViewController.m */; };
+		78F59C4726AF923200781EC7 /* ContainerFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78F59C4626AF923200781EC7 /* ContainerFeedViewController.m */; };
 		E4B6B47959F79E483DDBEA65 /* Pods_foodstaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50185661E04E68223708872F /* Pods_foodstaTests.framework */; };
 		F2EAC73CF64B1ABC7BFCF585 /* Pods_foodsta_foodstaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E40072F959FD3C6A5E6EAAC1 /* Pods_foodsta_foodstaUITests.framework */; };
 /* End PBXBuildFile section */
@@ -158,6 +159,8 @@
 		78F59C4026AF5F6400781EC7 /* ContainerTabController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContainerTabController.m; sourceTree = "<group>"; };
 		78F59C4226AF805B00781EC7 /* ContainerMapViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContainerMapViewController.h; sourceTree = "<group>"; };
 		78F59C4326AF805B00781EC7 /* ContainerMapViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContainerMapViewController.m; sourceTree = "<group>"; };
+		78F59C4526AF923200781EC7 /* ContainerFeedViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContainerFeedViewController.h; sourceTree = "<group>"; };
+		78F59C4626AF923200781EC7 /* ContainerFeedViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContainerFeedViewController.m; sourceTree = "<group>"; };
 		94DBCF63251A45821B4D96D8 /* Pods_foodsta.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_foodsta.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDED1C488468ADD58D63CDDE /* Pods-foodstaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-foodstaTests.release.xcconfig"; path = "Target Support Files/Pods-foodstaTests/Pods-foodstaTests.release.xcconfig"; sourceTree = "<group>"; };
 		DDA34CDF962E3DCE4D4CD92D /* Pods-foodsta.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-foodsta.release.xcconfig"; path = "Target Support Files/Pods-foodsta/Pods-foodsta.release.xcconfig"; sourceTree = "<group>"; };
@@ -314,6 +317,8 @@
 				78F59C4026AF5F6400781EC7 /* ContainerTabController.m */,
 				78F59C4226AF805B00781EC7 /* ContainerMapViewController.h */,
 				78F59C4326AF805B00781EC7 /* ContainerMapViewController.m */,
+				78F59C4526AF923200781EC7 /* ContainerFeedViewController.h */,
+				78F59C4626AF923200781EC7 /* ContainerFeedViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -635,6 +640,7 @@
 				780424E9269D4F0600E771CE /* LoginViewController.m in Sources */,
 				780424A8269D2E6300E771CE /* SceneDelegate.m in Sources */,
 				787AC56026A661C80070E5A9 /* SearchViewController.m in Sources */,
+				78F59C4726AF923200781EC7 /* ContainerFeedViewController.m in Sources */,
 				780424E3269D3DB000E771CE /* LocationsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

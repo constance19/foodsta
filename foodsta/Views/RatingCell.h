@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (weak, nonatomic) IBOutlet HCSStarRatingView *selfRatingView;
 
+@property (weak, nonatomic) IBOutlet HCSStarRatingView *containerRatingView;
+
 @end
 
 NS_ASSUME_NONNULL_END

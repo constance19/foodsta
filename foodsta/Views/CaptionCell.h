@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (weak, nonatomic) IBOutlet UILabel *selfCaptionLabel;
 
+@property (weak, nonatomic) IBOutlet UILabel *containerCaptionLabel;
+
 @end
 
 NS_ASSUME_NONNULL_END

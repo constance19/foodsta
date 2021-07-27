@@ -143,6 +143,8 @@
     }];
 }
 
+// MARK: UITableViewDataSource
+
 // Returns number of sections the table view should have (number of posts)
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return [self.feedDataSource numberOfSections];
@@ -224,6 +226,7 @@
 
 #pragma mark - Navigation
 
+// Only segue to followers/following list if the count > 0
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
     if ([identifier isEqualToString:@"selfFollowingSegue"] || [identifier isEqualToString:@"selfFollowingCountSegue"]) {
         if ([self.followingCount.text isEqualToString:@"0"]) {

@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (weak, nonatomic) IBOutlet UITextView *selfLocationView;
 
+@property (weak, nonatomic) IBOutlet UITextView *containerLocationView;
+
 @end
 
 NS_ASSUME_NONNULL_END
