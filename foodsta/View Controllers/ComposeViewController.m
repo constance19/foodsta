@@ -123,18 +123,22 @@ static NSString *const captionPlaceholder = @"Write a caption...";
        [MBProgressHUD showHUDAddedTo:self.view animated:TRUE];
         
         // Post the image and caption and show the progress HUD
+        typeof(self) __weak weakSelf = self;
         [Post postCheckIn:self.locationImage.image withCaption:caption withLocation:self.textField.text withUrl: self.location.yelpURL withRating:@(self.ratingView.value) withLatitude: self.location.latitude withLongitude: self.location.longitude withCompletion:^(BOOL succeeded, NSError *error) {
-            if (error) {
-                NSLog(@"Error posting check-in", error.localizedDescription);
-                // Show the progress HUD while user is waiting for the post request to complete
-                [MBProgressHUD hideHUDForView:self.view animated:TRUE];
-                [self dismissViewControllerAnimated:YES completion:nil];
-            } else {
-                NSLog(@"Successfully posted check-in!");
-                // Hide HUD once the network request comes back (must be done on main UI thread)
-                [MBProgressHUD hideHUDForView:self.view animated:TRUE];
-                [self dismissViewControllerAnimated:YES completion:nil];
-            }
+            typeof(weakSelf) strongSelf = weakSelf;  // strong by default
+                if (strongSelf) {
+                    if (error) {
+                        NSLog(@"Error posting check-in", error.localizedDescription);
+                        // Show the progress HUD while user is waiting for the post request to complete
+                        [MBProgressHUD hideHUDForView:self.view animated:TRUE];
+                        [strongSelf dismissViewControllerAnimated:YES completion:nil];
+                    } else {
+                        NSLog(@"Successfully posted check-in!");
+                        // Hide HUD once the network request comes back (must be done on main UI thread)
+                        [MBProgressHUD hideHUDForView:self.view animated:TRUE];
+                        [strongSelf dismissViewControllerAnimated:YES completion:nil];
+                    }
+                }
         }];
     }
 }

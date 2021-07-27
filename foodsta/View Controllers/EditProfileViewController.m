@@ -79,9 +79,13 @@
     [MBProgressHUD hideHUDForView:self.view animated:TRUE];
     
     // Dismiss to go back to profile page
+    typeof(self) __weak weakSelf = self;
     [self dismissViewControllerAnimated:YES completion: ^ {
-        // Pass back the updated profile picture to the parent view controller (profile tab)
-        self.onDismiss(self, self.profileImage.image, self.bioField.text);
+        typeof(weakSelf) strongSelf = weakSelf;  // strong by default
+            if (strongSelf) {
+                // Pass back the updated profile picture to the parent view controller (profile tab)
+                self.onDismiss(self, self.profileImage.image, self.bioField.text);
+            }
     }];
 }
 

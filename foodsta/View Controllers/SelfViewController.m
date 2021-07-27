@@ -59,13 +59,17 @@
     [followingQuery whereKey:@"followerid" equalTo:user.objectId];
     
     // Set following count
+    typeof(self) __weak weakSelf = self;
     [followingQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable following, NSError * _Nullable error) {
-        if (following != nil) {
-            int count = following.count;
-            self.followingCount.text = [NSString stringWithFormat: @"%d", count];
-        } else {
-            self.followingCount.text = @"0";
-        }
+        typeof(weakSelf) strongSelf = weakSelf;  // strong by default
+            if (strongSelf) {
+                if (following != nil) {
+                    int count = following.count;
+                    strongSelf.followingCount.text = [NSString stringWithFormat: @"%d", count];
+                } else {
+                    strongSelf.followingCount.text = @"0";
+                }
+            }
     }];
     
     // Get query of followers for the current user
@@ -76,12 +80,15 @@
     
     // Set follower count
     [followerQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable followers, NSError * _Nullable error) {
-        if (followers != nil) {
-            int count = followers.count;
-            self.followerCount.text = [NSString stringWithFormat: @"%d", count];
-        } else {
-            self.followerCount.text = @"0";
-        }
+        typeof(weakSelf) strongSelf = weakSelf;  // strong by default
+            if (strongSelf) {
+                if (followers != nil) {
+                    int count = followers.count;
+                    strongSelf.followerCount.text = [NSString stringWithFormat: @"%d", count];
+                } else {
+                    strongSelf.followerCount.text = @"0";
+                }
+            }
     }];
     
     // User feed of posted check-ins
@@ -130,16 +137,20 @@
     postQuery.limit = numPosts;
 
     // Fetch data asynchronously
+    typeof(self) __weak weakSelf = self;
     [postQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> * _Nullable posts, NSError * _Nullable error) {
-        if (posts) {
-            // Pass posts to data source
-            self.feedDataSource.arrayOfPosts = posts;
-            
-            [self.tableView reloadData];
-        }
-        else {
-            NSLog(@"😫😫😫 Error getting home timeline: %@", error.localizedDescription);
-        }
+        typeof(weakSelf) strongSelf = weakSelf;  // strong by default
+            if (strongSelf) {
+                if (posts) {
+                    // Pass posts to data source
+                    strongSelf.feedDataSource.arrayOfPosts = posts;
+                    
+                    [strongSelf.tableView reloadData];
+                }
+                else {
+                    NSLog(@"😫😫😫 Error getting home timeline: %@", error.localizedDescription);
+                }
+            }
     }];
 }
 

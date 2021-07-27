@@ -60,13 +60,18 @@
             // Get query of users with matching object ids for the table view
             PFQuery *followQuery = [PFUser query];
             [followQuery whereKey:@"objectId" containedIn:followIds];
+            
+            typeof(self) __weak weakSelf = self;
             [followQuery findObjectsInBackgroundWithBlock:^(NSArray<PFUser *> *_Nullable follows, NSError * _Nullable error) {
-                if (follows) {
-                    self.follows = follows;
-                    [self.tableView reloadData];
-                } else {
-                    NSLog(@"😫😫😫 Error getting follows: %@", error.localizedDescription);
-                }
+                typeof(weakSelf) strongSelf = weakSelf;  // strong by default
+                    if (strongSelf) {
+                        if (follows) {
+                            strongSelf.follows = follows;
+                            [strongSelf.tableView reloadData];
+                        } else {
+                            NSLog(@"😫😫😫 Error getting follows: %@", error.localizedDescription);
+                        }
+                    }
             }];
             
         } else {

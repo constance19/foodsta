@@ -59,50 +59,54 @@
     [postQuery whereKey:@"author" equalTo:profileUser];
     
     // Fetch data asynchronously
+    typeof(self) __weak weakSelf = self;
     [postQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> * _Nullable posts, NSError * _Nullable error) {
-        if (posts) {
-            self.arrayOfPosts = posts;
-            
-            // Fetch array of locations with coordinate properties
-            NSMutableArray *locations = [[NSMutableArray alloc] init];
-            for (Post *post in self.arrayOfPosts) {
-                if (post.latitude && post.longitude) {
-                    double latitude = [post.latitude doubleValue];
-                    double longitude = [post.longitude doubleValue];
+        typeof(weakSelf) strongSelf = weakSelf;  // strong by default
+            if (strongSelf) {
+                if (posts) {
+                    strongSelf.arrayOfPosts = posts;
                     
-                    CLLocation *location = [[CLLocation alloc] initWithLatitude:latitude longitude:longitude];
-                    [locations addObject:location];
+                    // Fetch array of locations with coordinate properties
+                    NSMutableArray *locations = [[NSMutableArray alloc] init];
+                    for (Post *post in strongSelf.arrayOfPosts) {
+                        if (post.latitude && post.longitude) {
+                            double latitude = [post.latitude doubleValue];
+                            double longitude = [post.longitude doubleValue];
+                            
+                            CLLocation *location = [[CLLocation alloc] initWithLatitude:latitude longitude:longitude];
+                            [locations addObject:location];
+                        }
+                    }
+                    strongSelf.arrayOfLocations = locations;
+                    
+                    // Iterate through each location, get its coordinates, and add LocationAnnotation pins to the map
+                    for (int i = 0; i < [strongSelf.arrayOfLocations count]; i++) {
+                        CLLocation *location = strongSelf.arrayOfLocations[i];
+                        CLLocationCoordinate2D coordinate = [location coordinate];
+                        Post *post = strongSelf.arrayOfPosts[i];
+                        
+                        // Set the coordinate and post for the annotation
+                        LocationAnnotation *annotation = [[LocationAnnotation alloc] init];
+                        annotation.coordinate = coordinate;
+                        annotation.post = post;
+                        
+                        // Set the post image for the annotation
+                        PFFileObject *imageFile = post.image;
+                        if (imageFile) {
+                            NSURL *url = [NSURL URLWithString: imageFile.url];
+                            NSData *fileData = [NSData dataWithContentsOfURL: url];
+                            UIImage *photo = [[UIImage alloc] initWithData:fileData];
+                            annotation.photo = [strongSelf resizeImage:photo withSize:CGSizeMake(50.0, 50.0)];
+                        }
+                        
+                        // Add annotation to the map
+                        [strongSelf.mapView addAnnotation:annotation];
+                    }
+                    
+                } else {
+                    NSLog(@"😫😫😫 Error getting feed posts: %@", error.localizedDescription);
                 }
             }
-            self.arrayOfLocations = locations;
-            
-            // Iterate through each location, get its coordinates, and add LocationAnnotation pins to the map
-            for (int i = 0; i < [self.arrayOfLocations count]; i++) {
-                CLLocation *location = self.arrayOfLocations[i];
-                CLLocationCoordinate2D coordinate = [location coordinate];
-                Post *post = self.arrayOfPosts[i];
-                
-                // Set the coordinate and post for the annotation
-                LocationAnnotation *annotation = [[LocationAnnotation alloc] init];
-                annotation.coordinate = coordinate;
-                annotation.post = post;
-                
-                // Set the post image for the annotation
-                PFFileObject *imageFile = post.image;
-                if (imageFile) {
-                    NSURL *url = [NSURL URLWithString: imageFile.url];
-                    NSData *fileData = [NSData dataWithContentsOfURL: url];
-                    UIImage *photo = [[UIImage alloc] initWithData:fileData];
-                    annotation.photo = [self resizeImage:photo withSize:CGSizeMake(50.0, 50.0)];
-                }
-                
-                // Add annotation to the map
-                [self.mapView addAnnotation:annotation];
-            }
-            
-        } else {
-            NSLog(@"😫😫😫 Error getting feed posts: %@", error.localizedDescription);
-        }
     }];
 }
 
@@ -161,47 +165,6 @@
         return annotationView;
     }
  }
-
-// Animation for each annotation's pin drop onto the map
-- (void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)views {
-    for (LocationAnnotationView *annotationView in views) {
-        // Don't pin drop if annotation is user's current location
-        if ([annotationView.annotation isKindOfClass:[MKUserLocation class]]) {
-            continue;
-        }
-
-        // Don't pin drop if pin is not in visible map region
-        MKMapPoint point =  MKMapPointForCoordinate(annotationView.annotation.coordinate);
-        if (!MKMapRectContainsPoint(self.mapView.visibleMapRect, point)) {
-            continue;
-        }
-        
-        // Move annotation out of view
-        CGRect endFrame = annotationView.frame;
-        annotationView.frame = CGRectMake(annotationView.frame.origin.x, annotationView.frame.origin.y - self.view.frame.size.height,
-                                          annotationView.frame.size.width, annotationView.frame.size.height);
-
-        // Animate drop
-        [UIView animateWithDuration:0.5 delay:0.04*[views indexOfObject:annotationView] options: UIViewAnimationOptionCurveLinear animations:^{
-            annotationView.frame = endFrame;
-            
-        // Animate bounce
-        }completion:^(BOOL finished){
-            if (finished) {
-                [UIView animateWithDuration:0.05 animations:^{
-                    annotationView.transform = CGAffineTransformMakeScale(1.0, 0.8);
-                    
-                }completion:^(BOOL finished){
-                    if (finished) {
-                        [UIView animateWithDuration:0.1 animations:^{
-                            annotationView.transform = CGAffineTransformIdentity;
-                        }];
-                    }
-                }];
-            }
-        }];
-    }
-}
 
 // Segue to post when user taps detail disclosure button in annotation view callout
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {

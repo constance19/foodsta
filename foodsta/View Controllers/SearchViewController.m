@@ -42,16 +42,20 @@
     [userQuery orderByAscending:@"username"];
 
     // Fetch data asynchronously
+    typeof(self) __weak weakSelf = self;
     [userQuery findObjectsInBackgroundWithBlock:^(NSArray<PFUser *> * _Nullable users, NSError * _Nullable error) {
-        if (users) {
-            self.arrayOfUsers = users;
-            self.filteredUsers = self.arrayOfUsers;
-            
-            [self.tableView reloadData];
-            
-        } else {
-            NSLog(@"😫😫😫 Error getting users: %@", error.localizedDescription);
-        }
+        typeof(weakSelf) strongSelf = weakSelf;  // strong by default
+            if (strongSelf) {
+                if (users) {
+                    strongSelf.arrayOfUsers = users;
+                    strongSelf.filteredUsers = self.arrayOfUsers;
+                    
+                    [strongSelf.tableView reloadData];
+                    
+                } else {
+                    NSLog(@"😫😫😫 Error getting users: %@", error.localizedDescription);
+                }
+            }
     }];
 }
 

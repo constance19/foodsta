@@ -86,50 +86,54 @@
                     postQuery.limit = 20;
 
                     // Fetch data asynchronously
+                    typeof(self) __weak weakSelf = self;
                     [postQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> * _Nullable posts, NSError * _Nullable error) {
-                        if (posts) {
-                            self.arrayOfPosts = posts;
-                            
-                            // Fetch array of locations with coordinate properties
-                            NSMutableArray *locations = [[NSMutableArray alloc] init];
-                            for (Post *post in self.arrayOfPosts) {
-                                if (post.latitude && post.longitude) {
-                                    double latitude = [post.latitude doubleValue];
-                                    double longitude = [post.longitude doubleValue];
+                        typeof(weakSelf) strongSelf = weakSelf;  // strong by default
+                            if (strongSelf) {
+                                if (posts) {
+                                    strongSelf.arrayOfPosts = posts;
                                     
-                                    CLLocation *location = [[CLLocation alloc] initWithLatitude:latitude longitude:longitude];
-                                    [locations addObject:location];
+                                    // Fetch array of locations with coordinate properties
+                                    NSMutableArray *locations = [[NSMutableArray alloc] init];
+                                    for (Post *post in strongSelf.arrayOfPosts) {
+                                        if (post.latitude && post.longitude) {
+                                            double latitude = [post.latitude doubleValue];
+                                            double longitude = [post.longitude doubleValue];
+                                            
+                                            CLLocation *location = [[CLLocation alloc] initWithLatitude:latitude longitude:longitude];
+                                            [locations addObject:location];
+                                        }
+                                    }
+                                    strongSelf.arrayOfLocations = locations;
+                                    
+                                    // Iterate through each location, get its coordinates, and add LocationAnnotation pins to the map
+                                    for (int i = 0; i < [strongSelf.arrayOfLocations count]; i++) {
+                                        CLLocation *location = strongSelf.arrayOfLocations[i];
+                                        CLLocationCoordinate2D coordinate = [location coordinate];
+                                        Post *post = strongSelf.arrayOfPosts[i];
+                                        
+                                        // Set the coordinate and post for the annotation
+                                        LocationAnnotation *annotation = [[LocationAnnotation alloc] init];
+                                        annotation.coordinate = coordinate;
+                                        annotation.post = post;
+                                        
+                                        // Set the post image for the annotation
+                                        PFFileObject *imageFile = post.image;
+                                        if (imageFile) {
+                                            NSURL *url = [NSURL URLWithString: imageFile.url];
+                                            NSData *fileData = [NSData dataWithContentsOfURL: url];
+                                            UIImage *photo = [[UIImage alloc] initWithData:fileData];
+                                            annotation.photo = [self resizeImage:photo withSize:CGSizeMake(50.0, 50.0)];
+                                        }
+                                        
+                                        // Add annotation to the map
+                                        [strongSelf.mapView addAnnotation:annotation];
+                                    }
+                                    
+                                } else {
+                                    NSLog(@"😫😫😫 Error getting feed posts: %@", error.localizedDescription);
                                 }
                             }
-                            self.arrayOfLocations = locations;
-                            
-                            // Iterate through each location, get its coordinates, and add LocationAnnotation pins to the map
-                            for (int i = 0; i < [self.arrayOfLocations count]; i++) {
-                                CLLocation *location = self.arrayOfLocations[i];
-                                CLLocationCoordinate2D coordinate = [location coordinate];
-                                Post *post = self.arrayOfPosts[i];
-                                
-                                // Set the coordinate and post for the annotation
-                                LocationAnnotation *annotation = [[LocationAnnotation alloc] init];
-                                annotation.coordinate = coordinate;
-                                annotation.post = post;
-                                
-                                // Set the post image for the annotation
-                                PFFileObject *imageFile = post.image;
-                                if (imageFile) {
-                                    NSURL *url = [NSURL URLWithString: imageFile.url];
-                                    NSData *fileData = [NSData dataWithContentsOfURL: url];
-                                    UIImage *photo = [[UIImage alloc] initWithData:fileData];
-                                    annotation.photo = [self resizeImage:photo withSize:CGSizeMake(50.0, 50.0)];
-                                }
-                                
-                                // Add annotation to the map
-                                [self.mapView addAnnotation:annotation];
-                            }
-                            
-                        } else {
-                            NSLog(@"😫😫😫 Error getting feed posts: %@", error.localizedDescription);
-                        }
                     }];
                     
                 } else {
@@ -249,8 +253,6 @@
     
     // Segue from annotation callout detail disclosure button
     if ([[segue identifier] isEqualToString:@"annotationPostSegue"]) {
-//        UINavigationController *navController = [segue destinationViewController];
-//        PostViewController *postController = navController.topViewController;
         PostViewController *postController = [segue destinationViewController];
         postController.post = sender;
     }

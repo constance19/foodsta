@@ -59,21 +59,25 @@
         [query whereKey:@"userid" equalTo:self.user.objectId];
         [query whereKey:@"followerid" equalTo:[PFUser currentUser].objectId];
         
+        typeof(self) __weak weakSelf = self;
         [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable follows, NSError * _Nullable error) {
-            if (follows != nil) {
-                // Current user does not follow the profile user
-                if (follows.count == 0) {
-                    [self.followButton setTitle:@"Follow" forState:UIControlStateNormal];
-                    
-                // Current user is following the profile user
-                } else {
-                    [self.followButton setTitle:@"Following" forState:UIControlStateNormal];
-                    [self.followButton setSelected:YES];
+            typeof(weakSelf) strongSelf = weakSelf;  // strong by default
+                if (strongSelf) {
+                    if (follows != nil) {
+                        // Current user does not follow the profile user
+                        if (follows.count == 0) {
+                            [strongSelf.followButton setTitle:@"Follow" forState:UIControlStateNormal];
+                            
+                        // Current user is following the profile user
+                        } else {
+                            [strongSelf.followButton setTitle:@"Following" forState:UIControlStateNormal];
+                            [strongSelf.followButton setSelected:YES];
+                        }
+                        
+                    } else {
+                        NSLog(@"%@", error.localizedDescription);
+                    }
                 }
-                
-            } else {
-                NSLog(@"%@", error.localizedDescription);
-            }
         }];
     }
     
@@ -84,13 +88,17 @@
     [followingQuery whereKey:@"followerid" equalTo:self.user.objectId];
     
     // Set following count
+    typeof(self) __weak weakSelf = self;
     [followingQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable following, NSError * _Nullable error) {
-        if (following != nil) {
-            int count = following.count;
-            self.followingCount.text = [NSString stringWithFormat: @"%d", count];
-        } else {
-            self.followingCount.text = @"0";
-        }
+        typeof(weakSelf) strongSelf = weakSelf;  // strong by default
+            if (strongSelf) {
+                if (following != nil) {
+                    int count = following.count;
+                    strongSelf.followingCount.text = [NSString stringWithFormat: @"%d", count];
+                } else {
+                    strongSelf.followingCount.text = @"0";
+                }
+            }
     }];
     
     // Get query of followers for the profile user
@@ -101,12 +109,15 @@
     
     // Set follower count
     [followerQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable followers, NSError * _Nullable error) {
-        if (followers != nil) {
-            int count = followers.count;
-            self.followerCount.text = [NSString stringWithFormat: @"%d", count];
-        } else {
-            self.followerCount.text = @"0";
-        }
+        typeof(weakSelf) strongSelf = weakSelf;  // strong by default
+            if (strongSelf) {
+                if (followers != nil) {
+                    int count = followers.count;
+                    strongSelf.followerCount.text = [NSString stringWithFormat: @"%d", count];
+                } else {
+                    strongSelf.followerCount.text = @"0";
+                }
+            }
     }];
     
     // Hide back button if profile is presented from map annotation post
@@ -133,7 +144,6 @@
     }
 }
 
-
 - (IBAction)onTapFollow:(id)sender {
     PFUser *currentUser = [PFUser currentUser];
     PFUser *profileUser = self.user;
@@ -144,44 +154,48 @@
     [query includeKey:@"followerid"];
     [query whereKey:@"userid" equalTo:self.user.objectId];
     [query whereKey:@"followerid" equalTo:[PFUser currentUser].objectId];
+    
+    typeof(self) __weak weakSelf = self;
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable follows, NSError * _Nullable error) {
-        
-        if (follows != nil) {
-            // Follow: add a Parse object with a follower relationship and increment follower count
-            if (follows.count == 0) {
-                PFObject *followPair = [PFObject objectWithClassName:@"Followers"];
-                followPair[@"userid"] = self.user.objectId;
-                followPair[@"followerid"] = currentUser.objectId;
+        typeof(weakSelf) strongSelf = weakSelf;  // strong by default
+            if (strongSelf) {
+                if (follows != nil) {
+                    // Follow: add a Parse object with a follower relationship and increment follower count
+                    if (follows.count == 0) {
+                        PFObject *followPair = [PFObject objectWithClassName:@"Followers"];
+                        followPair[@"userid"] = self.user.objectId;
+                        followPair[@"followerid"] = currentUser.objectId;
 
-                [followPair saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                    if (succeeded) {
-                        NSLog(@"Successfully followed");
-                          
+                        [followPair saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                            if (succeeded) {
+                                NSLog(@"Successfully followed");
+                                  
+                            } else {
+                                // There was a problem, check error.description
+                                NSLog(@"%@", error.localizedDescription);
+                            }
+                        }];
+                        
+                        // Increment follower count immediately
+                        int updateCount = [self.followerCount.text intValue];
+                        updateCount++;
+                        strongSelf.followerCount.text = [NSString stringWithFormat: @"%d", updateCount];
+                        
+                    // Unfollow: remove the Parse object for the follower relationship and decrement follower count
                     } else {
-                        // There was a problem, check error.description
-                        NSLog(@"%@", error.localizedDescription);
+                        PFObject *followPair = follows[0];
+                        [query getObjectInBackgroundWithId:followPair.objectId block:^(PFObject *followPair, NSError *error) {
+                            // Delete follow pair object from Parse
+                            [followPair deleteInBackground];
+                        }];
+                        
+                        // Decrement follower count immediately
+                        int updateCount = [self.followerCount.text intValue];
+                        updateCount--;
+                        strongSelf.followerCount.text = [NSString stringWithFormat: @"%d", updateCount];
                     }
-                }];
-                
-                // Increment follower count immediately
-                int updateCount = [self.followerCount.text intValue];
-                updateCount++;
-                self.followerCount.text = [NSString stringWithFormat: @"%d", updateCount];
-                
-            // Unfollow: remove the Parse object for the follower relationship and decrement follower count
-            } else {
-                PFObject *followPair = follows[0];
-                [query getObjectInBackgroundWithId:followPair.objectId block:^(PFObject *followPair, NSError *error) {
-                    // Delete follow pair object from Parse
-                    [followPair deleteInBackground];
-                }];
-                
-                // Decrement follower count immediately
-                int updateCount = [self.followerCount.text intValue];
-                updateCount--;
-                self.followerCount.text = [NSString stringWithFormat: @"%d", updateCount];
+                }
             }
-        }
     }];
     
     // Toggle display of follow/following button
@@ -197,6 +211,7 @@
 
 #pragma mark - Navigation
 
+// Only segue to followers/following page if the count > 0
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
     if ([identifier isEqualToString:@"followingSegue"] || [identifier isEqualToString:@"followingCountSegue"]) {
         if ([self.followingCount.text isEqualToString:@"0"]) {
@@ -211,7 +226,6 @@
         }
         return YES;
     }
-    
     return YES;
 }
 
@@ -243,6 +257,7 @@
     if ([[segue identifier] isEqualToString:@"toggleTabSegue"]) {
         ContainerTabController *tabController = [segue destinationViewController];
         tabController.user = self.user;
+//        tabController.toggleIndex = self.feedMapToggle.selectedSegmentIndex;
     }
 }
 

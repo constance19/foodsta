@@ -47,7 +47,6 @@ NSString *locationsIdentifier = @"locationsController";
     [requestData setURL:[NSURL URLWithString:str]];
 
     [requestData setHTTPMethod:@"GET"];
-    // Insert your API KEY Below in the form: @"Bearer <APIKEY>"
     NSString * APIParameter = @"Bearer VBHv7Qs9aw5kipARCA1zXH41do80z9YJmy5YJpVM3hw2GXXlF-vimVhtyBO-s-W5o5VzdkLbuucudqeQ777ZxQf1DS0EtMmUo8ZIqmDjvzvi1fK3tOsh-llc1nPsYHYx";
 
 
@@ -61,26 +60,28 @@ NSString *locationsIdentifier = @"locationsController";
     //Display HUD right before the request is made
    [MBProgressHUD showHUDAddedTo:self.view animated:TRUE];
     
+    typeof(self) __weak weakSelf = self;
     [[session dataTaskWithRequest:requestData completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        NSDictionary *jsonArray = [NSJSONSerialization JSONObjectWithData: data options: NSJSONReadingMutableContainers error: &error];
-        NSArray *businesses = jsonArray[@"businesses"]; // array of dictionaries, each dictionary = business with 16 key/value pairs
-        NSArray *locations = [Location locationsWithDictionaries:businesses];
-        self.arrayOfLocations = locations;
+        typeof(weakSelf) strongSelf = weakSelf;  // strong by default
+            if (strongSelf) {
+                NSDictionary *jsonArray = [NSJSONSerialization JSONObjectWithData: data options: NSJSONReadingMutableContainers error: &error];
+                NSArray *businesses = jsonArray[@"businesses"]; // array of dictionaries, each dictionary = business with 16 key/value pairs
+                NSArray *locations = [Location locationsWithDictionaries:businesses];
+                strongSelf.arrayOfLocations = locations;
 
-        for (Location *loc in locations) {
-//            NSLog(@"%@, %@, %@", loc.name, loc.address, loc.imageURL);
-            NSLog(@"%@", loc.name);
-            NSLog(@"%@", loc.address);
-            NSLog(@"%@", loc.imageURL);
-        }
+                for (Location *loc in locations) {
+                    NSLog(@"%@", loc.name);
+                    NSLog(@"%@", loc.address);
+                    NSLog(@"%@", loc.imageURL);
+                }
         
-        // Reload table view on main thread
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.tableView reloadData];
-            [MBProgressHUD hideHUDForView:self.view animated:TRUE];
-        });
-
-    }] resume];
+                // Reload table view on main thread
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [strongSelf.tableView reloadData];
+                    [MBProgressHUD hideHUDForView:self.view animated:TRUE];
+                });
+            }
+        }] resume];
 }
 
 // MARK: UITableViewDatasource

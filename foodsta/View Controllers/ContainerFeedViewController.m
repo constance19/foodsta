@@ -16,7 +16,7 @@
 #import "CaptionCell.h"
 @import Parse;
 
-@interface ContainerFeedViewController () <UITableViewDelegate, UITableViewDataSource, UsernameTimestampCellDelegate>
+@interface ContainerFeedViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
@@ -56,16 +56,20 @@
     }
 
     // Fetch data asynchronously
+    typeof(self) __weak weakSelf = self;
     [postQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> * _Nullable posts, NSError * _Nullable error) {
-        if (posts) {
-            // Pass posts to data source
-            self.feedDataSource.arrayOfPosts = posts;
-            
-            [self.tableView reloadData];
-        }
-        else {
-            NSLog(@"😫😫😫 Error getting profile timeline: %@", error.localizedDescription);
-        }
+        typeof(weakSelf) strongSelf = weakSelf;  // strong by default
+            if (strongSelf) {
+                if (posts) {
+                    // Pass posts to data source
+                    strongSelf.feedDataSource.arrayOfPosts = posts;
+                    
+                    [strongSelf.tableView reloadData];
+                }
+                else {
+                    NSLog(@"😫😫😫 Error getting profile timeline: %@", error.localizedDescription);
+                }
+            }
     }];
 }
 
