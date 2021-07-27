@@ -127,20 +127,15 @@
 }
 
 - (IBAction)onTapToggle:(id)sender {
+    ContainerTabController *tabController = self.childViewControllers.lastObject;
+    
     // Switching to feed view
     if (self.feedMapToggle.selectedSegmentIndex == 0) {
-        [self.tabBarController setSelectedIndex:0];
-        
-//        ContainerTabController *tbc = [self.storyboard instantiateViewControllerWithIdentifier:@"containerTabController"];
-//        tbc.selectedIndex = 0;
-
+        [tabController setSelectedIndex:0];
         
     // Switching to map view
     } else {
-        [self.tabBarController setSelectedIndex:1];
-        
-//        ContainerTabController *tbc = [self.storyboard instantiateViewControllerWithIdentifier:@"containerTabController"];
-//        tbc.selectedIndex = 1;
+        [tabController setSelectedIndex:1];
     }
 }
 
@@ -257,7 +252,6 @@
     if ([[segue identifier] isEqualToString:@"toggleTabSegue"]) {
         ContainerTabController *tabController = [segue destinationViewController];
         tabController.user = self.user;
-//        tabController.toggleIndex = self.feedMapToggle.selectedSegmentIndex;
     }
 }
 

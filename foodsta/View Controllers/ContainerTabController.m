@@ -17,15 +17,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-        
+            
     // Hide tab bar
     [self.toggleTabBar setHidden:YES];
-        UIView *contentView;
-        if ([[self.view.subviews objectAtIndex:0] isKindOfClass:[UITabBar class]]) {
-            contentView = [self.view.subviews objectAtIndex:1];
-        } else {
-            contentView = [self.view.subviews objectAtIndex:0];
-        }
+    
+    // Remove the gray space from hidden tab bar
+    UIView *contentView;
+    if ([[self.view.subviews objectAtIndex:0] isKindOfClass:[UITabBar class]]) {
+        contentView = [self.view.subviews objectAtIndex:1];
+    } else {
+        contentView = [self.view.subviews objectAtIndex:0];
+    }
     contentView.frame = self.view.bounds;
 }
 
