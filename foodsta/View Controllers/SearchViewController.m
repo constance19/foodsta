@@ -12,8 +12,9 @@
 
 @interface SearchViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 
-@property (nonatomic, strong) NSArray *arrayOfUsers;
+@property (nonatomic, strong) NSArray *allUsers;
 @property (nonatomic, strong) NSArray *filteredUsers;
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 
 @end
 
@@ -31,18 +32,19 @@
     self.searchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
     self.searchBar.placeholder = NSLocalizedString(@"Search for user...", @"Tells the user to search for a user");
     
-    // Load in user's recent searches
-    PFUser *currentUser = [PFUser currentUser];
-    self.filteredUsers = currentUser[@"searches"];
+    // Fetch recently searched users and load into table view
+    [self loadRecentSearches];
     
     // Fetch and save Parse user query
     [self loadUsers];
 }
 
+// Fetch and save users in the Parse database
 - (void) loadUsers {
-    // Construct PFQuery for users in the Parse database
+    // Construct PFQuery for all users in the Parse database
     PFQuery *userQuery = [PFUser query];
     [userQuery orderByAscending:@"username"];
+    [userQuery includeKey:@"username"];
 
     // Fetch data asynchronously
     typeof(self) __weak weakSelf = self;
@@ -50,10 +52,38 @@
         typeof(weakSelf) strongSelf = weakSelf;  // strong by default
             if (strongSelf) {
                 if (users) {
-                    strongSelf.arrayOfUsers = users;
+                    strongSelf.allUsers = users;
                     
                 } else {
                     NSLog(@"😫😫😫 Error getting users: %@", error.localizedDescription);
+                }
+            }
+    }];
+}
+
+// Fetch current user's recent search history
+- (void) loadRecentSearches {
+    // Retrieve objectIds for user's recent searches
+    PFUser *currentUser = [PFUser currentUser];
+    NSArray *searchIds = currentUser[@"searches"];
+    
+    // Construct PFQuery to fetch Parse users for recent searches
+    PFQuery *userQuery = [PFUser query];
+    [userQuery orderByAscending:@"username"];
+    [userQuery includeKey:@"username"];
+    [userQuery whereKey:@"objectId" containedIn:searchIds];
+
+    // Fetch data asynchronously
+    typeof(self) __weak weakSelf = self;
+    [userQuery findObjectsInBackgroundWithBlock:^(NSArray<PFUser *> * _Nullable users, NSError * _Nullable error) {
+        typeof(weakSelf) strongSelf = weakSelf;  // strong by default
+            if (strongSelf) {
+                if (users) {
+                    strongSelf.filteredUsers = users;
+                    [self.tableView reloadData];
+                    
+                } else {
+                    NSLog(@"😫😫😫 Error getting recently searched users: %@", error.localizedDescription);
                 }
             }
     }];
@@ -79,7 +109,6 @@
     
     // Get and set the username for the cell
     PFUser *user = self.filteredUsers[indexPath.row];
-    [user fetchIfNeeded];
     cell.user = user;
     cell.usernameLabel.text = [NSString stringWithFormat:@"@%@", user.username];
     
@@ -97,19 +126,20 @@
 
 // Filtering of users for search bar
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    // If search bar is not empty, set title label to "Results" and find user matches
     if (searchText.length != 0) {
+        
         NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(PFUser *evaluatedObject, NSDictionary *bindings) {
             NSString *username = [NSString stringWithFormat:@"@%@", evaluatedObject.username];
             return [username containsString:searchText];
         }];
         
         // Reset array of user results based on search text matches
-        self.filteredUsers = [self.arrayOfUsers filteredArrayUsingPredicate:predicate];
+        self.filteredUsers = [self.allUsers filteredArrayUsingPredicate:predicate];
 
-    // If empty search bar, load in recent search history
+    // If empty search bar, load in recent search history and set title label to "Recent"
     } else {
-        PFUser *currentUser = [PFUser currentUser];
-        self.filteredUsers = currentUser[@"searches"];
+        [self loadRecentSearches];
     }
 
     [self.tableView reloadData];
@@ -120,16 +150,15 @@
     self.searchBar.showsCancelButton = YES;
 }
 
-// When user clicks cancel button, delete text and hide cancel button
+// When user clicks cancel button, show recent search history, delete text and hide cancel button
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
-    // Reset table view to recent search history
-    PFUser *currentUser = [PFUser currentUser];
-    self.filteredUsers = currentUser[@"searches"];
-    [self.tableView reloadData];
-    
+    // Configure search bar UI
     self.searchBar.showsCancelButton = NO;
     self.searchBar.text = @"";
     [self.searchBar resignFirstResponder];
+    
+    // Set title label to "Recent" and load in recent search history
+    [self loadRecentSearches];
 }
 
 
@@ -162,7 +191,7 @@
         
         // Add clicked user to Parse recent searches array
         NSMutableArray *searches = currentUser[@"searches"];
-        [searches addObject:tappedCell.user];
+        [searches addObject:tappedCell.user.objectId];
         currentUser[@"searches"] = searches;
         [currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
             if (error) {
