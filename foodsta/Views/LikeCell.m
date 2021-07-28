@@ -7,6 +7,10 @@
 
 #import "LikeCell.h"
 #import "Post.h"
+#import "ImageCell.h"
+
+@interface LikeCell() <ImageCellDelegate>
+@end
 
 @implementation LikeCell
 
@@ -80,6 +84,15 @@
             
         }
     }];
+}
+
+
+// MARK: ImageCellDelegate
+
+// If user double taps an unliked post's image, increment like count and set selected state of like button
+- (void)imageCell:(ImageCell *)imageCell didDoubleTap:(NSString *)likes {
+    [self.likeButton setTitle:likes forState:UIControlStateNormal];
+    [self.likeButton setSelected:YES];
 }
 
 @end

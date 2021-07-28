@@ -45,6 +45,12 @@
             }];
         }
         
+        // Use delegate to increment like count and set selected state of like button
+        int likeCount = [post.likeCount intValue];
+        likeCount++;
+        NSString *likes = [NSString stringWithFormat:@"%i", likeCount];
+        [self.delegate imageCell:self didDoubleTap:likes];
+        
         // Add newly liked post to user's "liked" array
         [liked addObject: post.objectId];
         currentUser[@"liked"] = liked;

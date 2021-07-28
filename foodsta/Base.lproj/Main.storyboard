@@ -1224,7 +1224,7 @@
                                 </connections>
                             </segmentedControl>
                             <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uJe-Q2-B5k">
-                                <rect key="frame" x="0.0" y="214" width="414" height="648"/>
+                                <rect key="frame" x="0.0" y="268" width="414" height="594"/>
                                 <connections>
                                     <segue destination="STZ-OE-q0u" kind="embed" identifier="toggleTabSegue" id="ySl-SW-ADB"/>
                                 </connections>
@@ -1299,7 +1299,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="3712" y="-2063"/>
+            <point key="canvasLocation" x="3711.594202898551" y="-2063.1696428571427"/>
         </scene>
         <!--Following-->
         <scene sceneID="ns6-E2-eq3">
@@ -2097,11 +2097,11 @@
             <objects>
                 <viewController id="555-na-0Qm" customClass="ContainerMapViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="RBO-Rq-qWf">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="549"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="594"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="UUG-8t-Zoz">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="549"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="594"/>
                             </mapView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="LaC-E7-DBU"/>
@@ -2128,11 +2128,11 @@
             <objects>
                 <viewController id="jmK-NT-Col" customClass="ContainerFeedViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5Xe-Ff-QvO">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="549"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="594"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Ggh-bL-v8n">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="500"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="545"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="usernameTimestampCell" rowHeight="56" id="iYI-R1-Swm" customClass="UsernameTimestampCell">
@@ -2482,8 +2482,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Z5l-gS-Txy"/>
-        <segue reference="GA1-AJ-bFi"/>
+        <segue reference="ySl-SW-ADB"/>
+        <segue reference="RhI-dF-yQE"/>
         <segue reference="Nt0-qg-eOt"/>
         <segue reference="fJp-VB-MIP"/>
         <segue reference="wId-7A-82a"/>

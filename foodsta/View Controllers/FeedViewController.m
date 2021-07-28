@@ -30,7 +30,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) FeedDataSource *feedDataSource;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
-
+@property (nonatomic, strong) NSMutableDictionary *likeDictionary;
 
 @end
 
@@ -54,6 +54,9 @@
     
     // Get timeline
     [self loadPosts:20];
+    
+    // Initialize dictionary storing like cells
+    self.likeDictionary = [[NSMutableDictionary alloc] init];
 }
 
 - (void) loadPosts: (int) numPosts {
@@ -196,8 +199,10 @@
         case PostCellModelTypeImage: {
             ImageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"imageCell" forIndexPath:indexPath];
             
-            // Convert file to image and set it to the image view
+            // Convert post image file set it to the image view
             if ([model.data isKindOfClass:[PFFileObject class]]) {
+                cell.post = model.post;
+                
                 PFFileObject *imageFile = model.data;
                 if (imageFile) {
                     NSURL *url = [NSURL URLWithString: imageFile.url];
@@ -206,11 +211,35 @@
                     cell.locationImage.image = photo;
                 }
             }
+            
+            // Get the index path for the Like Cell below
+            NSInteger likeSection = indexPath.section;
+            NSInteger likeRow = indexPath.row + 1;
+            NSIndexPath *likeIndexPath = [NSIndexPath indexPathForRow:likeRow inSection:likeSection];
+            
+            // Dequeue Like Cell, store it in the dictionary, and set it as the Image Cell's delegate
+            LikeCell *likeCell = [tableView dequeueReusableCellWithIdentifier:@"likeCell" forIndexPath:likeIndexPath];
+            NSString *key = [@(likeSection) stringValue];
+            [self.likeDictionary setObject:likeCell forKey:key];
+            cell.delegate = likeCell;
+            
             return cell;
         }
             
         case PostCellModelTypeLikeCount: {
-            LikeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"likeCell" forIndexPath:indexPath];
+            NSString *likeKey = [@(indexPath.section) stringValue];
+            LikeCell *cell;
+            
+            // If post has an image, the Like Cell has already been dequeued and stored in the dictionary
+            if ([self.likeDictionary objectForKey:likeKey]) {
+                cell = [self.likeDictionary objectForKey:likeKey];
+                [self.likeDictionary removeObjectForKey:likeKey];
+            
+            // If post does not has an image, need to dequeue the Like Cell
+            } else {
+                cell = [tableView dequeueReusableCellWithIdentifier:@"likeCell" forIndexPath:indexPath];
+            }
+            
             [cell.likeButton setSelected:NO];
             
             // Set selected state for like button if current user has already liked the post
