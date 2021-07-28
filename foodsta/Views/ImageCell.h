@@ -22,6 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) Post *post;
 @property (weak, nonatomic) IBOutlet UIImageView *likeHeart;
+@property (weak, nonatomic) IBOutlet UIImageView *containerLikeHeart;
 @property (nonatomic, weak) id<ImageCellDelegate> delegate;
 
 @end

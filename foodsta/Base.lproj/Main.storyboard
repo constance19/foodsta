@@ -1139,30 +1139,30 @@
             <objects>
                 <viewController id="RN1-DJ-c7o" customClass="ProfileViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3c7-4d-vMq">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ocr-Bu-l0f">
-                                <rect key="frame" x="20" y="108" width="107" height="107"/>
+                                <rect key="frame" x="20" y="76" width="107" height="107"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="107" id="UxK-hs-pP5"/>
                                     <constraint firstAttribute="width" constant="107" id="p5J-xA-fYo"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2D3-Lk-tSa">
-                                <rect key="frame" x="135" y="121" width="93" height="21"/>
+                                <rect key="frame" x="135" y="89" width="93" height="21"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="bio" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5qI-Gf-sDJ">
-                                <rect key="frame" x="135" y="154" width="259" height="20.5"/>
+                                <rect key="frame" x="135" y="122" width="259" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Following" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1NZ-GI-Kx0">
-                                <rect key="frame" x="279" y="186.5" width="72" height="21"/>
+                                <rect key="frame" x="279" y="154.5" width="72" height="21"/>
                                 <gestureRecognizers/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -1172,7 +1172,7 @@
                                 </connections>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5xN-3e-3B4">
-                                <rect key="frame" x="242" y="116.5" width="46" height="30"/>
+                                <rect key="frame" x="242" y="84.5" width="46" height="30"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                 <color key="tintColor" red="0.89479273560000006" green="0.85251945259999995" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <state key="normal" title="Follow">
@@ -1184,7 +1184,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="16" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Bp-xi-WHd">
-                                <rect key="frame" x="255" y="186.5" width="18" height="21"/>
+                                <rect key="frame" x="255" y="154.5" width="18" height="21"/>
                                 <gestureRecognizers/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -1194,7 +1194,7 @@
                                 </connections>
                             </label>
                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="16" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="29V-TN-9Zb">
-                                <rect key="frame" x="135" y="186.5" width="18" height="21"/>
+                                <rect key="frame" x="135" y="154.5" width="18" height="21"/>
                                 <gestureRecognizers/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -1204,7 +1204,7 @@
                                 </connections>
                             </label>
                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Followers" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fHg-Kd-seX">
-                                <rect key="frame" x="159" y="186.5" width="72" height="21"/>
+                                <rect key="frame" x="159" y="154.5" width="72" height="21"/>
                                 <gestureRecognizers/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -1214,7 +1214,7 @@
                                 </connections>
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="O1K-wq-Kes">
-                                <rect key="frame" x="0.0" y="229" width="414" height="32"/>
+                                <rect key="frame" x="0.0" y="197" width="414" height="32"/>
                                 <segments>
                                     <segment title="Map"/>
                                     <segment title="Feed"/>
@@ -2025,7 +2025,7 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="bAE-q7-G4k"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="rVn-bw-oPp">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -2251,18 +2251,31 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="128"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SA3-aL-Y1M">
+                                                <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SA3-aL-Y1M">
                                                     <rect key="frame" x="8" y="4" width="398" height="120"/>
+                                                </imageView>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="heart.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="vG7-8G-DDh">
+                                                    <rect key="frame" x="167" y="25.5" width="80" height="77.5"/>
+                                                    <color key="tintColor" systemColor="systemRedColor"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="80" id="ZfK-FP-Yat"/>
+                                                        <constraint firstAttribute="height" constant="80" id="h81-Oa-i1v"/>
+                                                    </constraints>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="SA3-aL-Y1M" firstAttribute="leading" secondItem="peP-oU-ZHd" secondAttribute="leading" constant="8" id="1A9-8w-lNH"/>
                                                 <constraint firstItem="SA3-aL-Y1M" firstAttribute="top" secondItem="peP-oU-ZHd" secondAttribute="top" constant="4" id="Ezs-pk-Kei"/>
                                                 <constraint firstAttribute="bottom" secondItem="SA3-aL-Y1M" secondAttribute="bottom" constant="4" id="MAr-Pu-9qB"/>
+                                                <constraint firstItem="SA3-aL-Y1M" firstAttribute="centerX" secondItem="peP-oU-ZHd" secondAttribute="centerX" id="OtX-kF-YzH"/>
                                                 <constraint firstAttribute="trailing" secondItem="SA3-aL-Y1M" secondAttribute="trailing" constant="8" id="VxY-U9-c6z"/>
+                                                <constraint firstItem="vG7-8G-DDh" firstAttribute="centerY" secondItem="peP-oU-ZHd" secondAttribute="centerY" id="mh7-1B-xY2"/>
+                                                <constraint firstItem="vG7-8G-DDh" firstAttribute="centerX" secondItem="peP-oU-ZHd" secondAttribute="centerX" id="ra6-mR-f5X"/>
+                                                <constraint firstItem="SA3-aL-Y1M" firstAttribute="centerY" secondItem="peP-oU-ZHd" secondAttribute="centerY" id="syE-fg-kKa"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="containerLikeHeart" destination="vG7-8G-DDh" id="a0t-8X-GC6"/>
                                             <outlet property="containerLocationImage" destination="SA3-aL-Y1M" id="lEj-bZ-zFs"/>
                                         </connections>
                                     </tableViewCell>
@@ -2282,6 +2295,7 @@
                                                     <state key="normal" title="1" image="heart" catalog="system">
                                                         <color key="titleColor" systemColor="labelColor"/>
                                                     </state>
+                                                    <state key="selected" image="heart.fill" catalog="system"/>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -2484,7 +2498,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="ySl-SW-ADB"/>
         <segue reference="RhI-dF-yQE"/>
-        <segue reference="Nt0-qg-eOt"/>
+        <segue reference="i0U-yA-jSZ"/>
         <segue reference="fJp-VB-MIP"/>
         <segue reference="wId-7A-82a"/>
     </inferredMetricsTieBreakers>

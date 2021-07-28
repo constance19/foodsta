@@ -93,6 +93,9 @@
 - (void)imageCell:(ImageCell *)imageCell didDoubleTap:(NSString *)likes {
     [self.likeButton setTitle:likes forState:UIControlStateNormal];
     [self.likeButton setSelected:YES];
+    
+    [self.containerLikeButton setTitle:likes forState:UIControlStateNormal];
+    [self.containerLikeButton setSelected:YES];
 }
 
 @end
