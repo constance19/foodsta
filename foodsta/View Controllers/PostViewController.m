@@ -23,6 +23,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *captionLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *likeHeart;
 @property (weak, nonatomic) IBOutlet UIView *popupView;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UIView *contentView;
 
 @end
 
@@ -34,7 +36,6 @@
     // Set rounded corners for the pop-up view
     self.popupView.layer.cornerRadius = 15;
     self.popupView.layer.masksToBounds = YES;
-    
     
     // Set username label
     PFUser *author = self.post.author;
@@ -140,8 +141,10 @@
 
 // Double tap to like gesture recognizer on the post image
 - (IBAction)doubleTapImage:(id)sender {
-    // Do not do anything if the post is already liked
+    
+    // If post is already liked, do not do anything except show the heart animation
     if (self.likeButton.isSelected) {
+        [self animateHeart];
         return;
     }
     
@@ -193,6 +196,11 @@
     }];
     
     // Animate heart that appears upon double tapping
+    [self animateHeart];
+}
+
+// Animate heart that appears upon double tapping
+- (void)animateHeart {
     [UIView animateWithDuration:0.3f delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
             self.likeHeart.transform = CGAffineTransformMakeScale(1.3, 1.3);
             self.likeHeart.alpha = 1.0;
