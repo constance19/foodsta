@@ -46,7 +46,6 @@
 - (void) loadUsers {
     // Construct PFQuery for all users in the Parse database
     PFQuery *userQuery = [PFUser query];
-    [userQuery orderByAscending:@"username"];
     [userQuery includeKey:@"username"];
 
     // Fetch data asynchronously
@@ -66,27 +65,41 @@
 
 // Fetch current user's recent search history
 - (void) loadRecentSearches {
-    // Retrieve objectIds for user's recent searches
+    // Retrieve Parse Search objects for user's recent searches
     PFUser *currentUser = [PFUser currentUser];
-    NSArray *searchIds = currentUser[@"searches"];
+    PFQuery *searchQuery = [PFQuery queryWithClassName:@"Search"];
+    [searchQuery includeKey:@"userId"];
+    [searchQuery includeKey:@"searchId"];
+    [searchQuery whereKey:@"userId" equalTo:currentUser.objectId];
+    [searchQuery orderByDescending:@"createdAt"];
     
-    // Construct PFQuery to fetch Parse users for recent searches
-    PFQuery *userQuery = [PFUser query];
-    [userQuery orderByAscending:@"username"];
-    [userQuery includeKey:@"username"];
-    [userQuery whereKey:@"objectId" containedIn:searchIds];
-
     // Fetch data asynchronously
     typeof(self) __weak weakSelf = self;
-    [userQuery findObjectsInBackgroundWithBlock:^(NSArray<PFUser *> * _Nullable users, NSError * _Nullable error) {
+    [searchQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable searchObjects, NSError * _Nullable error) {
         typeof(weakSelf) strongSelf = weakSelf;  // strong by default
             if (strongSelf) {
-                if (users) {
-                    strongSelf.filteredUsers = users;
-                    [self.tableView reloadData];
+                if (searchObjects) {
+                    // Make array of object IDs for searched users
+                    NSMutableArray *searchIds = [[NSMutableArray alloc] init];
+                    for (PFObject *searchObject in searchObjects) {
+                        [searchIds addObject:searchObject[@"searchId"]];
+                    }
                     
+                    // Make array of searched PFUsers
+                    NSMutableArray *searchUsers = [[NSMutableArray alloc] init];
+                    for (NSString *searchId in searchIds) {
+                        PFQuery *userQuery = [PFUser query];
+                        [userQuery whereKey:@"objectId" equalTo:searchId];
+                        NSArray *searchObject = [userQuery findObjects];
+                        [searchUsers addObject:searchObject[0]];
+                    }
+                    
+                    // Load recent search history into table view
+                    strongSelf.filteredUsers = searchUsers;
+                    [self.tableView reloadData];
+    
                 } else {
-                    NSLog(@"😫😫😫 Error getting recently searched users: %@", error.localizedDescription);
+                    NSLog(@"😫😫😫 Error getting search objects: %@", error.localizedDescription);
                 }
             }
     }];
@@ -180,30 +193,46 @@
         UserCell *tappedCell = sender;
         UINavigationController *navController = [segue destinationViewController];
         ProfileViewController *profileController = navController.topViewController;
-        profileController.user = tappedCell.user;
+        PFUser *searchUser = tappedCell.user;
+        profileController.user = searchUser;
         
-        // Initialize Parse recent searches array if necessary
+        // Determine whether the searched user is already in recent search history
         PFUser *currentUser = [PFUser currentUser];
-        if (currentUser[@"searches"] == nil) {
-            currentUser[@"searches"] = [[NSMutableArray alloc] init];
-        }
-        [currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-            if (error) {
-                NSLog(@"Error updating recent searches", error.localizedDescription);
-            } else {
-                NSLog(@"Successfully updated recent searches!");
-            }
+        PFQuery *searchedQuery = [PFQuery queryWithClassName:@"Search"];
+        [searchedQuery includeKey:@"userId"];
+        [searchedQuery includeKey:@"searchId"];
+        [searchedQuery whereKey:@"userId" equalTo:currentUser.objectId];
+        [searchedQuery whereKey:@"searchId" equalTo:searchUser.objectId];
+        
+        typeof(self) __weak weakSelf = self;
+        [searchedQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable searched, NSError * _Nullable error) {
+            typeof(weakSelf) strongSelf = weakSelf;  // strong by default
+                if (strongSelf) {
+                    // If in recent search history, remove old Parse Search object
+                    if (searched != nil && searched.count != 0) {
+                        PFObject *searchObject = searched[0];
+                        [searchedQuery getObjectInBackgroundWithId:searchObject.objectId block:^(PFObject *search, NSError *error) {
+                            // Delete search object from Parse
+                            [search deleteInBackground];
+                        }];
+                    }
+                }
         }];
         
-        // Add clicked user to recent search history and save to Parse
-        NSMutableArray *searches = currentUser[@"searches"];
-        [searches insertObject:tappedCell.user.objectId atIndex:0];
-        currentUser[@"searches"] = searches;
-        [currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-            if (error) {
-                NSLog(@"Error updating recent searches", error.localizedDescription);
+        // TODO: remove oldest search object if already 10 search objects with userId = currentUser
+                        
+        // Add newly searched user to recent search history and save to Parse
+        PFObject *search = [PFObject objectWithClassName:@"Search"];
+        search[@"userId"] = currentUser.objectId;
+        search[@"searchId"] = searchUser.objectId;
+
+        [search saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            if (succeeded) {
+                NSLog(@"Successfully added to search history");
+                                      
             } else {
-                NSLog(@"Successfully updated recent searches!");
+                // There was a problem, check error.description
+                NSLog(@"%@", error.localizedDescription);
             }
         }];
     }
