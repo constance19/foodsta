@@ -219,7 +219,27 @@
                 }
         }];
         
-        // TODO: remove oldest search object if already 10 search objects with userId = currentUser
+        // Remove oldest Search object if recent search history is full
+        PFQuery *limitQuery = [PFQuery queryWithClassName:@"Search"];
+        [limitQuery includeKey:@"userId"];
+        [limitQuery includeKey:@"searchId"];
+        [limitQuery whereKey:@"userId" equalTo:currentUser.objectId];
+        [limitQuery orderByAscending:@"createdAt"];
+        
+        [limitQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable searchHistory, NSError * _Nullable error) {
+            typeof(weakSelf) strongSelf = weakSelf;  // strong by default
+                if (strongSelf) {
+                    
+                    // If recent search history is full, remove oldest search
+                    if (searchHistory.count == 10) {
+                        PFObject *oldestSearch = searchHistory[0];
+                        [limitQuery getObjectInBackgroundWithId:oldestSearch.objectId block:^(PFObject *search, NSError *error) {
+                            // Delete search object from Parse
+                            [search deleteInBackground];
+                        }];
+                    }
+                }
+        }];
                         
         // Add newly searched user to recent search history and save to Parse
         PFObject *search = [PFObject objectWithClassName:@"Search"];
