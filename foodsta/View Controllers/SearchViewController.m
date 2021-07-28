@@ -32,6 +32,9 @@
     self.searchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
     self.searchBar.placeholder = NSLocalizedString(@"Search for user...", @"Tells the user to search for a user");
     
+    // Set title label to "Recent"
+    self.titleLabel.text = NSLocalizedString(@"Recent", @"Tells the user the displayed users are recent searches");
+    
     // Fetch recently searched users and load into table view
     [self loadRecentSearches];
     
@@ -128,6 +131,7 @@
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     // If search bar is not empty, set title label to "Results" and find user matches
     if (searchText.length != 0) {
+        self.titleLabel.text = NSLocalizedString(@"Results", @"Tells the user the displayed users are search results");
         
         NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(PFUser *evaluatedObject, NSDictionary *bindings) {
             NSString *username = [NSString stringWithFormat:@"@%@", evaluatedObject.username];
@@ -137,8 +141,9 @@
         // Reset array of user results based on search text matches
         self.filteredUsers = [self.allUsers filteredArrayUsingPredicate:predicate];
 
-    // If empty search bar, load in recent search history and set title label to "Recent"
+    // If empty search bar, set title label to "Recent" and load in recent search history
     } else {
+        self.titleLabel.text = NSLocalizedString(@"Recent", @"Tells the user the displayed users are recent searches");
         [self loadRecentSearches];
     }
 
@@ -150,7 +155,7 @@
     self.searchBar.showsCancelButton = YES;
 }
 
-// When user clicks cancel button, show recent search history, delete text and hide cancel button
+// When user clicks cancel button, delete text, hide cancel button, and show recent search history
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
     // Configure search bar UI
     self.searchBar.showsCancelButton = NO;
@@ -158,6 +163,7 @@
     [self.searchBar resignFirstResponder];
     
     // Set title label to "Recent" and load in recent search history
+    self.titleLabel.text = NSLocalizedString(@"Recent", @"Tells the user the displayed users are recent searches");
     [self loadRecentSearches];
 }
 
@@ -189,9 +195,9 @@
             }
         }];
         
-        // Add clicked user to Parse recent searches array
+        // Add clicked user to recent search history and save to Parse
         NSMutableArray *searches = currentUser[@"searches"];
-        [searches addObject:tappedCell.user.objectId];
+        [searches insertObject:tappedCell.user.objectId atIndex:0];
         currentUser[@"searches"] = searches;
         [currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
             if (error) {
