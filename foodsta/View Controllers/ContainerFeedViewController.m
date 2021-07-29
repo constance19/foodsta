@@ -20,6 +20,7 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSMutableDictionary *likeDictionary;
+@property (nonatomic, strong) UIRefreshControl *refreshControl;
 
 @end
 
@@ -44,6 +45,12 @@
     
     // Initialize dictionary storing like cells
     self.likeDictionary = [[NSMutableDictionary alloc] init];
+    
+    // Pull to refresh
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl setTintColor:[UIColor blackColor]];
+    [refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
+    [self.tableView insertSubview:refreshControl atIndex:0];
 }
 
 - (void) loadPosts {
@@ -77,6 +84,13 @@
             }
     }];
 }
+
+// Makes a network request to get updated data to refresh the tableView
+- (void)beginRefresh:(UIRefreshControl *)refreshControl {
+    [self loadPosts];
+    [refreshControl endRefreshing];
+}
+
 
 // MARK: UITableViewDataSource
 

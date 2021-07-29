@@ -398,9 +398,9 @@
             filePath = "foodsta/View Controllers/SearchViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "273"
-            endingLineNumber = "273"
-            landmarkName = "-prepareForSegue:sender:"
+            startingLineNumber = "267"
+            endingLineNumber = "267"
+            landmarkName = "-onTapClear:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -462,9 +462,9 @@
             filePath = "foodsta/View Controllers/SearchViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "262"
-            endingLineNumber = "262"
-            landmarkName = "-prepareForSegue:sender:"
+            startingLineNumber = "256"
+            endingLineNumber = "256"
+            landmarkName = "-onTapClear:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
