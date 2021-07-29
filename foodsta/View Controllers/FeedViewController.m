@@ -200,7 +200,7 @@
             ImageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"imageCell" forIndexPath:indexPath];
             
             // Convert post image file set it to the image view
-            if ([model.data isKindOfClass:[PFFileObject class]]) {
+            if ([model.data isKindOfClass:[PFFileObject class]] && [model.post isKindOfClass: [Post class]]) {
                 cell.post = model.post;
                 
                 PFFileObject *imageFile = model.data;

@@ -26,6 +26,14 @@
 }
 
 - (IBAction)onTapLike:(id)sender {
+    [self likePost:self.likeButton];
+}
+
+- (IBAction)onTapContainerLike:(id)sender {
+    [self likePost:self.containerLikeButton];
+}
+
+- (void) likePost:(UIButton *)likeButton {
     PFUser *currentUser = [PFUser currentUser];
     Post *post = self.post;
     int likeCount = [post.likeCount intValue];
@@ -43,11 +51,11 @@
     }
     
     // Unlike
-    if (self.likeButton.isSelected) {
+    if ([currentUser[@"liked"] containsObject:post.objectId]) {
         likeCount--;
         NSString *likes = [NSString stringWithFormat:@"%i", likeCount];
-        [self.likeButton setTitle:likes forState:UIControlStateNormal];
-        [self.likeButton setSelected:NO];
+        [likeButton setTitle:likes forState:UIControlStateNormal];
+        [likeButton setSelected:NO];
         
         NSMutableArray *liked = currentUser[@"liked"];
         [liked removeObject: post.objectId];
@@ -57,8 +65,8 @@
     } else {
         likeCount++;
         NSString *likes = [NSString stringWithFormat:@"%i", likeCount];
-        [self.likeButton setTitle:likes forState:UIControlStateNormal];
-        [self.likeButton setSelected:YES];
+        [likeButton setTitle:likes forState:UIControlStateNormal];
+        [likeButton setSelected:YES];
         
         NSMutableArray *liked = currentUser[@"liked"];
         [liked addObject: post.objectId];
@@ -85,7 +93,6 @@
         }
     }];
 }
-
 
 // MARK: ImageCellDelegate
 

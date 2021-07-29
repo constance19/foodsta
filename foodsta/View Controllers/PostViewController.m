@@ -96,7 +96,7 @@
     }
     
     // Unlike
-    if (self.likeButton.isSelected) {
+    if ([currentUser[@"liked"] containsObject:post.objectId]) {
         likeCount--;
         NSString *likes = [NSString stringWithFormat:@"%i", likeCount];
         [self.likeButton setTitle:likes forState:UIControlStateNormal];

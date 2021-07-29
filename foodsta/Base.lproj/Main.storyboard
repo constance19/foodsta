@@ -2296,6 +2296,9 @@
                                                         <color key="titleColor" systemColor="labelColor"/>
                                                     </state>
                                                     <state key="selected" image="heart.fill" catalog="system"/>
+                                                    <connections>
+                                                        <action selector="onTapContainerLike:" destination="F1B-5C-hm6" eventType="touchUpInside" id="8Tu-iS-VWR"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
