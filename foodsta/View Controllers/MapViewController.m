@@ -39,6 +39,7 @@
     
     self.mapView.delegate = self;
     self.mapView.showsUserLocation = YES;
+    [self.mapView setShowsScale:YES];
     
     // Add custom annotation views for check-in locations
     [self makeAnnotations];
@@ -164,6 +165,19 @@
     [self makeAnnotations];
 }
 
+- (IBAction)zoomIn:(id)sender {
+    MKCoordinateRegion region = self.mapView.region;
+    region.span.latitudeDelta /= 2.0;
+    region.span.longitudeDelta /= 2.0;
+    [self.mapView setRegion:region animated:YES];
+}
+
+- (IBAction)zoomOut:(id)sender {
+    MKCoordinateRegion region = self.mapView.region;
+    region.span.latitudeDelta  = MIN(region.span.latitudeDelta  * 2.0, 180.0);
+    region.span.longitudeDelta = MIN(region.span.longitudeDelta * 2.0, 180.0);
+    [self.mapView setRegion:region animated:YES];
+}
 
 // Resizing input post image to fit the annotation pin callout
 - (UIImage *)resizeImage:(UIImage *)image withSize:(CGSize)size {
