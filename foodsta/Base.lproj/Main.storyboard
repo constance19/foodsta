@@ -2104,12 +2104,22 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="UUG-8t-Zoz">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="594"/>
                             </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="scy-t9-9Cq">
+                                <rect key="frame" x="376" y="14" width="18" height="22"/>
+                                <color key="tintColor" systemColor="labelColor"/>
+                                <state key="normal" image="arrow.clockwise" catalog="system"/>
+                                <connections>
+                                    <action selector="onTapRefresh:" destination="555-na-0Qm" eventType="touchUpInside" id="ScX-L0-gJN"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="LaC-E7-DBU"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="scy-t9-9Cq" firstAttribute="top" secondItem="RBO-Rq-qWf" secondAttribute="top" constant="14" id="2Jo-49-h5Q"/>
                             <constraint firstAttribute="bottom" secondItem="UUG-8t-Zoz" secondAttribute="bottom" id="GF5-C1-a1g"/>
                             <constraint firstItem="UUG-8t-Zoz" firstAttribute="trailing" secondItem="LaC-E7-DBU" secondAttribute="trailing" id="NBh-gL-iJG"/>
+                            <constraint firstAttribute="trailing" secondItem="scy-t9-9Cq" secondAttribute="trailing" constant="20" symbolic="YES" id="XaC-00-LcU"/>
                             <constraint firstItem="UUG-8t-Zoz" firstAttribute="leading" secondItem="LaC-E7-DBU" secondAttribute="leading" id="ePO-Be-IjD"/>
                             <constraint firstItem="UUG-8t-Zoz" firstAttribute="top" secondItem="RBO-Rq-qWf" secondAttribute="top" id="x1C-F2-Fr3"/>
                         </constraints>
@@ -2122,7 +2132,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kOb-t1-jJZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5580" y="-666"/>
+            <point key="canvasLocation" x="5579.7101449275369" y="-666.29464285714278"/>
         </scene>
         <!--Container Feed View Controller-->
         <scene sceneID="tG6-kW-XXf">

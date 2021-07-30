@@ -125,6 +125,22 @@
     return newImage;
 }
 
+- (IBAction)onTapRefresh:(id)sender {
+    // Get array of all annotations except the user's current location
+    id userLocation = [self.mapView userLocation];
+    NSMutableArray *pins = [[NSMutableArray alloc] initWithArray:[self.mapView annotations]];
+    if (userLocation != nil ) {
+        [pins removeObject:userLocation]; // avoid removing user location off the map
+    }
+
+    // Remove the pins from the map
+    [self.mapView removeAnnotations:pins];
+    pins = nil;
+    
+    // Refresh: add the updated annotations
+    [self makeAnnotations];
+}
+
 
 // MARK: MKMapViewDelegate
 
