@@ -123,6 +123,11 @@
         }
     }];
     
+    // Clear displayed recent searches immediately if search bar is empty
+    if ([self.searchBar.text isEqualToString: @""]) {
+        self.filteredUsers = [[NSArray alloc] init];
+    }
+    
     [self.tableView reloadData];
 }
 
