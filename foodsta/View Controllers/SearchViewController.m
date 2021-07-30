@@ -105,6 +105,27 @@
     }];
 }
 
+// Delete current user's search history from Parse
+- (IBAction)onTapClear:(id)sender {
+    // Retrieve query of current user's search history
+    PFUser *currentUser = [PFUser currentUser];
+    PFQuery *searchQuery = [PFQuery queryWithClassName:@"Search"];
+    [searchQuery includeKey:@"userId"];
+    [searchQuery includeKey:@"searchId"];
+    [searchQuery whereKey:@"userId" equalTo:currentUser.objectId];
+
+    // Delete user's Parse search history
+    [searchQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable searchHistory, NSError * _Nullable error) {
+        if (searchHistory) {
+            [PFObject deleteAllInBackground:searchHistory];
+        } else {
+            NSLog(@"😫😫😫 Error getting search objects: %@", error.localizedDescription);
+        }
+    }];
+    
+    [self.tableView reloadData];
+}
+
 -(IBAction)prepareForUnwind:(UIStoryboardSegue *)segue {
 }
 
