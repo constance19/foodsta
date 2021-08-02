@@ -167,8 +167,12 @@
 
 // Refresh the annotations on the map
 - (IBAction)onTapRefresh:(id)sender {
+    // Re-zoom into user's current location
+    MKUserLocation *userLocation = [self.mapView userLocation];
+    MKCoordinateRegion region = MKCoordinateRegionMake(CLLocationCoordinate2DMake(userLocation.coordinate.latitude, userLocation.coordinate.longitude), MKCoordinateSpanMake(0.1, 0.1));
+    [self.mapView setRegion:region animated:YES];
+    
     // Get array of all annotations except the user's current location
-    id userLocation = [self.mapView userLocation];
     NSMutableArray *pins = [[NSMutableArray alloc] initWithArray:[self.mapView annotations]];
     if (userLocation != nil ) {
         [pins removeObject:userLocation]; // avoid removing user location off the map
