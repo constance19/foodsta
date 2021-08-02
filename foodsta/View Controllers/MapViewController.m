@@ -22,6 +22,8 @@
 @property (nonatomic, strong) NSArray *arrayOfPosts;
 @property (nonatomic, strong) NSArray *arrayOfLocations;
 @property (nonatomic) CLLocationManager *locationManager;
+@property (weak, nonatomic) IBOutlet UIButton *zoomInButton;
+@property (weak, nonatomic) IBOutlet UIButton *zoomOutButton;
 
 @end
 
@@ -43,6 +45,21 @@
     
     // Add custom annotation views for check-in locations
     [self makeAnnotations];
+    
+    // Round corners of zooming buttons
+    CAShapeLayer * topCorners = [CAShapeLayer layer];
+    topCorners.path = [UIBezierPath bezierPathWithRoundedRect: self.zoomInButton.bounds
+                                                byRoundingCorners: UIRectCornerTopLeft | UIRectCornerTopRight
+                                                      cornerRadii: (CGSize){7.5, 7.5}].CGPath;
+
+    self.zoomInButton.layer.mask = topCorners;
+    
+    CAShapeLayer * bottomCorners = [CAShapeLayer layer];
+    bottomCorners.path = [UIBezierPath bezierPathWithRoundedRect: self.zoomOutButton.bounds
+                                                byRoundingCorners: UIRectCornerBottomLeft | UIRectCornerBottomRight
+                                                      cornerRadii: (CGSize){7.5, 7.5}].CGPath;
+
+    self.zoomOutButton.layer.mask = bottomCorners;
 }
 
 - (void)makeAnnotations {

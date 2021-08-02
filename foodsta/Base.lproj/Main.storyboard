@@ -1415,7 +1415,12 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="808"/>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VwO-lu-lvg">
-                                <rect key="frame" x="376" y="148" width="18" height="22"/>
+                                <rect key="frame" x="369" y="118" width="30" height="35"/>
+                                <color key="backgroundColor" systemColor="systemGray4Color"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="lWB-WB-fyu"/>
+                                    <constraint firstAttribute="height" constant="35" id="mN0-Px-nWP"/>
+                                </constraints>
                                 <color key="tintColor" systemColor="labelColor"/>
                                 <state key="normal" image="plus" catalog="system"/>
                                 <connections>
@@ -1423,7 +1428,12 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ig7-o3-U4K">
-                                <rect key="frame" x="376" y="187" width="18" height="22"/>
+                                <rect key="frame" x="369" y="153" width="30" height="35"/>
+                                <color key="backgroundColor" systemColor="systemGray4Color"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="Qxn-7m-lhS"/>
+                                    <constraint firstAttribute="height" constant="35" id="TBv-tt-fwj"/>
+                                </constraints>
                                 <color key="tintColor" systemColor="labelColor"/>
                                 <state key="normal" image="minus" catalog="system"/>
                                 <connections>
@@ -1434,14 +1444,14 @@
                         <viewLayoutGuide key="safeArea" id="npT-ag-pMG"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="VwO-lu-lvg" firstAttribute="top" secondItem="npT-ag-pMG" secondAttribute="top" constant="60" id="AIe-aJ-AwN"/>
+                            <constraint firstItem="VwO-lu-lvg" firstAttribute="top" secondItem="npT-ag-pMG" secondAttribute="top" constant="30" id="AIe-aJ-AwN"/>
                             <constraint firstAttribute="bottom" secondItem="4q7-eS-FiM" secondAttribute="bottom" id="Juz-zT-tov"/>
-                            <constraint firstItem="npT-ag-pMG" firstAttribute="trailing" secondItem="Ig7-o3-U4K" secondAttribute="trailing" constant="20" id="KOq-lQ-S59"/>
+                            <constraint firstItem="npT-ag-pMG" firstAttribute="trailing" secondItem="Ig7-o3-U4K" secondAttribute="trailing" constant="15" id="KOq-lQ-S59"/>
                             <constraint firstItem="4q7-eS-FiM" firstAttribute="trailing" secondItem="npT-ag-pMG" secondAttribute="trailing" id="KUc-AB-0jH"/>
-                            <constraint firstItem="Ig7-o3-U4K" firstAttribute="top" secondItem="VwO-lu-lvg" secondAttribute="bottom" constant="17" id="dbp-u2-3hG"/>
+                            <constraint firstItem="Ig7-o3-U4K" firstAttribute="top" secondItem="VwO-lu-lvg" secondAttribute="bottom" id="dbp-u2-3hG"/>
                             <constraint firstItem="4q7-eS-FiM" firstAttribute="top" secondItem="npT-ag-pMG" secondAttribute="top" id="e6p-Ys-OKi"/>
                             <constraint firstItem="4q7-eS-FiM" firstAttribute="leading" secondItem="npT-ag-pMG" secondAttribute="leading" id="fQx-eu-Nmt"/>
-                            <constraint firstItem="npT-ag-pMG" firstAttribute="trailing" secondItem="VwO-lu-lvg" secondAttribute="trailing" constant="20" id="igT-W5-fvF"/>
+                            <constraint firstItem="npT-ag-pMG" firstAttribute="trailing" secondItem="VwO-lu-lvg" secondAttribute="trailing" constant="15" id="igT-W5-fvF"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Friend Map" id="d4E-CI-jsV">
@@ -1458,12 +1468,14 @@
                     </navigationItem>
                     <connections>
                         <outlet property="mapView" destination="4q7-eS-FiM" id="3ji-pV-Wo8"/>
+                        <outlet property="zoomInButton" destination="VwO-lu-lvg" id="5Gs-hu-CJU"/>
+                        <outlet property="zoomOutButton" destination="Ig7-o3-U4K" id="zaL-4W-B8O"/>
                         <segue destination="oAG-T5-xY1" kind="presentation" identifier="annotationPostSegue" id="fJp-VB-MIP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RGe-It-yTj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2158" y="2581"/>
+            <point key="canvasLocation" x="2157.971014492754" y="2580.8035714285711"/>
         </scene>
         <!--Recent Check-Ins-->
         <scene sceneID="idz-Ab-fW0">
@@ -2553,7 +2565,7 @@
         <segue reference="ySl-SW-ADB"/>
         <segue reference="RhI-dF-yQE"/>
         <segue reference="9pE-Xq-XYn"/>
-        <segue reference="VHv-ao-zGH"/>
+        <segue reference="fJp-VB-MIP"/>
         <segue reference="wId-7A-82a"/>
     </inferredMetricsTieBreakers>
     <resources>
@@ -2584,6 +2596,9 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray4Color">
+            <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
