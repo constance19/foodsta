@@ -25,9 +25,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *bioLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *profileImage;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *feedMapToggle;
 @property (weak, nonatomic) IBOutlet UILabel *followerCount;
 @property (weak, nonatomic) IBOutlet UILabel *followingCount;
-@property (weak, nonatomic) IBOutlet UISegmentedControl *feedMapToggle;
+@property (weak, nonatomic) IBOutlet UILabel *followersLabel;
+@property (weak, nonatomic) IBOutlet UILabel *followingLabel;
 
 @end
 
@@ -66,9 +68,9 @@
             if (strongSelf) {
                 if (following != nil) {
                     int count = following.count;
-                    strongSelf.followingCount.text = [NSString stringWithFormat: @"%d", count];
+                    strongSelf.followingCount.text = [@" " stringByAppendingString:[NSString stringWithFormat: @"%d", count]];
                 } else {
-                    strongSelf.followingCount.text = @"0";
+                    strongSelf.followingCount.text = @" 0";
                 }
             }
     }];
@@ -85,12 +87,52 @@
             if (strongSelf) {
                 if (followers != nil) {
                     int count = followers.count;
-                    strongSelf.followerCount.text = [NSString stringWithFormat: @"%d", count];
+                    strongSelf.followerCount.text = [@" " stringByAppendingString:[NSString stringWithFormat: @"%d", count]];
                 } else {
-                    strongSelf.followerCount.text = @"0";
+                    strongSelf.followerCount.text = @" 0";
                 }
             }
     }];
+    
+    // Round follower count label corners
+    CGRect bounds = self.followerCount.bounds;
+    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:bounds
+                                                   byRoundingCorners:(UIRectCornerTopLeft | UIRectCornerBottomLeft)
+                                                         cornerRadii:CGSizeMake(5.0, 5.0)];
+    CAShapeLayer *maskLayer = [CAShapeLayer layer];
+    maskLayer.frame = bounds;
+    maskLayer.path = maskPath.CGPath;
+    self.followerCount.layer.mask = maskLayer;
+    
+    // Round followers label corners
+    CGRect bounds2 = self.followersLabel.bounds;
+    UIBezierPath *maskPath2 = [UIBezierPath bezierPathWithRoundedRect:bounds2
+                                                   byRoundingCorners:(UIRectCornerTopRight | UIRectCornerBottomRight)
+                                                          cornerRadii:CGSizeMake(5.0, 5.0)];
+    CAShapeLayer *maskLayer2 = [CAShapeLayer layer];
+    maskLayer2.frame = bounds2;
+    maskLayer2.path = maskPath2.CGPath;
+    self.followersLabel.layer.mask = maskLayer2;
+    
+    // Round following count label corners
+    CGRect bounds3 = self.followingCount.bounds;
+    UIBezierPath *maskPath3 = [UIBezierPath bezierPathWithRoundedRect:bounds3
+                                                   byRoundingCorners:(UIRectCornerTopLeft | UIRectCornerBottomLeft)
+                                                          cornerRadii:CGSizeMake(5.0, 5.0)];
+    CAShapeLayer *maskLayer3 = [CAShapeLayer layer];
+    maskLayer3.frame = bounds3;
+    maskLayer3.path = maskPath3.CGPath;
+    self.followingCount.layer.mask = maskLayer3;
+    
+    // Round following label corners
+    CGRect bounds4 = self.followingLabel.bounds;
+    UIBezierPath *maskPath4 = [UIBezierPath bezierPathWithRoundedRect:bounds4
+                                                   byRoundingCorners:(UIRectCornerTopRight | UIRectCornerBottomRight)
+                                                          cornerRadii:CGSizeMake(5.0, 5.0)];
+    CAShapeLayer *maskLayer4 = [CAShapeLayer layer];
+    maskLayer4.frame = bounds4;
+    maskLayer4.path = maskPath4.CGPath;
+    self.followingLabel.layer.mask = maskLayer4;
 }
 
 - (IBAction)onTapLogout:(id)sender {

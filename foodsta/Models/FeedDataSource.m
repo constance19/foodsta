@@ -50,7 +50,7 @@
         model.post = post;
         
         PFUser *user = post.author;
-        NSString *username = [NSString stringWithFormat:@"@%@", user.username];
+        NSString *username = [[@" " stringByAppendingString: [NSString stringWithFormat:@"@%@", user.username]] stringByAppendingString: @" "];
         
         // Format and set createdAtString, convert Date to String using DateTool relative time
         NSDate *createdAt = post.createdAt;
