@@ -188,10 +188,12 @@
             LocationNameCell *cell = [tableView dequeueReusableCellWithIdentifier:@"locationCell" forIndexPath:indexPath];
             
             // Set location view text that links to Yelp webpage
-            if ([model.data isKindOfClass: [NSMutableAttributedString class]]) {
+            if ([model.data isKindOfClass: [NSAttributedString class]]) {
                 cell.locationView.attributedText = model.data;
                 cell.locationView.dataDetectorTypes = UIDataDetectorTypeLink;
                 [cell.locationView setFont:[UIFont systemFontOfSize:19]];
+                UIColor *myGreen = [UIColor colorWithRed:0.462 green:0.648 blue:0.642 alpha:1];
+                cell.locationView.linkTextAttributes = @{NSForegroundColorAttributeName:myGreen};
             }
             return cell;
         }
