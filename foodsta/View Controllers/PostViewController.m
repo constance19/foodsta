@@ -37,9 +37,13 @@
     self.popupView.layer.cornerRadius = 15;
     self.popupView.layer.masksToBounds = YES;
     
+    // Set rounded corners of username label
+    self.usernameLabel.layer.masksToBounds = YES;
+    self.usernameLabel.layer.cornerRadius = 8.0;
+    
     // Set username label
     PFUser *author = self.post.author;
-    NSString *username = [NSString stringWithFormat:@"@%@", author.username];
+    NSString *username = [[@" " stringByAppendingString:[NSString stringWithFormat:@"@%@", author.username]] stringByAppendingString:@" "];
     self.usernameLabel.text = username;
     
     // Format and set createdAtString, convert Date to String using DateTool relative time for timestamp label
@@ -52,7 +56,7 @@
     [locationLink addAttribute: NSLinkAttributeName value: self.post.locationUrl range: NSMakeRange(0, locationLink.length)];
     self.locationView.attributedText = locationLink;
     self.locationView.dataDetectorTypes = UIDataDetectorTypeLink;
-    [self.locationView setFont:[UIFont systemFontOfSize:19]];
+    [self.locationView setFont:[UIFont systemFontOfSize:19 weight:UIFontWeightLight]];
     
     // Set rating view
     self.ratingView.value = [self.post.rating doubleValue];

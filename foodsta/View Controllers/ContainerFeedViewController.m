@@ -129,7 +129,7 @@
             if ([model.data isKindOfClass: [NSMutableAttributedString class]]) {
                 cell.containerLocationView.attributedText = model.data;
                 cell.containerLocationView.dataDetectorTypes = UIDataDetectorTypeLink;
-                [cell.containerLocationView setFont:[UIFont systemFontOfSize:19]];
+                [cell.containerLocationView setFont:[UIFont systemFontOfSize:19 weight:UIFontWeightLight]];
             }
             return cell;
         }
