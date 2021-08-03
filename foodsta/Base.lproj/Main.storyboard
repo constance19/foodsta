@@ -962,14 +962,14 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="locationCell" id="XSS-9J-5Ve" customClass="LocationNameCell">
-                                        <rect key="frame" x="0.0" y="77" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="77" width="414" height="43"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="XSS-9J-5Ve" id="fUV-3v-Eyu">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="Location" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="duq-PX-BtK">
-                                                    <rect key="frame" x="48" y="5.5" width="358" height="34"/>
+                                                    <rect key="frame" x="48" y="5" width="358" height="34"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="34" id="2jZ-UM-LNN"/>
@@ -979,7 +979,7 @@
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 </textView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="📍" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AUM-Ik-SEY">
-                                                    <rect key="frame" x="24" y="11.5" width="23" height="21.5"/>
+                                                    <rect key="frame" x="24" y="11.5" width="23" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -999,7 +999,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="ratingCell" id="Pss-Q0-Ye1" customClass="RatingCell">
-                                        <rect key="frame" x="0.0" y="120.5" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="120" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Pss-Q0-Ye1" id="MkR-Rc-S3J">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -1014,15 +1014,13 @@
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="allowsHalfStars" value="YES"/>
-                                                        <userDefinedRuntimeAttribute type="image" keyPath="emptyStarImage">
-                                                            <imageReference key="value" image="star" catalog="system" renderingMode="template"/>
-                                                        </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="image" keyPath="halfStarImage">
-                                                            <imageReference key="value" image="star.leadinghalf.fill" catalog="system" renderingMode="template"/>
+                                                            <imageReference key="value" image="star-half" renderingMode="template"/>
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="image" keyPath="filledStarImage">
-                                                            <imageReference key="value" image="star.fill" catalog="system" renderingMode="template"/>
+                                                            <imageReference key="value" image="star-fill" renderingMode="template"/>
                                                         </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="image" keyPath="emptyStarImage" value="star-empty"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                             </subviews>
@@ -1036,7 +1034,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="imageCell" rowHeight="214" id="gzt-Tm-4VK" customClass="ImageCell">
-                                        <rect key="frame" x="0.0" y="164" width="414" height="214"/>
+                                        <rect key="frame" x="0.0" y="163.5" width="414" height="214"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gzt-Tm-4VK" id="3dw-Cb-vqN">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="214"/>
@@ -1070,7 +1068,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="likeCell" id="zv1-qr-Bhz" customClass="LikeCell">
-                                        <rect key="frame" x="0.0" y="378" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="377.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zv1-qr-Bhz" id="GA7-3l-wsJ">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -1101,7 +1099,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="captionCell" id="PT1-u4-JXB" customClass="CaptionCell">
-                                        <rect key="frame" x="0.0" y="421.5" width="414" height="43"/>
+                                        <rect key="frame" x="0.0" y="421" width="414" height="43"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PT1-u4-JXB" id="LxW-GB-eeV">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43"/>
@@ -1164,7 +1162,7 @@
             <objects>
                 <viewController id="RN1-DJ-c7o" customClass="ProfileViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3c7-4d-vMq">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="495"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ocr-Bu-l0f">
@@ -2306,13 +2304,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="📍" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="64U-iK-At4">
-                                                    <rect key="frame" x="20" y="0.5" width="23" height="74"/>
+                                                    <rect key="frame" x="20" y="8" width="23" height="66.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" text="Location" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="CV0-h7-zCJ">
-                                                    <rect key="frame" x="44" y="4" width="362" height="67"/>
+                                                    <rect key="frame" x="44" y="23.5" width="362" height="36"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="36" id="lAM-cq-Wqy"/>
@@ -2323,13 +2321,11 @@
                                                 </textView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="CV0-h7-zCJ" firstAttribute="top" secondItem="ibb-Cf-p1k" secondAttribute="top" constant="4" id="0iX-tC-bby"/>
                                                 <constraint firstItem="64U-iK-At4" firstAttribute="leading" secondItem="ibb-Cf-p1k" secondAttribute="leading" constant="20" id="8C6-td-XPU"/>
-                                                <constraint firstItem="64U-iK-At4" firstAttribute="top" secondItem="ibb-Cf-p1k" secondAttribute="top" constant="0.5" id="BHs-0Z-bWE"/>
+                                                <constraint firstItem="64U-iK-At4" firstAttribute="top" secondItem="ibb-Cf-p1k" secondAttribute="top" constant="8" id="BHs-0Z-bWE"/>
                                                 <constraint firstItem="CV0-h7-zCJ" firstAttribute="centerY" secondItem="64U-iK-At4" secondAttribute="centerY" id="HmT-TO-DmM"/>
                                                 <constraint firstAttribute="trailing" secondItem="CV0-h7-zCJ" secondAttribute="trailing" constant="8" id="MST-iD-dA6"/>
                                                 <constraint firstItem="CV0-h7-zCJ" firstAttribute="leading" secondItem="64U-iK-At4" secondAttribute="trailing" constant="1" id="bOM-FR-aS5"/>
-                                                <constraint firstAttribute="bottom" secondItem="CV0-h7-zCJ" secondAttribute="bottom" constant="4" id="j1m-7c-tI1"/>
                                                 <constraint firstAttribute="bottom" secondItem="64U-iK-At4" secondAttribute="bottom" constant="0.5" id="wvQ-0M-68Y"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -2345,7 +2341,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V5X-cP-Ubt" customClass="HCSStarRatingView">
-                                                    <rect key="frame" x="56" y="18" width="240" height="35"/>
+                                                    <rect key="frame" x="56" y="15" width="240" height="41"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <color key="tintColor" red="0.83984017369999997" green="0.8017378449" blue="0.937271297" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <constraints>
@@ -2354,19 +2350,20 @@
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="allowsHalfStars" value="YES"/>
                                                         <userDefinedRuntimeAttribute type="image" keyPath="emptyStarImage">
-                                                            <imageReference key="value" image="star" catalog="system" renderingMode="template"/>
+                                                            <imageReference key="value" image="star-empty" renderingMode="template"/>
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="image" keyPath="halfStarImage">
-                                                            <imageReference key="value" image="star.leadinghalf.fill" catalog="system" renderingMode="template"/>
+                                                            <imageReference key="value" image="star-half" renderingMode="template"/>
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="image" keyPath="filledStarImage">
-                                                            <imageReference key="value" image="star.fill" catalog="system" renderingMode="template"/>
+                                                            <imageReference key="value" image="star-fill" renderingMode="template"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="V5X-cP-Ubt" firstAttribute="leading" secondItem="wO2-Nd-7tC" secondAttribute="leading" constant="56" id="H6b-l3-U30"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="V5X-cP-Ubt" secondAttribute="bottom" constant="4" id="N4V-iS-WTH"/>
                                                 <constraint firstItem="V5X-cP-Ubt" firstAttribute="centerY" secondItem="wO2-Nd-7tC" secondAttribute="centerY" id="N6F-Lw-4RY"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -2441,14 +2438,14 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="captionCell" id="5GE-eg-aTM" customClass="CaptionCell">
-                                        <rect key="frame" x="0.0" y="398" width="414" height="43"/>
+                                        <rect key="frame" x="0.0" y="398" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5GE-eg-aTM" id="pgC-Hp-GND">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8fh-Ix-C7k">
-                                                    <rect key="frame" x="20" y="11" width="354" height="21"/>
+                                                    <rect key="frame" x="20" y="11" width="354" height="21.5"/>
                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -2654,7 +2651,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="Z5l-gS-Txy"/>
         <segue reference="Gcq-KO-dIm"/>
-        <segue reference="9pE-Xq-XYn"/>
+        <segue reference="i0U-yA-jSZ"/>
         <segue reference="VHv-ao-zGH"/>
         <segue reference="wId-7A-82a"/>
     </inferredMetricsTieBreakers>
@@ -2681,6 +2678,9 @@
         <image name="search-big" width="29" height="29"/>
         <image name="search-color" width="22" height="22"/>
         <image name="star" catalog="system" width="128" height="116"/>
+        <image name="star-empty" width="32" height="32"/>
+        <image name="star-fill" width="32" height="32"/>
+        <image name="star-half" width="32" height="32"/>
         <image name="star.fill" catalog="system" width="128" height="116"/>
         <image name="star.leadinghalf.fill" catalog="system" width="128" height="116"/>
         <image name="user-big" width="32" height="32"/>
