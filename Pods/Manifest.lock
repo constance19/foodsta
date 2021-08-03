@@ -1,6 +1,7 @@
 PODS:
   - Bolts/Tasks (1.9.1)
   - DateTools (2.0.0)
+  - FoldingTabBar (1.2.1)
   - HCSStarRatingView (1.5)
   - MBProgressHUD (1.2.0)
   - Parse (1.19.2):
@@ -12,6 +13,7 @@ PODS:
 
 DEPENDENCIES:
   - DateTools
+  - FoldingTabBar (~> 1.2.1)
   - HCSStarRatingView (~> 1.5)
   - MBProgressHUD
   - Parse
@@ -21,6 +23,7 @@ SPEC REPOS:
   trunk:
     - Bolts
     - DateTools
+    - FoldingTabBar
     - HCSStarRatingView
     - MBProgressHUD
     - Parse
@@ -28,10 +31,11 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Bolts: 8c1e8aab2f603387b8b9924f57d1d64f43d3ffdc
   DateTools: 933ac9c490f21f92127cf690ccd8c397e0126caf
+  FoldingTabBar: b1817b36d15eedefd8e42f66abbd36fe4feabcf2
   HCSStarRatingView: 1d18f79654735514cd6f00e6d90e38cb6320dc31
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   Parse: 081fb8755c3000fd11df817eec235def233d0af3
 
-PODFILE CHECKSUM: f6e9d3d12debc2f4eef335565d9b895e28a1a10d
+PODFILE CHECKSUM: 3afbe1110c53350d788bd9023a3b2b1048a6495e
 
 COCOAPODS: 1.10.1

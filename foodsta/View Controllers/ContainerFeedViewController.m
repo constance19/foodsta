@@ -224,18 +224,6 @@
 }
 
 
-// MARK: UITableViewDelegate
-
-// For separator between sections (posts)
-// TODO: fix UI of separator (too thick)
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-    CGRect sepFrame = CGRectMake(0, tableView.frame.size.height, self.view.bounds.size.width, 1);
-    UIView *separatorView =[[UIView alloc] initWithFrame:sepFrame];
-    separatorView.backgroundColor = tableView.separatorColor;
-    return separatorView;
-}
-
-
 /*
 #pragma mark - Navigation
 
