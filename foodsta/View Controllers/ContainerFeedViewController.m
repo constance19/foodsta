@@ -188,7 +188,7 @@
                 PFUser *currentUser = [PFUser currentUser];
                 Post *currentPost = model.post;
                 NSArray *liked = currentUser[@"liked"];
-                NSString *likeCount = [NSString stringWithFormat:@"%@", model.data];
+                NSString *likeCount = [@" " stringByAppendingString: [NSString stringWithFormat:@"%@", model.data]];
             
                 // Set selected state for like button
                 if ([liked containsObject:currentPost.objectId]) {

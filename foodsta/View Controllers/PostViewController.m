@@ -64,7 +64,7 @@
     // Set like count
     PFUser *currentUser = [PFUser currentUser];
     NSArray *liked = currentUser[@"liked"];
-    NSString *likeCount = [NSString stringWithFormat:@"%@", self.post.likeCount];
+    NSString *likeCount = [@" " stringByAppendingString:[NSString stringWithFormat:@"%@", self.post.likeCount]];
 
     // Set like button selected status
     if ([liked containsObject:self.post.objectId]) {
