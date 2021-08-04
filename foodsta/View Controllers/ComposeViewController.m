@@ -142,8 +142,15 @@ static NSString *const captionPlaceholder = @"Write a caption...";
         
         //Display HUD right before the request is made
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:TRUE];
+        
+        // Configure HUD UI
         hud.mode = MBProgressHUDModeDeterminate;
+        hud.square = YES;
+        hud.animationType = YES;
         hud.label.text = @"Posting...";
+        hud.label.font = [UIFont systemFontOfSize:16 weight:UIFontWeightLight];
+        UIColor *myGreen = [UIColor colorWithRed:0.462 green:0.648 blue:0.642 alpha:1];
+        hud.contentColor = myGreen;
         
         // Post the image and caption and show the progress HUD
         typeof(self) __weak weakSelf = self;

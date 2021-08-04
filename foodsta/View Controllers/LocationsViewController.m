@@ -36,6 +36,11 @@ NSString *locationsIdentifier = @"locationsController";
     self.locationBar.placeholder = NSLocalizedString(@"Location..", @"User guidance to enter location");
 }
 
+-(void)dismissKeyboard {
+    [self.searchBar resignFirstResponder];
+    [self.locationBar resignFirstResponder];
+}
+
 - (IBAction)onTapSearch:(id)sender {
     // Dismiss keyboard
     [self dismissKeyboard];
@@ -63,8 +68,15 @@ NSString *locationsIdentifier = @"locationsController";
 
     //Display HUD right before the request is made
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:TRUE];
+    
+    // Configure HUD UI
     hud.mode = MBProgressHUDModeDeterminate;
+    hud.square = YES;
+    hud.animationType = YES;
     hud.label.text = @"Searching...";
+    hud.label.font = [UIFont systemFontOfSize:16 weight:UIFontWeightLight];
+    UIColor *myGreen = [UIColor colorWithRed:0.462 green:0.648 blue:0.642 alpha:1];
+    hud.contentColor = myGreen;
     
     typeof(self) __weak weakSelf = self;
     [[session dataTaskWithRequest:requestData completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {

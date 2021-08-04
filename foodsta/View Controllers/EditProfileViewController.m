@@ -47,10 +47,17 @@
 }
 
 - (IBAction)onTapDone:(id)sender {
-    // Display HUD right before the requests are made
+    //Display HUD right before the request is made
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:TRUE];
+    
+    // Configure HUD UI
     hud.mode = MBProgressHUDModeDeterminate;
+    hud.square = YES;
+    hud.animationType = YES;
     hud.label.text = @"Updating...";
+    hud.label.font = [UIFont systemFontOfSize:16 weight:UIFontWeightLight];
+    UIColor *myGreen = [UIColor colorWithRed:0.462 green:0.648 blue:0.642 alpha:1];
+    hud.contentColor = myGreen;
     
     // Set profile image of current user
     PFUser *user = [PFUser currentUser];
