@@ -173,7 +173,7 @@
         
         NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(PFUser *evaluatedObject, NSDictionary *bindings) {
             NSString *username = [NSString stringWithFormat:@"@%@", evaluatedObject.username];
-            return [username containsString:searchText];
+            return [[username lowercaseString] containsString:[searchText lowercaseString]];
         }];
         
         // Reset array of user results based on search text matches
