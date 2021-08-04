@@ -32,6 +32,10 @@
     self.searchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
     self.searchBar.placeholder = NSLocalizedString(@"Search for user...", @"Tells the user to search for a user");
     
+    // Dismiss keyboard upon tapping screen
+    UITapGestureRecognizer *tapScreen = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(dismissKeyboard)];
+    [self.view addGestureRecognizer:tapScreen];
+    
     // Set title label to "Recent"
     self.titleLabel.text = NSLocalizedString(@"Recent", @"Tells the user the displayed users are recent searches");
     
@@ -40,6 +44,10 @@
     
     // Fetch and save Parse user query
     [self loadUsers];
+}
+
+-(void)dismissKeyboard {
+    [self.searchBar resignFirstResponder];
 }
 
 // Fetch and save users in the Parse database
