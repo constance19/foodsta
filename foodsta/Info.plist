@@ -12,6 +12,8 @@
 	<string>macOS, location usage</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>iOS, always usage</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Access to camera when posting a check-in</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
