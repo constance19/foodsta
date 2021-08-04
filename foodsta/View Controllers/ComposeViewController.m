@@ -71,24 +71,45 @@ static NSString *const captionPlaceholder = @"Write a caption...";
     [self.captionView resignFirstResponder];
 }
 
+// Prompt user with pop-up menu with options for either taking a photo or selecting from photo library
 - (IBAction)onTapPhoto:(id)sender {
-    // Instantiate a UIImagePickerController
-    UIImagePickerController *imagePickerVC = [UIImagePickerController new];
-    imagePickerVC.delegate = self;
-    imagePickerVC.allowsEditing = YES;
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:nil
+                                                            preferredStyle:UIAlertControllerStyleActionSheet];
     
-    // Present camera on iPhone
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+    // Camera for user to take a photo
+    UIAlertAction *camera = [UIAlertAction actionWithTitle:@"Take Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action){
+        // Instantiate a UIImagePickerController
+        UIImagePickerController *imagePickerVC = [UIImagePickerController new];
+        imagePickerVC.delegate = self;
+        imagePickerVC.allowsEditing = YES;
         imagePickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
-    }
+        
+        [self presentViewController:imagePickerVC animated:YES completion:nil];
+    }];
     
-    // For Xcode simulator, present photo library
-    else {
-        NSLog(@"Camera 🚫 available so we will use photo library instead");
+    // Photo library for user to select a photo
+    UIAlertAction *library = [UIAlertAction actionWithTitle:@"Photo Library" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action){
+        // Instantiate a UIImagePickerController
+        UIImagePickerController *imagePickerVC = [UIImagePickerController new];
+        imagePickerVC.delegate = self;
+        imagePickerVC.allowsEditing = YES;
         imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    }
+        
+        [self presentViewController:imagePickerVC animated:YES completion:nil];
+    }];
     
-    [self presentViewController:imagePickerVC animated:YES completion:nil];
+    // Cancel option
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {}];
+    
+    // Don't include camera action for Xcode simulator
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        [alert addAction:camera];
+    }
+    [alert addAction:library];
+    [alert addAction:cancelAction];
+    
+    // Present pop-up menu with appropriate action options
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 - (IBAction)onTapShare:(id)sender {
