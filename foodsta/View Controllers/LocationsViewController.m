@@ -34,15 +34,6 @@ NSString *locationsIdentifier = @"locationsController";
     // Set placeholder text of search bars
     self.searchBar.placeholder = NSLocalizedString(@"Cafes, pasta, delivery, etc.", @"Location search suggestions");
     self.locationBar.placeholder = NSLocalizedString(@"Location..", @"User guidance to enter location");
-    
-    // Dismiss keyboard upon tapping screen
-    UITapGestureRecognizer *tapScreen = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(dismissKeyboard)];
-    [self.view addGestureRecognizer:tapScreen];
-}
-
--(void)dismissKeyboard {
-    [self.searchBar resignFirstResponder];
-    [self.locationBar resignFirstResponder];
 }
 
 - (IBAction)onTapSearch:(id)sender {
