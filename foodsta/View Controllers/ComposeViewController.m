@@ -42,10 +42,11 @@ static NSString *const captionPlaceholder = @"Write a caption...";
     }
     
     // Set caption box display
-    self.captionView.layer.borderWidth = 1.2f;
+    self.captionView.layer.borderWidth = 0.8f;
     self.captionView.clipsToBounds = YES;
-    self.captionView.layer.cornerRadius = 3.0f;
-    self.captionView.layer.borderColor = UIColor.blackColor.CGColor;
+    self.captionView.layer.cornerRadius = 5.0f;
+    UIColor *textGray = [UIColor colorWithRed:0.863 green:0.863 blue:0.863 alpha:1];
+    self.captionView.layer.borderColor = textGray.CGColor;
     
     // Set placeholder text for caption view
     self.captionView.delegate = self;
@@ -88,7 +89,6 @@ static NSString *const captionPlaceholder = @"Write a caption...";
     }
     
     [self presentViewController:imagePickerVC animated:YES completion:nil];
-    self.photoButton.hidden = YES;
 }
 
 - (IBAction)onTapShare:(id)sender {
@@ -173,6 +173,7 @@ static NSString *const captionPlaceholder = @"Write a caption...";
     CGSize size = CGSizeMake(300, 300);
     self.locationImage.image = [self resizeImage:editedImage withSize:size];
     self.locationImage.image = editedImage;
+    self.photoButton.hidden = YES;
     
     // Dismiss UIImagePickerController to go back to your original view controller
     [self dismissViewControllerAnimated:YES completion:nil];
