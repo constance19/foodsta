@@ -11,7 +11,11 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
+    
+    // Add tap gesture recognizer for username label
+    UITapGestureRecognizer *usernameTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didTapUsername:)];
+    [self.usernameLabel addGestureRecognizer:usernameTap];
+    [self.usernameLabel setUserInteractionEnabled:YES];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -19,5 +23,10 @@
 
     // Configure the view for the selected state
 }
+
+- (void)didTapUsername:(UITapGestureRecognizer *)sender{
+    [self.delegate mapLocationCell:self didTap:self.user];
+}
+
 
 @end

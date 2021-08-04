@@ -1566,7 +1566,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fib-Su-jUy">
+                                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fib-Su-jUy">
                                                     <rect key="frame" x="100" y="70.5" width="77" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="textColor"/>
@@ -1610,6 +1610,7 @@
                     <navigationItem key="navigationItem" title="Recent Check-Ins" id="RiV-z3-yJU"/>
                     <connections>
                         <outlet property="tableView" destination="dK4-5B-Rd2" id="B5h-hQ-Mne"/>
+                        <segue destination="w63-Vf-zMB" kind="presentation" identifier="mapProfileSegue" id="fXN-lU-hTU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SBr-DH-RI4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -2679,14 +2680,14 @@
     <inferredMetricsTieBreakers>
         <segue reference="ySl-SW-ADB"/>
         <segue reference="RhI-dF-yQE"/>
-        <segue reference="i0U-yA-jSZ"/>
+        <segue reference="fXN-lU-hTU"/>
         <segue reference="VHv-ao-zGH"/>
         <segue reference="wId-7A-82a"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="edit-profile" width="32" height="32"/>
-        <image name="heart" width="25" height="25"/>
         <image name="heart" catalog="system" width="128" height="109"/>
+        <image name="heart" width="25" height="25"/>
         <image name="heart-color" width="25" height="25"/>
         <image name="heart.circle" catalog="system" width="128" height="121"/>
         <image name="heart.fill" catalog="system" width="128" height="109"/>

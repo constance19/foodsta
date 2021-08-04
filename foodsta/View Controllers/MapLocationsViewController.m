@@ -9,8 +9,9 @@
 #import "MapLocationCell.h"
 #import "Post.h"
 #import "DateTools.h"
+#import "ProfileViewController.h"
 
-@interface MapLocationsViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface MapLocationsViewController () <UITableViewDelegate, UITableViewDataSource, MapLocationCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
@@ -56,6 +57,7 @@
     
     // Get and set the username for the cell
     PFUser *user = post.author;
+    cell.user = user;
     cell.usernameLabel.text = [NSString stringWithFormat:@"@%@", user[@"username"]];
     
     // Get and set the profile picture for the cell
@@ -64,17 +66,33 @@
     NSData *fileData = [NSData dataWithContentsOfURL: url];
     cell.profileImage.image = [[UIImage alloc] initWithData:fileData];
     
+    // Set delegate for username label to profile segue
+    cell.delegate = self;
+    
     return cell;
 }
 
-/*
+
+// MARK: MapLocationCellDelegate
+-(void)mapLocationCell:(MapLocationCell *) mapLocationCell didTap: (PFUser *)user {
+    [self performSegueWithIdentifier:@"mapProfileSegue" sender:user];
+}
+
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    
+    // Segue from username label to profile page
+    if ([[segue identifier] isEqualToString:@"mapProfileSegue"]) {
+        UINavigationController *navController = [segue destinationViewController];
+        ProfileViewController *profileController = navController.topViewController;
+        profileController.user = sender;
+    }
 }
-*/
+
 
 @end
