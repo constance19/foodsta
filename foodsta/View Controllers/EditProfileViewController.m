@@ -48,7 +48,9 @@
 
 - (IBAction)onTapDone:(id)sender {
     // Display HUD right before the requests are made
-   [MBProgressHUD showHUDAddedTo:self.view animated:TRUE];
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:TRUE];
+    hud.mode = MBProgressHUDModeDeterminate;
+    hud.label.text = @"Updating...";
     
     // Set profile image of current user
     PFUser *user = [PFUser currentUser];

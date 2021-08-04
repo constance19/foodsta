@@ -46,6 +46,9 @@ NSString *locationsIdentifier = @"locationsController";
 }
 
 - (IBAction)onTapSearch:(id)sender {
+    // Dismiss keyboard
+    [self dismissKeyboard];
+    
     // Process the search term and location to be compatible with the Yelp API, i.e. converting spaces to +
     NSString *rawTerm = self.searchBar.text;
     NSString *term = [rawTerm stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]];
@@ -68,7 +71,9 @@ NSString *locationsIdentifier = @"locationsController";
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
 
     //Display HUD right before the request is made
-   [MBProgressHUD showHUDAddedTo:self.view animated:TRUE];
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:TRUE];
+    hud.mode = MBProgressHUDModeDeterminate;
+    hud.label.text = @"Searching...";
     
     typeof(self) __weak weakSelf = self;
     [[session dataTaskWithRequest:requestData completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {

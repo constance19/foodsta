@@ -141,7 +141,9 @@ static NSString *const captionPlaceholder = @"Write a caption...";
         }
         
         //Display HUD right before the request is made
-       [MBProgressHUD showHUDAddedTo:self.view animated:TRUE];
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:TRUE];
+        hud.mode = MBProgressHUDModeDeterminate;
+        hud.label.text = @"Posting...";
         
         // Post the image and caption and show the progress HUD
         typeof(self) __weak weakSelf = self;
