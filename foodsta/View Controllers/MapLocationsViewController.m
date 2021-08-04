@@ -43,7 +43,7 @@
     [str addAttribute: NSLinkAttributeName value: post.locationUrl range: NSMakeRange(0, str.length)];
     cell.locationView.attributedText = str;
     cell.locationView.dataDetectorTypes = UIDataDetectorTypeLink;
-    [cell.locationView setFont:[UIFont systemFontOfSize:19]];
+    [cell.locationView setFont:[UIFont systemFontOfSize:19 weight:UIFontWeightLight]];
     
     // Format and set createdAtString, convert Date to String using DateTool relative time
     NSDate *createdAt = post.createdAt;

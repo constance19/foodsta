@@ -27,7 +27,6 @@
     self.tableView.dataSource = self;
     self.searchBar.delegate = self;
     
-    self.tableView.rowHeight = UITableViewAutomaticDimension;
     [self.searchBar becomeFirstResponder];
     self.searchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
     self.searchBar.placeholder = NSLocalizedString(@"Search for user...", @"Tells the user to search for a user");
