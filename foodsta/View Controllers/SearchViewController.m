@@ -39,6 +39,9 @@
     
     // Fetch and save Parse user query
     [self loadUsers];
+    
+    // Remove separator lines for unpopulated cells
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 }
 
 // Fetch and save users in the Parse database

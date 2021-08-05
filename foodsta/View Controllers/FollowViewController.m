@@ -25,6 +25,9 @@
     self.tableView.dataSource = self;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     
+    // Remove separator lines for unpopulated cells
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    
     [self loadUsers];
 }
 
