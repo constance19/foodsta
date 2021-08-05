@@ -15,8 +15,29 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="foodsta" translatesAutoresizingMaskIntoConstraints="NO" id="GRr-Cu-n0k">
+                                <rect key="frame" x="167" y="333.5" width="80" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="ewX-qt-ylU"/>
+                                    <constraint firstAttribute="width" constant="80" id="rHa-Tt-Y2F"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="foodsta" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sP4-bL-dXL">
+                                <rect key="frame" x="161.5" y="427.5" width="91" height="36"/>
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="30"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="GRr-Cu-n0k" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" multiplier="1:1.2" id="0y5-97-kB2"/>
+                            <constraint firstItem="sP4-bL-dXL" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="9cN-Wm-VGj"/>
+                            <constraint firstItem="sP4-bL-dXL" firstAttribute="top" secondItem="GRr-Cu-n0k" secondAttribute="bottom" constant="14" id="EBs-5q-rSz"/>
+                            <constraint firstItem="GRr-Cu-n0k" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="xS2-61-476"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -25,6 +46,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="foodsta" width="120" height="120"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
