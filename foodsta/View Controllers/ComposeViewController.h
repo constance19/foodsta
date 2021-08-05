@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (strong, nonatomic) Location *location;
 @property (nonatomic) int *locationSelected;
+@property (nonatomic) BOOL hideCancelButton;
 
 @end
 

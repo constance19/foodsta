@@ -40,6 +40,7 @@
 		78A8138826A184EA00695571 /* LikeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 78A8138726A184EA00695571 /* LikeCell.m */; };
 		78A8138B26A1852100695571 /* CaptionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 78A8138A26A1852100695571 /* CaptionCell.m */; };
 		78A8138E26A1854700695571 /* RatingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 78A8138D26A1854700695571 /* RatingCell.m */; };
+		78F51D9426BC9A8700A2F630 /* TabController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78F51D9326BC9A8700A2F630 /* TabController.m */; };
 		78F59C2126A8E34C00781EC7 /* SetLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78F59C2026A8E34C00781EC7 /* SetLocationViewController.m */; };
 		78F59C2326A8EC2200781EC7 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78F59C2226A8EC2200781EC7 /* CoreLocation.framework */; };
 		78F59C2926A9045200781EC7 /* LocationAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 78F59C2826A9045200781EC7 /* LocationAnnotation.m */; };
@@ -141,6 +142,8 @@
 		78A8138A26A1852100695571 /* CaptionCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CaptionCell.m; sourceTree = "<group>"; };
 		78A8138C26A1854700695571 /* RatingCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RatingCell.h; sourceTree = "<group>"; };
 		78A8138D26A1854700695571 /* RatingCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RatingCell.m; sourceTree = "<group>"; };
+		78F51D9226BC9A8700A2F630 /* TabController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TabController.h; sourceTree = "<group>"; };
+		78F51D9326BC9A8700A2F630 /* TabController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TabController.m; sourceTree = "<group>"; };
 		78F59C1F26A8E34C00781EC7 /* SetLocationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SetLocationViewController.h; sourceTree = "<group>"; };
 		78F59C2026A8E34C00781EC7 /* SetLocationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SetLocationViewController.m; sourceTree = "<group>"; };
 		78F59C2226A8EC2200781EC7 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -319,6 +322,8 @@
 				78F59C4326AF805B00781EC7 /* ContainerMapViewController.m */,
 				78F59C4526AF923200781EC7 /* ContainerFeedViewController.h */,
 				78F59C4626AF923200781EC7 /* ContainerFeedViewController.m */,
+				78F51D9226BC9A8700A2F630 /* TabController.h */,
+				78F51D9326BC9A8700A2F630 /* TabController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -629,6 +634,7 @@
 				780424FF269E5B0E00E771CE /* LocationDetailsViewController.m in Sources */,
 				78A8138826A184EA00695571 /* LikeCell.m in Sources */,
 				78F59C4126AF5F6400781EC7 /* ContainerTabController.m in Sources */,
+				78F51D9426BC9A8700A2F630 /* TabController.m in Sources */,
 				780424F9269D6BEC00E771CE /* ComposeViewController.m in Sources */,
 				78F59C2126A8E34C00781EC7 /* SetLocationViewController.m in Sources */,
 				780424A5269D2E6300E771CE /* AppDelegate.m in Sources */,

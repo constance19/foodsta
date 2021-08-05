@@ -65,6 +65,11 @@ static NSString *const captionPlaceholder = @"Write a caption...";
     
     // Set select photo button display
     [self.photoButton setFrame:CGRectMake(173, 269, 130, 44)];
+    
+    // Only show cancel button if presented modally
+    if (self.hideCancelButton) {
+        self.navigationItem.leftBarButtonItem = nil;
+    }
 }
 
 -(void)dismissKeyboard {

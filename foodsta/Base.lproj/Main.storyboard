@@ -235,10 +235,10 @@
             </objects>
             <point key="canvasLocation" x="2912" y="-2857"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Tab Controller-->
         <scene sceneID="RWv-Mn-7P0">
             <objects>
-                <tabBarController storyboardIdentifier="TabBarController" modalPresentationStyle="overFullScreen" id="0kM-CZ-YXU" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabBarController" modalPresentationStyle="overFullScreen" id="0kM-CZ-YXU" customClass="TabController" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="UHJ-ve-N4O"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="3n7-4B-mXO">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
@@ -249,7 +249,7 @@
                     <connections>
                         <segue destination="jdb-Fa-aiQ" kind="relationship" relationship="viewControllers" id="Ayy-r7-i9M"/>
                         <segue destination="0gF-Pr-90X" kind="relationship" relationship="viewControllers" id="4IJ-Vo-qeT"/>
-                        <segue destination="KHd-i3-ehk" kind="relationship" relationship="viewControllers" id="ixr-0t-FLS"/>
+                        <segue destination="KHd-i3-ehk" kind="relationship" relationship="viewControllers" destinationCreationSelector="tabCheckInSegue" id="ixr-0t-FLS"/>
                         <segue destination="3QU-4f-IQY" kind="relationship" relationship="viewControllers" id="S8H-nV-SGb"/>
                         <segue destination="cMq-LT-46z" kind="relationship" relationship="viewControllers" id="pzo-Sm-xQd"/>
                     </connections>
