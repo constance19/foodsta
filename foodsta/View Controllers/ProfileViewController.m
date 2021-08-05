@@ -120,7 +120,7 @@
             }
     }];
     
-    // Hide back button if profile is presented from map annotation post
+    // Hide back button if profile is not presented from search tab
     if (self.hideBackButton) {
         self.navigationItem.leftBarButtonItem = nil;
     }

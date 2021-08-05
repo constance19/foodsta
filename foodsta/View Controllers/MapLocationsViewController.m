@@ -86,11 +86,12 @@
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
     
-    // Segue from username label to profile page
+    // Segue from username label and profile picture to profile page
     if ([[segue identifier] isEqualToString:@"mapProfileSegue"]) {
         UINavigationController *navController = [segue destinationViewController];
         ProfileViewController *profileController = navController.topViewController;
         profileController.user = sender;
+        profileController.hideBackButton = YES;
     }
 }
 

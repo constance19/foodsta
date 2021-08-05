@@ -315,6 +315,7 @@
         UINavigationController *navController = [segue destinationViewController];
         ProfileViewController *profileController = navController.topViewController;
         profileController.user = sender;
+        profileController.hideBackButton = YES;
     }
     
     // Segue from Check In button to compose page
