@@ -106,6 +106,8 @@
 - (IBAction)onTapUpdate:(id)sender {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:nil
                                                                 preferredStyle:UIAlertControllerStyleActionSheet];
+    UIColor *myGreen = [UIColor colorWithRed:0.462 green:0.648 blue:0.642 alpha:1];
+    alert.view.tintColor = myGreen;
 
     // Camera for user to take a photo
     UIAlertAction *camera = [UIAlertAction actionWithTitle:@"Take Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action){
