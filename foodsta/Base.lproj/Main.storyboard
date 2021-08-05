@@ -1661,7 +1661,7 @@
         <scene sceneID="leU-Dg-UDC">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="KHd-i3-ehk" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Check In" image="add-pin" id="J4y-v4-3WZ">
+                    <tabBarItem key="tabBarItem" title="Check In" image="add-pin" selectedImage="add-pin-big" id="J4y-v4-3WZ">
                         <inset key="imageInsets" minX="0.0" minY="-25" maxX="0.0" maxY="0.0"/>
                     </tabBarItem>
                     <toolbarItems/>
@@ -2198,6 +2198,7 @@
     </inferredMetricsTieBreakers>
     <resources>
         <image name="add-pin" width="64" height="64"/>
+        <image name="add-pin-big" width="80" height="80"/>
         <image name="edit-profile" width="32" height="32"/>
         <image name="heart" width="25" height="25"/>
         <image name="heart-color" width="25" height="25"/>
