@@ -971,6 +971,7 @@
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ocr-Bu-l0f">
                                 <rect key="frame" x="20" y="76" width="107" height="107"/>
+                                <color key="backgroundColor" red="0.9453889728" green="0.92445605990000002" blue="0.99216574430000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="107" id="UxK-hs-pP5"/>
                                     <constraint firstAttribute="width" constant="107" id="p5J-xA-fYo"/>
