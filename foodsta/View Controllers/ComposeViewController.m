@@ -173,7 +173,8 @@ static NSString *const captionPlaceholder = @"Write a caption...";
                         NSLog(@"Successfully posted check-in!");
                         // Hide HUD once the network request comes back (must be done on main UI thread)
                         [MBProgressHUD hideHUDForView:self.view animated:TRUE];
-                        [strongSelf dismissViewControllerAnimated:YES completion:nil];
+                        strongSelf.tabBarController.selectedIndex = 0;
+                        [strongSelf dismissViewControllerAnimated:true completion:nil];
                     }
                 }
         }];
