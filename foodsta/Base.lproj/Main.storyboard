@@ -589,6 +589,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="recentLabel" destination="MAI-nd-32V" id="XzY-p4-D6z"/>
                         <outlet property="searchBar" destination="cFH-i9-vBl" id="7Zf-25-VAE"/>
                         <outlet property="tableView" destination="MAu-Rl-ezR" id="81R-Yu-hED"/>
                         <outlet property="titleLabel" destination="MAI-nd-32V" id="X62-iQ-KwQ"/>

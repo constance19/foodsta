@@ -15,6 +15,7 @@
 @property (nonatomic, strong) NSArray *allUsers;
 @property (nonatomic, strong) NSArray *filteredUsers;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *recentLabel;
 
 @end
 
@@ -129,6 +130,9 @@
     if ([self.searchBar.text isEqualToString: @""]) {
         self.filteredUsers = [[NSArray alloc] init];
     }
+    
+    // Hide "Recent" label
+    [self.recentLabel setHidden:YES];
     
     [self.tableView reloadData];
 }
