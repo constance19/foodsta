@@ -141,14 +141,36 @@ NSString *locationsIdentifier = @"locationsController";
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
     
+    // Pass selected Yelp location and previously entered rating, caption, and/or post image if necessary
     if ([[segue identifier] isEqualToString:@"locationSegue"]) {
         UITableViewCell *tappedCell = sender;
         NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
         Location *location = self.arrayOfLocations[indexPath.row];
         
         ComposeViewController *composeController = [segue destinationViewController];
+        
+        // Pass selected Yelp location back to compose vc
         composeController.location = location;
         composeController.locationSelected = 1;
+        
+        // Pass previously entered rating back to compose vc
+        composeController.ratingValue = self.ratingValue;
+        
+        // Save previously entered caption if necessary
+        if (self.caption) {
+            composeController.caption = self.caption;
+            composeController.hasCaption = 1;
+        } else {
+            composeController.hasCaption = 0;
+        }
+        
+        // Save previously selected image if necessary
+        if (self.postImage) {
+            composeController.postImage = self.postImage;
+            composeController.hasImage = 1;
+        } else {
+            composeController.hasImage = 0;
+        }
     }
  
 }

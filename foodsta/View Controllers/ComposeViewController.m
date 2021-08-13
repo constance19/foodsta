@@ -41,6 +41,9 @@ static NSString *const captionPlaceholder = @"Write a caption...";
         self.textField.text = self.location.name;
     }
     
+    // Set previously saved rating value if necessary
+    self.ratingView.value = self.ratingValue;
+    
     // Set caption box display
     self.captionView.layer.borderWidth = 0.8f;
     self.captionView.clipsToBounds = YES;
@@ -48,11 +51,16 @@ static NSString *const captionPlaceholder = @"Write a caption...";
     UIColor *textGray = [UIColor colorWithRed:0.863 green:0.863 blue:0.863 alpha:1];
     self.captionView.layer.borderColor = textGray.CGColor;
     
-    // Set placeholder text for caption view
-    self.captionView.delegate = self;
-    self.captionView.text = captionPlaceholder;
-    UIColor *myBlack = [UIColor colorWithRed:0.7 green:0.7 blue:0.7 alpha:1.0];
-    self.captionView.textColor = myBlack;
+    // Set previously saved caption or placeholder text
+    if (self.hasCaption) {
+        self.captionView.text = self.caption;
+    } else {
+        // Set placeholder text for caption view
+        self.captionView.delegate = self;
+        self.captionView.text = captionPlaceholder;
+        UIColor *myBlack = [UIColor colorWithRed:0.7 green:0.7 blue:0.7 alpha:1.0];
+        self.captionView.textColor = myBlack;
+    }
     
     // Dismiss keyboard upon tapping
     UITapGestureRecognizer *tapScreen = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(dismissKeyboard)];
@@ -62,6 +70,12 @@ static NSString *const captionPlaceholder = @"Write a caption...";
     UIColor *myGray = [UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1.0];
     self.locationImage.layer.backgroundColor = myGray.CGColor;
     self.locationImage.image = nil;
+    
+    // Set previously saved post image if necessary
+    if (self.hasImage) {
+        self.locationImage.image = self.postImage;
+        self.photoButton.hidden = YES;
+    }
     
     // Set select photo button display
     [self.photoButton setFrame:CGRectMake(173, 269, 130, 44)];
@@ -252,14 +266,32 @@ static NSString *const captionPlaceholder = @"Write a caption...";
     return NO;
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    
+    // Save previously entered rating, caption, and/or image before searching for Yelp location
+    if ([[segue identifier] isEqualToString:@"yelpLocationSegue"]) {
+        LocationsViewController *locationController = [segue destinationViewController];
+        
+        // Pass rating value to Yelp search vc
+        locationController.ratingValue = self.ratingView.value;
+        
+        // Pass caption to Yelp search vc if user typed anything
+        if (![self.captionView.text isEqualToString:captionPlaceholder] && ![self.captionView.text isEqualToString:@""]) {
+            locationController.caption = self.captionView.text;
+        }
+        
+        // Pass post image to Yelp search vc if user selected one
+        if (self.locationImage.image) {
+            locationController.postImage = self.locationImage.image;
+        }
+    }
 }
-*/
+
 
 @end

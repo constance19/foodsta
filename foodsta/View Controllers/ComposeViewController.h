@@ -16,6 +16,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) int *locationSelected;
 @property (nonatomic) BOOL hideCancelButton;
 
+@property (nonatomic) double ratingValue;
+@property (nonatomic, strong) NSString *caption;
+@property (nonatomic, strong) UIImage *postImage;
+@property (nonatomic) BOOL hasCaption;
+@property (nonatomic) BOOL hasImage;
+
 @end
 
 NS_ASSUME_NONNULL_END

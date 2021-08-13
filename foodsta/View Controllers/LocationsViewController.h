@@ -11,5 +11,9 @@
 
 extern NSString *locationsIdentifier;
 
+@property (nonatomic) double ratingValue;
+@property (nonatomic, strong) NSString *caption;
+@property (nonatomic, strong) UIImage *postImage;
+
 @end
 
