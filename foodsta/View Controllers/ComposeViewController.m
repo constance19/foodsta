@@ -168,13 +168,21 @@ static NSString *const captionPlaceholder = @"Write a caption...";
                         NSLog(@"Error posting check-in", error.localizedDescription);
                         // Show the progress HUD while user is waiting for the post request to complete
                         [MBProgressHUD hideHUDForView:self.view animated:TRUE];
-                        [strongSelf dismissViewControllerAnimated:YES completion:nil];
+                        
+                        // Dismiss modal vc to go back to home feed
+                        if (self.modalInPresentation) {
+                            [strongSelf dismissViewControllerAnimated:YES completion:nil];
+                        }
                     } else {
                         NSLog(@"Successfully posted check-in!");
                         // Hide HUD once the network request comes back (must be done on main UI thread)
                         [MBProgressHUD hideHUDForView:self.view animated:TRUE];
                         strongSelf.tabBarController.selectedIndex = 0;
-                        [strongSelf dismissViewControllerAnimated:true completion:nil];
+                        
+                        // Dismiss modal vc to go back to home feed
+                        if (self.modalInPresentation) {
+                            [strongSelf dismissViewControllerAnimated:true completion:nil];
+                        }
                     }
                 }
         }];
